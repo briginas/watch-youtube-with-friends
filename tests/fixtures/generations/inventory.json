@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    { "role": "qa", "projectId": "fixture-qa" },
+    { "role": "control", "projectId": "fixture-control" },
+    { "role": "backend", "projectId": "fixture-backend-one", "generation": "g1", "firstRelease": "0.9.0", "state": "active", "provenance": "fixture" },
+    { "role": "backend", "projectId": "fixture-backend-two", "generation": "g2", "firstRelease": "0.10.0", "state": "active", "provenance": "fixture" },
+    { "role": "backend", "projectId": "fixture-backend-three", "generation": "g3", "firstRelease": "1.0.0", "state": "provisioned", "provenance": "fixture" },
+    { "role": "backend", "projectId": "fixture-backend-four", "generation": "g4", "firstRelease": "1.1.0", "state": "planned", "provenance": "fixture" }
+  ]
+}

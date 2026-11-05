@@ -1,0 +1,137 @@
+{
+  "scenario": "YouTube: UI комнаты, настоящий SPA, локальный просмотр, общая смена и выход",
+  "complete": true,
+  "stage": "complete",
+  "browserVersion": "156.0.8078.4",
+  "headless": true,
+  "checkpoints": [
+    {
+      "name": "joined",
+      "distinctUids": true,
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 0
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "name": "compact UI and title after reload; details do not change playback",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 0
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 10.502622,
+        "playbackRate": 1,
+        "isPlaying": true
+      },
+      "b": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "name": "real watch SPA and explicit return preserve revision",
+      "nextVideoId": "xOXolSQcEb4",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 0
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "name": "paused shared switch accepted",
+      "playback": {
+        "videoId": "ZSn3Tvc7jQU",
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 1
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 0,
+        "playbackRate": 1,
+        "isPlaying": true
+      }
+    },
+    {
+      "name": "local SPA, explicit return and shared video switch",
+      "playback": {
+        "videoId": "ZSn3Tvc7jQU",
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 1
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "name": "page leave clears title without playback revision",
+      "playback": {
+        "videoId": "ZSn3Tvc7jQU",
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 1
+      },
+      "participantCount": 1,
+      "a": {
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 0.84777,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    }
+  ]
+}

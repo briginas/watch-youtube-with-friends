@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "updatedAt": "2026-11-04T00:00:00Z",
+  "generations": [{ "generation": "emulator-v1", "firstRelease": "0.2.0", "state": "active" }]
+}

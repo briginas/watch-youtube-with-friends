@@ -1,0 +1,1100 @@
+{
+  "date": "2026-11-03",
+  "regressionBeforeFix": "Russian layout: media=1.5, intents=[]; browser test failed",
+  "adapter": [
+    {
+      "observations": {
+        "scenario": "remote-rate-native-ui",
+        "remote-1.25": {
+          "menu": "Playback speed1.25",
+          "report": {
+            "status": "ready",
+            "sample": {
+              "positionSeconds": 5,
+              "playbackRate": 1.25,
+              "isPlaying": false
+            },
+            "intents": [],
+            "traces": [
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "started"
+              },
+              {
+                "event": "ratechange",
+                "status": "ready",
+                "detail": "remote",
+                "trusted": true
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "applied"
+              }
+            ]
+          }
+        },
+        "remote-1.5": {
+          "menu": "Playback speed1.5",
+          "report": {
+            "status": "ready",
+            "sample": {
+              "positionSeconds": 5,
+              "playbackRate": 1.5,
+              "isPlaying": false
+            },
+            "intents": [],
+            "traces": [
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "started"
+              },
+              {
+                "event": "ratechange",
+                "status": "ready",
+                "detail": "remote",
+                "trusted": true
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "applied"
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "started"
+              },
+              {
+                "event": "ratechange",
+                "status": "ready",
+                "detail": "remote",
+                "trusted": true
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "applied"
+              }
+            ]
+          }
+        },
+        "remote-1": {
+          "menu": "Playback speedNormal",
+          "report": {
+            "status": "ready",
+            "sample": {
+              "positionSeconds": 5,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "intents": [],
+            "traces": [
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "started"
+              },
+              {
+                "event": "ratechange",
+                "status": "ready",
+                "detail": "remote",
+                "trusted": true
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "applied"
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "started"
+              },
+              {
+                "event": "ratechange",
+                "status": "ready",
+                "detail": "remote",
+                "trusted": true
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "applied"
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "started"
+              },
+              {
+                "event": "ratechange",
+                "status": "ready",
+                "detail": "remote",
+                "trusted": true
+              },
+              {
+                "event": "apply",
+                "status": "ready",
+                "detail": "applied"
+              }
+            ]
+          }
+        },
+        "firstKey": {
+          "status": "ready",
+          "sample": {
+            "positionSeconds": 5,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "intents": [
+            {
+              "kind": "rate",
+              "sample": {
+                "positionSeconds": 5,
+                "playbackRate": 1.5,
+                "isPlaying": false
+              }
+            }
+          ],
+          "traces": [
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "input",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "intent",
+              "status": "ready",
+              "detail": "rate"
+            }
+          ]
+        },
+        "russianKeys": {
+          "status": "ready",
+          "sample": {
+            "positionSeconds": 5,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "intents": [
+            {
+              "kind": "rate",
+              "sample": {
+                "positionSeconds": 5,
+                "playbackRate": 1.5,
+                "isPlaying": false
+              }
+            },
+            {
+              "kind": "rate",
+              "sample": {
+                "positionSeconds": 5,
+                "playbackRate": 1.25,
+                "isPlaying": false
+              }
+            },
+            {
+              "kind": "rate",
+              "sample": {
+                "positionSeconds": 5,
+                "playbackRate": 1.5,
+                "isPlaying": false
+              }
+            }
+          ],
+          "traces": [
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "started"
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "remote",
+              "trusted": true
+            },
+            {
+              "event": "apply",
+              "status": "ready",
+              "detail": "applied"
+            },
+            {
+              "event": "input",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "intent",
+              "status": "ready",
+              "detail": "rate"
+            },
+            {
+              "event": "input",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "intent",
+              "status": "ready",
+              "detail": "rate"
+            },
+            {
+              "event": "input",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "ratechange",
+              "status": "ready",
+              "detail": "rate",
+              "trusted": true
+            },
+            {
+              "event": "intent",
+              "status": "ready",
+              "detail": "rate"
+            }
+          ]
+        },
+        "result": "passed"
+      },
+      "report": {
+        "status": "ready",
+        "sample": {
+          "positionSeconds": 5,
+          "playbackRate": 1.5,
+          "isPlaying": false
+        },
+        "intents": [
+          {
+            "kind": "rate",
+            "sample": {
+              "positionSeconds": 5,
+              "playbackRate": 1.5,
+              "isPlaying": false
+            }
+          },
+          {
+            "kind": "rate",
+            "sample": {
+              "positionSeconds": 5,
+              "playbackRate": 1.25,
+              "isPlaying": false
+            }
+          },
+          {
+            "kind": "rate",
+            "sample": {
+              "positionSeconds": 5,
+              "playbackRate": 1.5,
+              "isPlaying": false
+            }
+          }
+        ],
+        "traces": [
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "started"
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "remote",
+            "trusted": true
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "applied"
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "started"
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "remote",
+            "trusted": true
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "applied"
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "started"
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "remote",
+            "trusted": true
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "applied"
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "started"
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "remote",
+            "trusted": true
+          },
+          {
+            "event": "apply",
+            "status": "ready",
+            "detail": "applied"
+          },
+          {
+            "event": "input",
+            "status": "ready",
+            "detail": "rate",
+            "trusted": true
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "rate",
+            "trusted": true
+          },
+          {
+            "event": "intent",
+            "status": "ready",
+            "detail": "rate"
+          },
+          {
+            "event": "input",
+            "status": "ready",
+            "detail": "rate",
+            "trusted": true
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "rate",
+            "trusted": true
+          },
+          {
+            "event": "intent",
+            "status": "ready",
+            "detail": "rate"
+          },
+          {
+            "event": "input",
+            "status": "ready",
+            "detail": "rate",
+            "trusted": true
+          },
+          {
+            "event": "ratechange",
+            "status": "ready",
+            "detail": "rate",
+            "trusted": true
+          },
+          {
+            "event": "intent",
+            "status": "ready",
+            "detail": "rate"
+          }
+        ]
+      },
+      "document": {
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "activation": true,
+        "rootClass": "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-modern-caption ytp-exp-ppp-update ytp-livebadge-color ytp-grid-scrollable ytp-delhi-modern ytp-delhi-modern-icons ytp-delhi-horizontal-volume-controls ytp-delhi-modern-compact-controls ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-cards-teaser-dismissible ytp-hide-info-bar ytp-large-width-mode ytp-disable-bottom-gradient ytp-autonav-endscreen-cancelled-state ytp-branding-shown ytp-hide-fullscreen-title ytp-fullscreen-metadata-top ytp-heat-map paused-mode",
+        "videoPresent": true,
+        "readyState": 4,
+        "playerText": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short FilmTap to unmute2xBig Buck Bunny 60fps 4K - Official Blender Foundation Short FilmBlender   23,500,278 views   11y agoCopy linkInfoShoppingIf playback doesn't begin shortly, try restarting your device.1.5xSettings•Up nextLiveUpcomingCancelPlay NowYou're signed outVideos you watch may be added to the TV's watch history and influence TV recommendations. To avoid this, cancel and sign in to YouTube on your computer.CancelConfirmShareInclude playlistAn error occurred while retrieving sharing information. Please try again later.Stable VolumeVoice boostAnnotationsSleep timerOffPlayback speed1.5QualityAuto (480p)0:050:05 / 10:34Live•Watch full video••11:46SNOW BEAR - A Hand-Drawn Animated Short Film (4K) by Aaron BlaiseThe Art of Aaron Blaise10M • 11mo agoLivePlaylist ()Mix (50+)3:04:50Kyoto 4K 🇯🇵 Bamboo Forest, Ancient Temples & Peaceful Japanese SceneryPiano Odyssey 4K533K • 4mo agoLivePlaylist ()Mix (50+)2:00:31CAT GAMES 🐾  3D"
+      }
+    }
+  ],
+  "sync": [
+    {
+      "live": false,
+      "manual": false,
+      "stage": "complete",
+      "browserVersion": "156.0.8078.4",
+      "identity": {
+        "participantCount": 2,
+        "distinctUids": true
+      },
+      "nativeRates": [],
+      "checkpoints": [
+        {
+          "action": "creator: play",
+          "revision": 1,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.970315,
+            "playbackRate": 1,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 5.971635,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "creator: pause (keyboard)",
+          "revision": 2,
+          "source": 1,
+          "a": {
+            "positionSeconds": 6.022237,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 6.015516,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: seek",
+          "revision": 3,
+          "source": 1,
+          "a": {
+            "positionSeconds": 11.022237,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 11.022237,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: rate",
+          "revision": 4,
+          "source": 1,
+          "a": {
+            "positionSeconds": 11.022237,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 11.022237,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: play",
+          "revision": 5,
+          "source": 2,
+          "a": {
+            "positionSeconds": 12.177041,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 12.230266,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "guest: pause (keyboard)",
+          "revision": 6,
+          "source": 2,
+          "a": {
+            "positionSeconds": 12.253122,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 12.264812,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: seek",
+          "revision": 7,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: rate",
+          "revision": 8,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: receives remote rate 1.25",
+          "revision": 9,
+          "source": 1,
+          "a": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: first > after remote rate",
+          "revision": 10,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: receives remote rate 1.25",
+          "revision": 11,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: first > after remote rate",
+          "revision": 12,
+          "source": 1,
+          "a": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.264811,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: play after creator leaves",
+          "revision": 13,
+          "source": 2,
+          "a": {
+            "positionSeconds": 9.371814,
+            "playbackRate": 1.5,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 8.583543,
+            "playbackRate": 1.5,
+            "isPlaying": true
+          }
+        }
+      ]
+    },
+    {
+      "live": true,
+      "manual": false,
+      "stage": "complete",
+      "browserVersion": "156.0.8078.4",
+      "identity": {
+        "participantCount": 2,
+        "distinctUids": true
+      },
+      "nativeRates": [
+        {
+          "receiver": 2,
+          "expected": 1.25,
+          "playerRate": 1.25,
+          "menu": "Playback speed1.25"
+        },
+        {
+          "receiver": 1,
+          "expected": 1.25,
+          "playerRate": 1.25,
+          "menu": "Playback speed1.25"
+        }
+      ],
+      "checkpoints": [
+        {
+          "action": "creator: play",
+          "revision": 1,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.822016,
+            "playbackRate": 1,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 5.79718,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "creator: pause (keyboard)",
+          "revision": 2,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.860186,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.838798,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: seek",
+          "revision": 3,
+          "source": 1,
+          "a": {
+            "positionSeconds": 10.860185,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.860185,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: rate",
+          "revision": 4,
+          "source": 1,
+          "a": {
+            "positionSeconds": 10.860185,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.860185,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: play",
+          "revision": 5,
+          "source": 2,
+          "a": {
+            "positionSeconds": 11.773539,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 11.866029,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "guest: pause (keyboard)",
+          "revision": 6,
+          "source": 2,
+          "a": {
+            "positionSeconds": 11.836686,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 11.891489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: seek",
+          "revision": 7,
+          "source": 2,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: rate",
+          "revision": 8,
+          "source": 2,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: receives remote rate 1.25",
+          "revision": 9,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: first > after remote rate",
+          "revision": 10,
+          "source": 2,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: Russian down",
+          "revision": 11,
+          "source": 2,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: Russian up",
+          "revision": 12,
+          "source": 2,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: receives remote rate 1.25",
+          "revision": 13,
+          "source": 2,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: first > after remote rate",
+          "revision": 14,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: Russian down",
+          "revision": 15,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: Russian up",
+          "revision": 16,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.641489,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: play after creator leaves",
+          "revision": 17,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.56136,
+            "playbackRate": 1.5,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 6.774751,
+            "playbackRate": 1.5,
+            "isPlaying": true
+          }
+        }
+      ]
+    }
+  ],
+  "minimalChromiumControl": {
+    "args": [
+      "--remote-debugging-pipe",
+      "--no-first-run",
+      "--no-default-browser-check",
+      "--disable-search-engine-choice-screen",
+      "about:blank"
+    ],
+    "samples": [
+      {
+        "position": 47.937178,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "position": 50.940077,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "position": 53.943042,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "position": 56.94696,
+        "readyState": 4,
+        "paused": false
+      },
+      {
+        "position": 59.916366,
+        "readyState": 2,
+        "paused": false
+      },
+      {
+        "position": 59.916366,
+        "readyState": 2,
+        "paused": false
+      },
+      {
+        "position": 0,
+        "readyState": 0,
+        "paused": true,
+        "error": "Something went wrong. Refresh or try again later. Learn more"
+      }
+    ]
+  }
+}

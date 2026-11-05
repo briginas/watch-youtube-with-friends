@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "backendGeneration": "prod-v1",
+  "metadata": [
+    "name",
+    "createdWithVersion",
+    "backendGeneration"
+  ]
+}

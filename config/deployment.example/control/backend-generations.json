@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "revision": 2,
+  "updatedAt": "2026-11-04T13:53:53.540Z",
+  "generations": [
+    {
+      "generation": "prod-v1",
+      "firstRelease": "0.2.1",
+      "state": "active"
+    }
+  ]
+}

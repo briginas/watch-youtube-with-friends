@@ -1,0 +1,251 @@
+{
+  "date": "2026-11-03",
+  "environment": {
+    "browser": "Google Chrome 156.0.8078.74 arm64",
+    "os": "macOS 27.2",
+    "backend": "example-qa / europe-west1",
+    "automation": "native UI through CUA, no Playwright/CDP",
+    "distinctAnonymousIdentities": true,
+    "rulesSha256": "0e8e0e47576a8d7f6a946fb32e9f025935c0c039230c8709b31b7024c2316e59"
+  },
+  "profiles": {
+    "A": {
+      "startedAt": "2026-11-03T14:10:34.498000+00:00",
+      "finishedAt": "2026-11-03T14:16:53.571000+00:00",
+      "statusErrors": 0,
+      "updates": [
+        {
+          "at": 102.5,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 17.678469,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "playback",
+            "videoRevision": 0,
+            "updatedAt": 1793714854474,
+            "actionAt": 1793714854474,
+            "sampledAt": 1793714854474,
+            "revision": 0
+          },
+          "ownActor": true,
+          "participants": 2
+        },
+        {
+          "at": 39263.199951171875,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "f7NwyBnIRTE",
+            "positionSeconds": 7.51033,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 1,
+            "updatedAt": 1793715072701,
+            "actionAt": 1793715072608,
+            "sampledAt": 1793715072610,
+            "revision": 1
+          },
+          "ownActor": true,
+          "participants": 1
+        },
+        {
+          "at": 41200.699951171875,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "f7NwyBnIRTE",
+            "positionSeconds": 7.51033,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 1,
+            "updatedAt": 1793715072701,
+            "actionAt": 1793715072608,
+            "sampledAt": 1793715072610,
+            "revision": 1
+          },
+          "ownActor": true,
+          "participants": 2
+        },
+        {
+          "at": 177201.60009765625,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "M7lc1UVf-VE",
+            "positionSeconds": 48.472648,
+            "playbackRate": 1.5,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 2,
+            "updatedAt": 1793715194272,
+            "actionAt": 1793715194082,
+            "sampledAt": 1793715194084,
+            "revision": 2
+          },
+          "ownActor": false,
+          "participants": 2
+        }
+      ],
+      "nativeMedia": {
+        "videoId": "M7lc1UVf-VE",
+        "samples": 923,
+        "elapsedMs": 9262.400146484375,
+        "positionSeconds": {
+          "min": 48.472648,
+          "max": 48.472648
+        },
+        "rates": [
+          1.5
+        ],
+        "playingValues": [
+          false
+        ],
+        "readySamples": 923,
+        "adSamples": 0
+      }
+    },
+    "B": {
+      "startedAt": "2026-11-03T14:10:02.434000+00:00",
+      "finishedAt": "2026-11-03T14:18:05.558000+00:00",
+      "statusErrors": 2,
+      "updates": [
+        {
+          "at": 103.39990234375,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 17.678469,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "playback",
+            "videoRevision": 0,
+            "updatedAt": 1793714854474,
+            "actionAt": 1793714854474,
+            "sampledAt": 1793714854474,
+            "revision": 0
+          },
+          "ownActor": false,
+          "participants": 2
+        },
+        {
+          "at": 72265.30004882812,
+          "connected": true,
+          "roomReady": false,
+          "playback": {
+            "actionAt": 1793715072608,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "playbackRate": 1,
+            "positionSeconds": 7.51033,
+            "revision": 1,
+            "sampledAt": 1793715072610,
+            "updatedAt": 1793715072701,
+            "videoId": "f7NwyBnIRTE",
+            "videoRevision": 1
+          },
+          "ownActor": false,
+          "participants": 1
+        },
+        {
+          "at": 73265.19995117188,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "f7NwyBnIRTE",
+            "positionSeconds": 7.51033,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 1,
+            "updatedAt": 1793715072701,
+            "actionAt": 1793715072608,
+            "sampledAt": 1793715072610,
+            "revision": 1
+          },
+          "ownActor": false,
+          "participants": 2
+        },
+        {
+          "at": 117265.10009765625,
+          "connected": true,
+          "roomReady": false,
+          "playback": {
+            "videoId": "f7NwyBnIRTE",
+            "positionSeconds": 7.51033,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 1,
+            "updatedAt": 1793715072701,
+            "actionAt": 1793715072608,
+            "sampledAt": 1793715072610,
+            "revision": 1
+          },
+          "ownActor": false,
+          "participants": 2
+        },
+        {
+          "at": 118265.39990234375,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "f7NwyBnIRTE",
+            "positionSeconds": 7.51033,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 1,
+            "updatedAt": 1793715072701,
+            "actionAt": 1793715072608,
+            "sampledAt": 1793715072610,
+            "revision": 1
+          },
+          "ownActor": false,
+          "participants": 2
+        },
+        {
+          "at": 209265.10009765625,
+          "connected": true,
+          "roomReady": true,
+          "playback": {
+            "videoId": "M7lc1UVf-VE",
+            "positionSeconds": 48.472648,
+            "playbackRate": 1.5,
+            "isPlaying": false,
+            "kind": "switch-video",
+            "videoRevision": 2,
+            "updatedAt": 1793715194272,
+            "actionAt": 1793715194082,
+            "sampledAt": 1793715194084,
+            "revision": 2
+          },
+          "ownActor": true,
+          "participants": 2
+        }
+      ],
+      "nativeMedia": {
+        "videoId": "M7lc1UVf-VE",
+        "samples": 5290,
+        "elapsedMs": 52920.60009765625,
+        "positionSeconds": {
+          "min": 48.472648,
+          "max": 48.472648
+        },
+        "rates": [
+          1.5
+        ],
+        "playingValues": [
+          false
+        ],
+        "readySamples": 5290,
+        "adSamples": 0
+      }
+    }
+  }
+}

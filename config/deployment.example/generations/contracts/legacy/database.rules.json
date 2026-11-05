@@ -1,0 +1,88 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$key": {
+        ".read": "auth != null && $key.matches(/^[A-Za-z0-9_-]{32,128}$/)",
+        ".write": "auth != null && $key.matches(/^[A-Za-z0-9_-]{32,128}$/) && !data.exists() && newData.hasChildren(['playback', 'metadata']) && !newData.child('presence').exists()",
+        ".validate": "newData.hasChildren(['playback', 'metadata'])",
+        "playback": {
+          ".write": "auth != null && $key.matches(/^[A-Za-z0-9_-]{32,128}$/) && data.parent().exists() && newData.exists()",
+          ".validate": "newData.hasChildren(['videoId', 'positionSeconds', 'playbackRate', 'isPlaying', 'updatedAt', 'actionAt', 'sampledAt', 'revision', 'actorUid', 'commandId', 'kind', 'videoRevision']) && newData.child('actorUid').val() === auth.uid && newData.child('updatedAt').val() === now && ((!data.exists() && newData.child('revision').val() === 0 && newData.child('videoRevision').val() === 0 && newData.child('kind').val() === 'playback') || (data.exists() && newData.child('actionAt').val() > data.child('actionAt').val() && newData.child('revision').val() === data.child('revision').val() + 1 && newData.child('commandId').val() !== data.child('commandId').val() && ((newData.child('kind').val() === 'playback' && newData.child('videoId').val() === data.child('videoId').val() && newData.child('videoRevision').val() === data.child('videoRevision').val()) || (newData.child('kind').val() === 'switch-video' && newData.child('videoId').val() !== data.child('videoId').val() && newData.child('videoRevision').val() === newData.child('revision').val()))))",
+          "videoId": {
+            ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9_-]{11}$/)"
+          },
+          "positionSeconds": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 9007199254740991"
+          },
+          "playbackRate": {
+            ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= 16"
+          },
+          "isPlaying": {
+            ".validate": "newData.isBoolean()"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "actionAt": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 9007199254740991 && newData.val() <= now + 5000"
+          },
+          "sampledAt": {
+            ".validate": "newData.isNumber() && newData.val() >= newData.parent().child('actionAt').val() && newData.val() <= 9007199254740991 && newData.val() <= now + 5000"
+          },
+          "revision": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 9007199254740991 && newData.val() % 1 === 0"
+          },
+          "actorUid": {
+            ".validate": "newData.isString()"
+          },
+          "commandId": {
+            ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9_-]{1,128}$/)"
+          },
+          "$other": {
+            ".validate": false
+          },
+          "kind": {
+            ".validate": "newData.val() === 'playback' || newData.val() === 'switch-video'"
+          },
+          "videoRevision": {
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= newData.parent().child('revision').val() && newData.val() % 1 === 0"
+          }
+        },
+        "presence": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid && $key.matches(/^[A-Za-z0-9_-]{32,128}$/) && data.parent().parent().exists()",
+            ".validate": "newData.hasChildren(['connections'])",
+            "connections": {
+              "$connection": {
+                ".validate": "$connection.matches(/^[A-Za-z0-9_-]{1,128}$/) && newData.hasChildren(['connectedAt'])",
+                "connectedAt": {
+                  ".validate": "newData.isNumber() && (newData.val() === now || (data.exists() && newData.val() === data.val()))"
+                },
+                "$other": {
+                  ".validate": false
+                }
+              }
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "metadata": {
+          ".validate": "newData.hasChildren(['name'])",
+          "name": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200 && newData.val().matches(/.*[^ ].*/)"
+          },
+          "$other": {
+            ".validate": false
+          }
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}

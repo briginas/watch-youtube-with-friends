@@ -1,0 +1,76 @@
+:root {
+  color-scheme: dark;
+  --surface: #212121;
+  --border: #414141;
+  --muted: #b3b3b3;
+  --accent: #3ea6ff;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: transparent; color: #f1f1f1; font: 13px/1.4 Roboto, Arial, sans-serif; }
+body { display: flex; flex-direction: column; justify-content: end; }
+#room-panel { display: flex; flex: none; flex-direction: column; gap: 6px; max-height: 100%; }
+#room-dock, #room-details, #copy-status { background: var(--surface); border: 1px solid var(--border); }
+#room-dock { display: flex; align-items: center; flex: none; order: 1; border-radius: 24px; }
+p { margin: 6px 0; overflow-wrap: anywhere; }
+button, input { font: inherit; }
+button { border: 0; border-radius: 18px; padding: 8px 12px; background: #383838; color: inherit; cursor: pointer; }
+button:not(:disabled):hover { background: #4a4a4a; }
+button:disabled { opacity: .55; cursor: default; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+#room-toggle {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  border-radius: 24px;
+  padding: 7px 6px 7px 12px;
+  background: transparent;
+  text-align: left;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+#room-toggle.dragging { cursor: grabbing; }
+.heading { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.sync-dot { position: relative; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+[data-synced] .sync-dot { background: var(--accent); }
+[data-problem] .sync-dot { background: #ffce5c; }
+[data-buffering] .sync-dot { background: transparent; }
+.buffering-spinner {
+  display: none;
+  position: absolute;
+  inset: -2.5px;
+  border: 2px solid var(--muted);
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+[data-buffering] .buffering-spinner { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .buffering-spinner { animation: buffering-spin .8s linear infinite; }
+}
+@keyframes buffering-spin { to { transform: rotate(360deg); } }
+#room-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; flex: 1; min-width: 0; }
+#participant-count { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 12px; }
+svg { flex: none; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+#chevron { color: var(--muted); }
+[aria-expanded="true"] #chevron { transform: rotate(180deg); }
+.summary { display: block; margin: 2px 0 0 14px; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+:is([data-synced], [data-buffering]):not([data-problem]) .summary,
+:is([data-synced], [data-buffering]) #status,
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#problem { color: #ffce5c; }
+#room-panel:not([data-synced], [data-buffering]) #problem::before { content: ' · '; white-space: pre; }
+#copy-invitation { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; padding: 0; background: transparent; }
+#room-dock button:not(:disabled):hover { background: #383838; }
+#copy-invitation svg { width: 19px; height: 19px; }
+#copy-status { flex: none; order: 0; border-radius: 14px; margin: 0; padding: 6px 12px; color: var(--muted); font-size: 12px; }
+#copy-status:empty { display: none; }
+#room-details { order: -1; min-height: 0; overflow: auto; scrollbar-width: thin; border-radius: 14px; padding: 10px 12px; }
+h1 { font-size: 13px; line-height: 1.4; margin: 0 0 8px; overflow-wrap: anywhere; }
+#room-details button, #return-video { display: block; margin: 7px 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+ul { list-style: none; padding: 0; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+a { color: var(--accent); }
+label { display: block; margin-top: 8px; }
+input { display: block; width: 100%; padding: 7px; margin-top: 4px; border: 1px solid var(--border); border-radius: 7px; }
+.leave { color: #ffb4ab; }
+[data-buffering] #synced-status { visibility: hidden; }

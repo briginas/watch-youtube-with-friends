@@ -1,0 +1,183 @@
+{
+  "live": true,
+  "browserVersion": "156.0.8078.4",
+  "checkpoints": [
+    {
+      "source": "creator",
+      "action": "mute",
+      "revision": 2,
+      "a": {
+        "volume": 0.8933054837332952,
+        "muted": true,
+        "subtitles": "false"
+      },
+      "b": {
+        "volume": 0.8933054837332952,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "creator",
+      "action": "volume keyboard",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "false"
+      },
+      "b": {
+        "volume": 0.8933054837332952,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "creator",
+      "action": "subtitles",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8933054837332952,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "creator",
+      "action": "quality",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8933054837332952,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "creator",
+      "action": "selected quality",
+      "selected": "360p",
+      "other": "Auto"
+    },
+    {
+      "source": "guest",
+      "action": "mute",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8933054837332952,
+        "muted": true,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "guest",
+      "action": "volume keyboard",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "guest",
+      "action": "subtitles",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      }
+    },
+    {
+      "source": "guest",
+      "action": "subtitles keyboard",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "guest",
+      "action": "quality",
+      "revision": 2,
+      "a": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "true"
+      },
+      "b": {
+        "volume": 0.8486402095466304,
+        "muted": false,
+        "subtitles": "false"
+      }
+    },
+    {
+      "source": "guest",
+      "action": "selected quality",
+      "selected": "144p",
+      "other": "360p"
+    },
+    {
+      "action": "shared seek preserves personal settings",
+      "revision": 3,
+      "a": {
+        "positionSeconds": 10.900163,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 10.900163,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "settings": [
+        {
+          "volume": 0.8486402095466304,
+          "muted": false,
+          "subtitles": "true"
+        },
+        {
+          "volume": 0.8486402095466304,
+          "muted": false,
+          "subtitles": "false"
+        }
+      ],
+      "qualities": [
+        "360p",
+        "144p"
+      ]
+    }
+  ]
+}

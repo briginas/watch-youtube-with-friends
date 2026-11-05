@@ -1,0 +1,401 @@
+{
+  "date": "2026-11-02",
+  "firebase": "local demo emulator",
+  "manualVerification": {
+    "status": "passed",
+    "browser": "Google Chrome for Testing 156.0.8078.4",
+    "profiles": "two native Chromium profiles with distinct Anonymous Auth participants",
+    "interaction": "Computer Use native UI only: play/pause via YouTube controls or video surface, seek slider Increment/Decrement, explicit speed presets",
+    "observation": "Read-only emulator REST observation; actual video state read through visible DevTools Console; no playback mutations through REST or Console",
+    "checkpoints": [
+      {
+        "action": "baseline",
+        "observedAt": "2026-11-02T11:54:16.929Z",
+        "revision": 0,
+        "source": "A",
+        "isPlaying": false,
+        "positionSeconds": 24.811482,
+        "playbackRate": 1,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "B: play button",
+        "observedAt": "2026-11-02T11:54:29.364Z",
+        "revision": 1,
+        "source": "B",
+        "isPlaying": true,
+        "positionSeconds": 24.812896,
+        "playbackRate": 1,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "A: pause player surface",
+        "observedAt": "2026-11-02T11:55:10.842Z",
+        "revision": 2,
+        "source": "A",
+        "isPlaying": false,
+        "positionSeconds": 66.560207,
+        "playbackRate": 1,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "A: seek slider +5s",
+        "observedAt": "2026-11-02T11:55:25.700Z",
+        "revision": 3,
+        "source": "A",
+        "isPlaying": false,
+        "positionSeconds": 71.560207,
+        "playbackRate": 1,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "A: speed menu 1.25",
+        "observedAt": "2026-11-02T11:55:43.995Z",
+        "revision": 4,
+        "source": "A",
+        "isPlaying": false,
+        "positionSeconds": 71.560207,
+        "playbackRate": 1.25,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "B: seek slider -5s",
+        "observedAt": "2026-11-02T11:56:38.435Z",
+        "revision": 5,
+        "source": "B",
+        "isPlaying": false,
+        "positionSeconds": 66.560207,
+        "playbackRate": 1.25,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "B: speed menu 1.5",
+        "observedAt": "2026-11-02T11:57:02.089Z",
+        "revision": 6,
+        "source": "B",
+        "isPlaying": false,
+        "positionSeconds": 66.560207,
+        "playbackRate": 1.5,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "A: play player surface",
+        "observedAt": "2026-11-02T11:57:32.045Z",
+        "revision": 7,
+        "source": "A",
+        "isPlaying": true,
+        "positionSeconds": 66.561218,
+        "playbackRate": 1.5,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      },
+      {
+        "action": "B: pause player surface",
+        "observedAt": "2026-11-02T11:57:52.601Z",
+        "revision": 8,
+        "source": "B",
+        "isPlaying": false,
+        "positionSeconds": 94.751199,
+        "playbackRate": 1.5,
+        "distinctParticipants": 2,
+        "stableForMs": 1200
+      }
+    ],
+    "mediaObservations": [
+      {
+        "profile": "B",
+        "afterRevision": 4,
+        "positionSeconds": 71.560207,
+        "paused": true,
+        "playbackRate": 1.25
+      },
+      {
+        "profile": "A",
+        "afterRevision": 6,
+        "positionSeconds": 66.560207,
+        "paused": true,
+        "playbackRate": 1.5
+      },
+      {
+        "profile": "A",
+        "afterRevision": 8,
+        "positionSeconds": 94.781359,
+        "paused": true,
+        "playbackRate": 1.5
+      },
+      {
+        "profile": "B",
+        "afterRevision": 8,
+        "positionSeconds": 94.751199,
+        "paused": true,
+        "playbackRate": 1.5
+      }
+    ],
+    "finalPositionDifferenceSeconds": 0.03016,
+    "limitations": [
+      "Local Firebase emulator; this is not a cloud p95 or continuous drift measurement.",
+      "YouTube speed menu still showed Normal after remote rate=1.25 while video.playbackRate was 1.25; keyboard/UI consistency remains for tasks 4.2/4.4."
+    ]
+  },
+  "results": [
+    {
+      "live": false,
+      "manual": false,
+      "checkpoints": [
+        {
+          "action": "creator: play",
+          "revision": 1,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.94044,
+            "playbackRate": 1,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 5.943377,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "creator: pause (keyboard)",
+          "revision": 2,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.992917,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.989977,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: seek",
+          "revision": 3,
+          "source": 1,
+          "a": {
+            "positionSeconds": 10.992917,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.992917,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: rate",
+          "revision": 4,
+          "source": 1,
+          "a": {
+            "positionSeconds": 10.992917,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.992917,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: play",
+          "revision": 5,
+          "source": 2,
+          "a": {
+            "positionSeconds": 12.10052,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 12.149847,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "guest: pause (keyboard)",
+          "revision": 6,
+          "source": 2,
+          "a": {
+            "positionSeconds": 12.163675,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 12.176923,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: seek",
+          "revision": 7,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.176923,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.176923,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: rate",
+          "revision": 8,
+          "source": 2,
+          "a": {
+            "positionSeconds": 7.176923,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 7.176923,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        }
+      ]
+    },
+    {
+      "live": true,
+      "manual": false,
+      "checkpoints": [
+        {
+          "action": "creator: play",
+          "revision": 1,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.781269,
+            "playbackRate": 1,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 5.747188,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "creator: pause (keyboard)",
+          "revision": 2,
+          "source": 1,
+          "a": {
+            "positionSeconds": 5.798303,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 5.779156,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: seek",
+          "revision": 3,
+          "source": 1,
+          "a": {
+            "positionSeconds": 10.798303,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.798303,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "creator: rate",
+          "revision": 4,
+          "source": 1,
+          "a": {
+            "positionSeconds": 10.798303,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.798303,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: play",
+          "revision": 5,
+          "source": 2,
+          "a": {
+            "positionSeconds": 11.625617,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 11.682661,
+            "playbackRate": 1.25,
+            "isPlaying": true
+          }
+        },
+        {
+          "action": "guest: pause (keyboard)",
+          "revision": 6,
+          "source": 2,
+          "a": {
+            "positionSeconds": 11.688241,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 11.708941,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: seek",
+          "revision": 7,
+          "source": 2,
+          "a": {
+            "positionSeconds": 6.70894,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 6.70894,
+            "playbackRate": 1.25,
+            "isPlaying": false
+          }
+        },
+        {
+          "action": "guest: rate",
+          "revision": 8,
+          "source": 2,
+          "a": {
+            "positionSeconds": 6.70894,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 6.70894,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        }
+      ]
+    }
+  ]
+}

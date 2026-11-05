@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-02",
+  "environment": {
+    "node": "24.19.0",
+    "browser": "bundled Chromium 156.0.0.0, headless MV3, fresh independent profiles, signed out"
+  },
+  "commands": {
+    "npm run test:player": {
+      "passed": 11
+    },
+    "npm run test:player:youtube": {
+      "passed": 4,
+      "skipped": 1
+    },
+    "npm run test:e2e": {
+      "passed": 1
+    }
+  },
+  "cases": {
+    "spa": {
+      "result": "passed",
+      "finalStatus": "ready",
+      "finalIntentKinds": [],
+      "fromVideoId": "aqz-KE-bpKQ",
+      "toVideoId": "xOXolSQcEb4",
+      "sameDocumentAndMediaElements": true,
+      "awayStatus": "different-video",
+      "awayIntentCount": 0,
+      "browserBackAndForward": "passed",
+      "returnAction": "original URL, full navigation"
+    },
+    "unavailable": {
+      "result": "passed",
+      "finalStatus": "unavailable",
+      "finalIntentKinds": [],
+      "videoId": "00000000000",
+      "mediaReadyState": 0,
+      "observedLayout": "visible ytd-background-promo-renderer outside hidden movie_player"
+    },
+    "autoplay": {
+      "result": "passed",
+      "finalStatus": "ready",
+      "finalIntentKinds": [
+        "pause"
+      ],
+      "policy": "document-user-activation-required",
+      "assertedNoActivationBeforeApply": true,
+      "blockedStatus": "autoplay-blocked",
+      "blockedIntentCount": 0,
+      "playRejection": [
+        "NotAllowedError"
+      ],
+      "traceEnabled": false
+    }
+  },
+  "advertising": {
+    "result": "skipped",
+    "verified": false,
+    "attempts": [
+      {
+        "videoId": "dQw4w9WgXcQ",
+        "adObserved": false,
+        "status": "ready"
+      },
+      {
+        "videoId": "kJQP7kiw5Fk",
+        "adObserved": false,
+        "status": "ready"
+      },
+      {
+        "videoId": "9bZkp7q19f0",
+        "adObserved": false,
+        "status": "ready"
+      }
+    ]
+  },
+  "boundary": "onIntent output only; no room transport or second participant; latest room state recovery belongs to tasks 3.3-3.5"
+}

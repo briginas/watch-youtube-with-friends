@@ -1,0 +1,3138 @@
+{
+  "environment": {
+    "projectId": "example-qa",
+    "databaseHost": "example-qa-default-rtdb.europe-west1.firebasedatabase.app",
+    "region": "europe-west1 (Belgium)",
+    "clients": "Два независимых Chromium profiles на одном Mac пользователя; географическое положение хоста не установлено",
+    "network": "Общий внешний маршрут хоста; без искусственного throttling. Тип доступа и наличие VPN не установлены",
+    "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+  },
+  "methodology": "Все переданные сессии с одинаковыми условиями; пригодность каждого замера сохранена из исходного отчёта. Неполные сессии и исключённые команды не удаляются. Цели оцениваются только для готовых плееров; completeRuns приводится отдельно.",
+  "summary": {
+    "runs": 4,
+    "completeRuns": 0,
+    "collected": 77,
+    "eligible": 40,
+    "excluded": 37,
+    "applied": 40,
+    "p95Ms": 300,
+    "maxDifferenceSeconds": 0.1803099389648466,
+    "acceptedOnceAll": true,
+    "statesAt3sMatch": true,
+    "byAction": {
+      "rate-up": 10,
+      "seek-back": 1,
+      "rate-normal": 9,
+      "play": 14,
+      "pause": 6
+    },
+    "bySource": [
+      {
+        "source": 1,
+        "eligible": 25
+      },
+      {
+        "source": 2,
+        "eligible": 15
+      }
+    ],
+    "maxDifferenceIncludingRestrictions": 48.591064,
+    "meetsLatencyTarget": true,
+    "meetsPositionTarget": true
+  },
+  "runs": [
+    {
+      "label": "first-attempt.json",
+      "report": {
+        "startedAt": "2026-11-02T17:18:16.545Z",
+        "finishedAt": "2026-11-02T17:22:29.687Z",
+        "stage": "command 6: 1 rate-normal",
+        "rehearsal": false,
+        "liveYouTube": true,
+        "browserVersions": [
+          "156.0.8078.4",
+          "156.0.8078.4"
+        ],
+        "distinctUids": true,
+        "environment": {
+          "projectId": "example-qa",
+          "databaseHost": "example-qa-default-rtdb.europe-west1.firebasedatabase.app",
+          "region": "europe-west1 (Belgium)",
+          "clients": "Два независимых Chromium profiles на одном Mac пользователя; географическое положение хоста не установлено",
+          "network": "Общий внешний маршрут хоста; без искусственного throttling. Тип доступа и наличие VPN не установлены",
+          "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+        },
+        "methodology": {
+          "commands": 32,
+          "samplingPeriodMs": 10,
+          "stableApplicationMs": 100,
+          "timing": "trusted input to remote media matching source, stable for 100ms; browser monotonic clocks with shared host epoch",
+          "position": "first samples at input+3000ms, extrapolated to common sample time",
+          "percentile": "nearest rank ceil(0.95*N)",
+          "eligibility": "no ads/readyState<3 during first 3s, both players ready at sample"
+        },
+        "summary": {
+          "collected": 5,
+          "eligible": 1,
+          "applied": 1,
+          "p95Ms": 230.2998046875,
+          "maxDifferenceSeconds": 0.14413106103515538,
+          "meetsLatencyTarget": false,
+          "meetsPositionTarget": false
+        },
+        "observations": [
+          {
+            "revision": 1,
+            "source": 1,
+            "action": "play",
+            "eligible": false,
+            "latencyMs": 248.300048828125,
+            "differenceSeconds": 0.11334495117187515,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.699951171875,
+              3009.39990234375
+            ],
+            "samplingSkewMs": 0.699951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793639935468.7,
+                "position": 7.929998,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793639935469.4,
+                "position": 7.817353,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 2,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 230.2998046875,
+            "differenceSeconds": 0.14413106103515538,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.199951171875,
+              3009.5
+            ],
+            "samplingSkewMs": 0.300048828125,
+            "samplesAt3s": [
+              {
+                "at": 1793639939179,
+                "position": 12.356263,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793639939179.3,
+                "position": 12.212507,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 3,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 419.39990234375,
+            "differenceSeconds": 0.24851400000000012,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.699951171875,
+              3009.699951171875
+            ],
+            "samplingSkewMs": 0,
+            "samplesAt3s": [
+              {
+                "at": 1793639942374.4,
+                "position": 22.442856,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793639942374.4,
+                "position": 22.194342,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 4,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 268.800048828125,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.60009765625,
+              3009.60009765625
+            ],
+            "samplingSkewMs": 1,
+            "samplesAt3s": [
+              {
+                "at": 1793639945531.5,
+                "position": 22.643045,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793639945532.5,
+                "position": 22.643045,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 5,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 669.89990234375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000,
+              3009
+            ],
+            "samplingSkewMs": 9,
+            "samplesAt3s": [
+              {
+                "at": 1793639948698,
+                "position": 16.393045,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793639948707,
+                "position": 16.393045,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          }
+        ]
+      }
+    },
+    {
+      "label": "second-attempt.json",
+      "report": {
+        "startedAt": "2026-11-02T17:24:27.318Z",
+        "finishedAt": "2026-11-02T17:26:53.057Z",
+        "stage": "command 25: 2 play",
+        "rehearsal": false,
+        "liveYouTube": true,
+        "browserVersions": [
+          "156.0.8078.4",
+          "156.0.8078.4"
+        ],
+        "distinctUids": true,
+        "environment": {
+          "projectId": "example-qa",
+          "databaseHost": "example-qa-default-rtdb.europe-west1.firebasedatabase.app",
+          "region": "europe-west1 (Belgium)",
+          "clients": "Два независимых Chromium profiles на одном Mac пользователя; географическое положение хоста не установлено",
+          "network": "Общий внешний маршрут хоста; без искусственного throttling. Тип доступа и наличие VPN не установлены",
+          "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+        },
+        "methodology": {
+          "minimumCommands": 32,
+          "minimumEligible": 30,
+          "maximumCommands": 128,
+          "samplingPeriodMs": 10,
+          "stableApplicationMs": 100,
+          "timing": "trusted input to remote media matching source, stable for 100ms; browser monotonic clocks with shared host epoch",
+          "position": "first samples at input+3000ms, extrapolated to common sample time",
+          "percentile": "nearest rank ceil(0.95*N)",
+          "eligibility": "no ads/readyState<3 during first 3s, both players ready at sample"
+        },
+        "summary": {
+          "collected": 24,
+          "eligible": 14,
+          "applied": 14,
+          "p95Ms": 359.900146484375,
+          "maxDifferenceSeconds": 0.16121312207031124,
+          "meetsLatencyTarget": false,
+          "meetsPositionTarget": false
+        },
+        "observations": [
+          {
+            "revision": 1,
+            "source": 1,
+            "action": "play",
+            "eligible": false,
+            "latencyMs": 228.5,
+            "differenceSeconds": 0.11349095117187513,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.10009765625,
+              3008.300048828125
+            ],
+            "samplingSkewMs": 0.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640307648.8,
+                "position": 7.938963,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640307649,
+                "position": 7.825672,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 2,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 235,
+            "differenceSeconds": 0.14801812207031162,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3007.199951171875,
+              3005.300048828125
+            ],
+            "samplingSkewMs": 1.89990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640311364.2,
+                "position": 12.373804,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640311362.3,
+                "position": 12.223411,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 3,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 568.699951171875,
+            "differenceSeconds": 0.26287012207031424,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.599853515625,
+              3009.699951171875
+            ],
+            "samplingSkewMs": 1.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640314569.9,
+                "position": 22.476546,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640314571,
+                "position": 22.215051,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 4,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 249.5,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.10009765625,
+              3008.60009765625
+            ],
+            "samplingSkewMs": 8.5,
+            "samplesAt3s": [
+              {
+                "at": 1793640317731.8,
+                "position": 22.693151,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640317740.3,
+                "position": 22.693151,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 5,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": true,
+            "latencyMs": 359.900146484375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3010.300048828125,
+              3000.300048828125
+            ],
+            "samplingSkewMs": 10,
+            "samplesAt3s": [
+              {
+                "at": 1793640320930.3,
+                "position": 16.443151,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640320920.3,
+                "position": 16.443151,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 6,
+            "source": 1,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 222.900146484375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3003.39990234375,
+              3003
+            ],
+            "samplingSkewMs": 0.39990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640324561.9,
+                "position": 16.443151,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640324561.5,
+                "position": 16.443151,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 7,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 219.7001953125,
+            "differenceSeconds": 0.1278929999999967,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3010.10009765625,
+              3009.10009765625
+            ],
+            "samplingSkewMs": 1,
+            "samplesAt3s": [
+              {
+                "at": 1793640327752.3,
+                "position": 19.389566,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640327751.3,
+                "position": 19.260673,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 8,
+            "source": 1,
+            "action": "pause",
+            "eligible": true,
+            "latencyMs": 229.500244140625,
+            "differenceSeconds": 0.011479999999998824,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.199951171875,
+              3009.10009765625
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640330924.0999,
+                "position": 19.556437,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640330924,
+                "position": 19.544957,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 9,
+            "source": 2,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 249.800048828125,
+            "differenceSeconds": 0.1281270976562503,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008,
+              3009.10009765625
+            ],
+            "samplingSkewMs": 1.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640334119.7,
+                "position": 22.557079,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640334120.8,
+                "position": 22.430052,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 10,
+            "source": 2,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 233.999755859375,
+            "differenceSeconds": 0.16121312207031124,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3003.099853515625,
+              3003.199951171875
+            ],
+            "samplingSkewMs": 0.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640337788.2,
+                "position": 26.941624,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640337788.3,
+                "position": 26.780536,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 11,
+            "source": 2,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 500.699951171875,
+            "differenceSeconds": 0.25797087792968654,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3002.5,
+              3000.89990234375
+            ],
+            "samplingSkewMs": 1.60009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640340963.8,
+                "position": 36.969476,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640340962.2,
+                "position": 36.709505,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 12,
+            "source": 2,
+            "action": "pause",
+            "eligible": true,
+            "latencyMs": 270.89990234375,
+            "differenceSeconds": 0.09716900000000095,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.300048828125,
+              3000.89990234375
+            ],
+            "samplingSkewMs": 0.599853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640344106.6,
+                "position": 37.152308,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640344107.2,
+                "position": 37.055139,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 13,
+            "source": 2,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 519.39990234375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.10009765625,
+              3010
+            ],
+            "samplingSkewMs": 9.89990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640347271.4001,
+                "position": 30.902307,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640347281.3,
+                "position": 30.902307,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 14,
+            "source": 2,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 244.7998046875,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3003.2998046875,
+              3004.89990234375
+            ],
+            "samplingSkewMs": 1.60009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640350921.7,
+                "position": 30.902307,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640350923.3,
+                "position": 30.902307,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 15,
+            "source": 2,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 220.599853515625,
+            "differenceSeconds": 0.1066900000000004,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000,
+              3000
+            ],
+            "samplingSkewMs": 0,
+            "samplesAt3s": [
+              {
+                "at": 1793640354090.8,
+                "position": 33.84059,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640354090.8,
+                "position": 33.7339,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 16,
+            "source": 2,
+            "action": "pause",
+            "eligible": true,
+            "latencyMs": 300,
+            "differenceSeconds": 0.07962899999999706,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.60009765625,
+              3000.699951171875
+            ],
+            "samplingSkewMs": 8.900146484375,
+            "samplesAt3s": [
+              {
+                "at": 1793640357266.3,
+                "position": 34.010545,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640357257.4,
+                "position": 34.090174,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 17,
+            "source": 1,
+            "action": "play",
+            "eligible": false,
+            "latencyMs": 269.60009765625,
+            "differenceSeconds": 0.12063309765625974,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.199951171875,
+              3009.800048828125
+            ],
+            "samplingSkewMs": 0.60009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640360430.2,
+                "position": 37.107913,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640360430.8,
+                "position": 36.98788,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 18,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 228.10009765625,
+            "differenceSeconds": 0.15022318310546723,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.10009765625,
+              3008.000244140625
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640364097.7,
+                "position": 41.492997,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640364097.6,
+                "position": 41.342649,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 19,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 486.400146484375,
+            "differenceSeconds": 0.23521312207031286,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3007.699951171875,
+              3005.300048828125
+            ],
+            "samplingSkewMs": 2.39990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640367295.9,
+                "position": 51.548735,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640367293.5,
+                "position": 51.310522,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 20,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 230.60009765625,
+            "differenceSeconds": 0.06912099999999555,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.5,
+              3009.2001953125
+            ],
+            "samplingSkewMs": 0.2998046875,
+            "samplesAt3s": [
+              {
+                "at": 1793640370455.0999,
+                "position": 51.739458,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640370454.8,
+                "position": 51.670337,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 21,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 429.400146484375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.699951171875,
+              3009.60009765625
+            ],
+            "samplingSkewMs": 0.900146484375,
+            "samplesAt3s": [
+              {
+                "at": 1793640373616.0999,
+                "position": 45.489458,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640373617,
+                "position": 45.489458,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 22,
+            "source": 1,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 212.900146484375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3002.900146484375,
+              3002.7001953125
+            ],
+            "samplingSkewMs": 0.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640377241.5,
+                "position": 45.489458,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640377241.3,
+                "position": 45.489458,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 23,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 219.5,
+            "differenceSeconds": 0.10658204882812328,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3012.199951171875,
+              3010
+            ],
+            "samplingSkewMs": 2.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640380433,
+                "position": 48.423195,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640380430.8,
+                "position": 48.314413,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 24,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 229.10009765625,
+            "differenceSeconds": 48.591064,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.199951171875,
+              3009
+            ],
+            "samplingSkewMs": 0.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640383594.9,
+                "position": 0,
+                "rate": 1,
+                "playing": false,
+                "ready": false,
+                "ad": false,
+                "buffering": true
+              },
+              {
+                "at": 1793640383594.7,
+                "position": 48.591064,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          }
+        ]
+      }
+    },
+    {
+      "label": "third-attempt.json",
+      "report": {
+        "startedAt": "2026-11-02T17:28:35.566Z",
+        "finishedAt": "2026-11-02T17:31:05.681Z",
+        "stage": "command 25: 2 play",
+        "rehearsal": false,
+        "liveYouTube": true,
+        "browserVersions": [
+          "156.0.8078.4",
+          "156.0.8078.4"
+        ],
+        "distinctUids": true,
+        "environment": {
+          "projectId": "example-qa",
+          "databaseHost": "example-qa-default-rtdb.europe-west1.firebasedatabase.app",
+          "region": "europe-west1 (Belgium)",
+          "clients": "Два независимых Chromium profiles на одном Mac пользователя; географическое положение хоста не установлено",
+          "network": "Общий внешний маршрут хоста; без искусственного throttling. Тип доступа и наличие VPN не установлены",
+          "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+        },
+        "methodology": {
+          "minimumCommands": 32,
+          "minimumEligible": 30,
+          "maximumCommands": 128,
+          "samplingPeriodMs": 10,
+          "stableApplicationMs": 100,
+          "timing": "trusted input to remote media matching source, stable for 100ms; browser monotonic clocks with shared host epoch",
+          "position": "first samples at input+3000ms, extrapolated to common sample time",
+          "percentile": "nearest rank ceil(0.95*N)",
+          "eligibility": "no ads/readyState<3 during first 3s, both players ready at sample"
+        },
+        "summary": {
+          "collected": 24,
+          "eligible": 12,
+          "applied": 12,
+          "p95Ms": 310.699951171875,
+          "maxDifferenceSeconds": 0.1803099389648466,
+          "meetsLatencyTarget": false,
+          "meetsPositionTarget": false
+        },
+        "observations": [
+          {
+            "revision": 1,
+            "source": 1,
+            "action": "play",
+            "eligible": false,
+            "latencyMs": 248.000244140625,
+            "differenceSeconds": 0.12078795117187546,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.900146484375,
+              3009.10009765625
+            ],
+            "samplingSkewMs": 0.800048828125,
+            "samplesAt3s": [
+              {
+                "at": 1793640560608,
+                "position": 7.942345,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640560607.2,
+                "position": 7.820757,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 2,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 214,
+            "differenceSeconds": 0.15051712207031187,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3004.699951171875,
+              3005.300048828125
+            ],
+            "samplingSkewMs": 0.60009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640564262.5999,
+                "position": 12.31172,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640564263.2,
+                "position": 12.161953,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 3,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 410.7001953125,
+            "differenceSeconds": 0.17709524414062372,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.5,
+              3000.2001953125
+            ],
+            "samplingSkewMs": 0.2998046875,
+            "samplesAt3s": [
+              {
+                "at": 1793640567447.5999,
+                "position": 22.383678,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640567447.3,
+                "position": 22.206208,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 4,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 250,
+            "differenceSeconds": 0.026793999999998874,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.699951171875,
+              3000.699951171875
+            ],
+            "samplingSkewMs": 9,
+            "samplesAt3s": [
+              {
+                "at": 1793640570622.2,
+                "position": 22.604297,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640570613.2,
+                "position": 22.577503,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 5,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 360.5,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.10009765625,
+              3000
+            ],
+            "samplingSkewMs": 0.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640573788,
+                "position": 16.354296,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640573787.9,
+                "position": 16.354296,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 6,
+            "source": 1,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 310.699951171875,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3002.199951171875,
+              3002
+            ],
+            "samplingSkewMs": 0.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640577409.7,
+                "position": 16.354296,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640577409.5,
+                "position": 16.354296,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 7,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 220.400146484375,
+            "differenceSeconds": 0.10667709765624878,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.800048828125,
+              3010.900146484375
+            ],
+            "samplingSkewMs": 1.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640580573.7,
+                "position": 19.294425,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640580574.8,
+                "position": 19.188848,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 8,
+            "source": 1,
+            "action": "pause",
+            "eligible": true,
+            "latencyMs": 238.800048828125,
+            "differenceSeconds": 0.018755999999999773,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3001,
+              3001.5
+            ],
+            "samplingSkewMs": 0.5,
+            "samplesAt3s": [
+              {
+                "at": 1793640583741.7,
+                "position": 19.464322,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640583742.2,
+                "position": 19.483078,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 9,
+            "source": 2,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 239.499755859375,
+            "differenceSeconds": 0.14937600000000018,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3010.2998046875,
+              3000.2998046875
+            ],
+            "samplingSkewMs": 10,
+            "samplesAt3s": [
+              {
+                "at": 1793640586941.4,
+                "position": 22.483367,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640586931.4,
+                "position": 22.323991,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 10,
+            "source": 2,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 233.7998046875,
+            "differenceSeconds": 0.1803099389648466,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3003.39990234375,
+              3004.099853515625
+            ],
+            "samplingSkewMs": 0.699951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640590603.9,
+                "position": 26.862036,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640590604.5999,
+                "position": 26.682601,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 11,
+            "source": 2,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 469.7998046875,
+            "differenceSeconds": 0.20962581689453685,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3020,
+              3001.099853515625
+            ],
+            "samplingSkewMs": 18.900146484375,
+            "samplesAt3s": [
+              {
+                "at": 1793640593802.6,
+                "position": 36.907705,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640593783.7,
+                "position": 36.674454,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 12,
+            "source": 2,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 243.7998046875,
+            "differenceSeconds": 0.03725899999999882,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3010.099853515625,
+              3001.39990234375
+            ],
+            "samplingSkewMs": 8.699951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640596934.9,
+                "position": 37.066787,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640596926.2,
+                "position": 37.029528,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 13,
+            "source": 2,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 430.999755859375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.89990234375,
+              3011.2998046875
+            ],
+            "samplingSkewMs": 2.39990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640600105.7,
+                "position": 30.816786,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640600108.0999,
+                "position": 30.816786,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 14,
+            "source": 2,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 233.7998046875,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3002.89990234375,
+              3002.999755859375
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640603699.7,
+                "position": 30.816786,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640603699.7998,
+                "position": 30.816786,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 15,
+            "source": 2,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 250.39990234375,
+            "differenceSeconds": 0.14953485351563245,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.89990234375,
+              3009.999755859375
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640606886.5,
+                "position": 33.765678,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640606886.5999,
+                "position": 33.616243,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 16,
+            "source": 2,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 650.199951171875,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3001.5,
+              3001.7998046875
+            ],
+            "samplingSkewMs": 0.2998046875,
+            "samplesAt3s": [
+              {
+                "at": 1793640610040,
+                "position": 33.921155,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640610040.2998,
+                "position": 33.921155,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 17,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 241.2001953125,
+            "differenceSeconds": 0.05352819531250219,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3011,
+              3009.2001953125
+            ],
+            "samplingSkewMs": 1.7998046875,
+            "samplesAt3s": [
+              {
+                "at": 1793640613207.9,
+                "position": 36.855277,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640613206.1,
+                "position": 36.799949,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 18,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 231.400146484375,
+            "differenceSeconds": 0.08441493896484076,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.800048828125,
+              3001
+            ],
+            "samplingSkewMs": 0.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640616822.7,
+                "position": 41.186319,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640616822.9,
+                "position": 41.102154,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 19,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 488.199951171875,
+            "differenceSeconds": 0.1289462441406215,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.599853515625,
+              3008.800048828125
+            ],
+            "samplingSkewMs": 8.2001953125,
+            "samplesAt3s": [
+              {
+                "at": 1793640620002.5999,
+                "position": 51.210519,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640620010.8,
+                "position": 51.091823,
+                "rate": 1.25,
+                "playing": true,
+                "ready": false,
+                "ad": false,
+                "buffering": true
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 20,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 241.60009765625,
+            "differenceSeconds": 0.041766000000002634,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.10009765625,
+              3000.000244140625
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640623145.9,
+                "position": 51.393555,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640623145.8,
+                "position": 51.351789,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 21,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 439.2001953125,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000,
+              3009.800048828125
+            ],
+            "samplingSkewMs": 9.800048828125,
+            "samplesAt3s": [
+              {
+                "at": 1793640626307.5999,
+                "position": 45.143555,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640626317.4,
+                "position": 45.143555,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 22,
+            "source": 1,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 235,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3005.39990234375,
+              3006.2001953125
+            ],
+            "samplingSkewMs": 0.80029296875,
+            "samplesAt3s": [
+              {
+                "at": 1793640629926.7998,
+                "position": 45.143555,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640629927.6,
+                "position": 45.143555,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 23,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 239,
+            "differenceSeconds": 0.12777109765625028,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.199951171875,
+              3010.300048828125
+            ],
+            "samplingSkewMs": 10.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640633107.2,
+                "position": 48.072967,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640633117.3,
+                "position": 47.955296,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 24,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 230.2001953125,
+            "differenceSeconds": 48.229171,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.199951171875,
+              3000.2001953125
+            ],
+            "samplingSkewMs": 8.999755859375,
+            "samplesAt3s": [
+              {
+                "at": 1793640636276.2998,
+                "position": 0,
+                "rate": 1,
+                "playing": false,
+                "ready": false,
+                "ad": false,
+                "buffering": true
+              },
+              {
+                "at": 1793640636267.3,
+                "position": 48.229171,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          }
+        ],
+        "diagnostics": [
+          {
+            "players": [
+              {
+                "readyState": 0,
+                "networkState": 0,
+                "position": 0,
+                "paused": true,
+                "errorCode": null,
+                "ad": false
+              }
+            ],
+            "error": "\n        "
+          },
+          {
+            "players": [
+              {
+                "readyState": 0,
+                "networkState": 0,
+                "position": 0,
+                "paused": true,
+                "errorCode": null,
+                "ad": false
+              }
+            ],
+            "error": "\n        "
+          }
+        ]
+      }
+    },
+    {
+      "label": "fourth-attempt.json",
+      "report": {
+        "startedAt": "2026-11-02T17:33:38.397Z",
+        "finishedAt": "2026-11-02T17:36:04.860Z",
+        "stage": "command 25: 2 play",
+        "rehearsal": false,
+        "liveYouTube": true,
+        "browserVersions": [
+          "156.0.8078.4",
+          "156.0.8078.4"
+        ],
+        "distinctUids": true,
+        "environment": {
+          "projectId": "example-qa",
+          "databaseHost": "example-qa-default-rtdb.europe-west1.firebasedatabase.app",
+          "region": "europe-west1 (Belgium)",
+          "clients": "Два независимых Chromium profiles на одном Mac пользователя; географическое положение хоста не установлено",
+          "network": "Общий внешний маршрут хоста; без искусственного throttling. Тип доступа и наличие VPN не установлены",
+          "video": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+        },
+        "methodology": {
+          "minimumCommands": 32,
+          "minimumEligible": 30,
+          "maximumCommands": 128,
+          "samplingPeriodMs": 10,
+          "stableApplicationMs": 100,
+          "timing": "trusted input to remote media matching source, stable for 100ms; browser monotonic clocks with shared host epoch",
+          "position": "first samples at input+3000ms, extrapolated to common sample time",
+          "percentile": "nearest rank ceil(0.95*N)",
+          "eligibility": "no ads/readyState<3 during first 3s, both players ready at sample"
+        },
+        "summary": {
+          "collected": 24,
+          "eligible": 13,
+          "applied": 13,
+          "p95Ms": 231.800048828125,
+          "maxDifferenceSeconds": 0.15913600000000372,
+          "meetsLatencyTarget": false,
+          "meetsPositionTarget": false
+        },
+        "observations": [
+          {
+            "revision": 1,
+            "source": 1,
+            "action": "play",
+            "eligible": false,
+            "latencyMs": 238.5,
+            "differenceSeconds": 0.11285124414062508,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.699951171875,
+              3009.2001953125
+            ],
+            "samplingSkewMs": 0.500244140625,
+            "samplesAt3s": [
+              {
+                "at": 1793640859646.5999,
+                "position": 7.929449,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640859647.1,
+                "position": 7.817098,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 2,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 222.500244140625,
+            "differenceSeconds": 0.14384706103515654,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3002.400146484375,
+              3003.2001953125
+            ],
+            "samplingSkewMs": 0.800048828125,
+            "samplesAt3s": [
+              {
+                "at": 1793640863331.5,
+                "position": 12.33041,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640863332.3,
+                "position": 12.187563,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 3,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 409.300048828125,
+            "differenceSeconds": 0.25852412207031605,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3001.5,
+              3000.10009765625
+            ],
+            "samplingSkewMs": 1.39990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640866529.9,
+                "position": 22.425837,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640866528.5,
+                "position": 22.165563,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 4,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 250.5,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.900146484375,
+              3010.60009765625
+            ],
+            "samplingSkewMs": 0.699951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640869708.8,
+                "position": 22.652519,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640869709.5,
+                "position": 22.652519,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 5,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 349.199951171875,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.39990234375,
+              3009.300048828125
+            ],
+            "samplingSkewMs": 8.900146484375,
+            "samplesAt3s": [
+              {
+                "at": 1793640872866.9,
+                "position": 16.402519,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640872875.8,
+                "position": 16.402519,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 6,
+            "source": 1,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 216.000244140625,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3005.60009765625,
+              3004.500244140625
+            ],
+            "samplingSkewMs": 1.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640876500.2,
+                "position": 16.402519,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640876499.1,
+                "position": 16.402519,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 7,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 230.400146484375,
+            "differenceSeconds": 0.10667700000000124,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.10009765625,
+              3000.10009765625
+            ],
+            "samplingSkewMs": 0,
+            "samplesAt3s": [
+              {
+                "at": 1793640879656.8,
+                "position": 19.331541,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640879656.8,
+                "position": 19.224864,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 8,
+            "source": 1,
+            "action": "pause",
+            "eligible": true,
+            "latencyMs": 220.300048828125,
+            "differenceSeconds": 0.0020469999999974675,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009,
+              3009.099853515625
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640882836.8,
+                "position": 19.505704,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640882836.9,
+                "position": 19.507751,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 9,
+            "source": 2,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 227.999755859375,
+            "differenceSeconds": 0.1067320488281247,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3008.7998046875,
+              3008.099853515625
+            ],
+            "samplingSkewMs": 0.699951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640886034.9,
+                "position": 22.509642,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640886034.2,
+                "position": 22.40221,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 10,
+            "source": 2,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 215.199951171875,
+            "differenceSeconds": 0.1355130000000031,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3004.5,
+              3004.5
+            ],
+            "samplingSkewMs": 0,
+            "samplesAt3s": [
+              {
+                "at": 1793640889705.7,
+                "position": 26.894549,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640889705.7,
+                "position": 26.759036,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 11,
+            "source": 2,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 460.499755859375,
+            "differenceSeconds": 0.26698306103516245,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3010.599853515625,
+              3009.89990234375
+            ],
+            "samplingSkewMs": 0.699951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640892895.7,
+                "position": 36.942672,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640892895,
+                "position": 36.674814,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 12,
+            "source": 2,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 270,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009,
+              3010.39990234375
+            ],
+            "samplingSkewMs": 1.39990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640896063,
+                "position": 37.147361,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640896064.4,
+                "position": 37.147361,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 13,
+            "source": 2,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 424.300048828125,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.60009765625,
+              3009.60009765625
+            ],
+            "samplingSkewMs": 0,
+            "samplesAt3s": [
+              {
+                "at": 1793640899227.3,
+                "position": 30.89736,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640899227.3,
+                "position": 30.89736,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 14,
+            "source": 2,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 220.2998046875,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.89990234375,
+              3009.89990234375
+            ],
+            "samplingSkewMs": 0,
+            "samplesAt3s": [
+              {
+                "at": 1793640902860.7,
+                "position": 30.89736,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640902860.7,
+                "position": 30.89736,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 15,
+            "source": 2,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 229.199951171875,
+            "differenceSeconds": 0.10669180468750739,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009,
+              3009.7998046875
+            ],
+            "samplingSkewMs": 0.7998046875,
+            "samplesAt3s": [
+              {
+                "at": 1793640906036.3,
+                "position": 33.837887,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640906037.0999,
+                "position": 33.731995,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 16,
+            "source": 2,
+            "action": "pause",
+            "eligible": true,
+            "latencyMs": 231.60009765625,
+            "differenceSeconds": 0.01126499999999453,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.699951171875,
+              3009.800048828125
+            ],
+            "samplingSkewMs": 0.10009765625,
+            "samplesAt3s": [
+              {
+                "at": 1793640909197.9,
+                "position": 33.993453,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640909198,
+                "position": 34.004718,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 17,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 230.89990234375,
+            "differenceSeconds": 0.12791995117187582,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.5,
+              3000.199951171875
+            ],
+            "samplingSkewMs": 0.300048828125,
+            "samplesAt3s": [
+              {
+                "at": 1793640912356.5,
+                "position": 37.000683,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640912356.2,
+                "position": 36.872463,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 18,
+            "source": 1,
+            "action": "rate-up",
+            "eligible": true,
+            "latencyMs": 231.800048828125,
+            "differenceSeconds": 0.15913600000000372,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3001.2001953125,
+              3000.7001953125
+            ],
+            "samplingSkewMs": 0.5,
+            "samplesAt3s": [
+              {
+                "at": 1793640915976.3,
+                "position": 41.335447,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640915975.8,
+                "position": 41.175686,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 19,
+            "source": 1,
+            "action": "seek-forward",
+            "eligible": false,
+            "latencyMs": 460.10009765625,
+            "differenceSeconds": 0.2260650000000055,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.400146484375,
+              3000.900146484375
+            ],
+            "samplingSkewMs": 8.5,
+            "samplesAt3s": [
+              {
+                "at": 1793640919156.3,
+                "position": 51.370206,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640919147.8,
+                "position": 51.133516,
+                "rate": 1.25,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 20,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 229.7001953125,
+            "differenceSeconds": 0.049931000000000836,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3009.400146484375,
+              3010.800048828125
+            ],
+            "samplingSkewMs": 1.39990234375,
+            "samplesAt3s": [
+              {
+                "at": 1793640922308.3,
+                "position": 51.553939,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640922309.7,
+                "position": 51.504008,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 21,
+            "source": 1,
+            "action": "seek-back",
+            "eligible": false,
+            "latencyMs": 419.900146484375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.39990234375,
+              3010.199951171875
+            ],
+            "samplingSkewMs": 9.800048828125,
+            "samplesAt3s": [
+              {
+                "at": 1793640925479.0999,
+                "position": 45.303939,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640925488.9,
+                "position": 45.303939,
+                "rate": 1.25,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          },
+          {
+            "revision": 22,
+            "source": 1,
+            "action": "rate-normal",
+            "eligible": true,
+            "latencyMs": 215.400146484375,
+            "differenceSeconds": 0,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3007.300048828125,
+              3006.10009765625
+            ],
+            "samplingSkewMs": 1.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640929130,
+                "position": 45.303939,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640929128.8,
+                "position": 45.303939,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 23,
+            "source": 1,
+            "action": "play",
+            "eligible": true,
+            "latencyMs": 219.800048828125,
+            "differenceSeconds": 0.10663704882812652,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3000.400146484375,
+              3000.2001953125
+            ],
+            "samplingSkewMs": 0.199951171875,
+            "samplesAt3s": [
+              {
+                "at": 1793640932290,
+                "position": 48.236669,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              },
+              {
+                "at": 1793640932289.8,
+                "position": 48.129832,
+                "rate": 1,
+                "playing": true,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": false,
+            "ad": false
+          },
+          {
+            "revision": 24,
+            "source": 1,
+            "action": "pause",
+            "eligible": false,
+            "latencyMs": 220.199951171875,
+            "differenceSeconds": 48.41088,
+            "sampleTimingValid": true,
+            "sampleDelayMs": [
+              3010.699951171875,
+              3010.60009765625
+            ],
+            "samplingSkewMs": 0.099853515625,
+            "samplesAt3s": [
+              {
+                "at": 1793640935472.4,
+                "position": 0,
+                "rate": 1,
+                "playing": false,
+                "ready": false,
+                "ad": false,
+                "buffering": true
+              },
+              {
+                "at": 1793640935472.3,
+                "position": 48.41088,
+                "rate": 1,
+                "playing": false,
+                "ready": true,
+                "ad": false,
+                "buffering": false
+              }
+            ],
+            "acceptedOnce": true,
+            "buffering": true,
+            "ad": false
+          }
+        ],
+        "diagnostics": [
+          {
+            "videoId": "aqz-KE-bpKQ",
+            "visibility": "visible",
+            "playerClasses": "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-modern-caption ytp-exp-ppp-update ytp-livebadge-color ytp-grid-scrollable ytp-delhi-modern ytp-delhi-modern-icons ytp-delhi-horizontal-volume-controls ytp-delhi-modern-compact-controls ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-cards-teaser-dismissible ytp-hide-info-bar ytp-large-width-mode ytp-disable-bottom-gradient ytp-hide-fullscreen-title ytp-fullscreen-metadata-top ytp-heat-map ytp-autonav-endscreen-cancelled-state ytp-autohide",
+            "players": [
+              {
+                "readyState": 0,
+                "networkState": 0,
+                "position": 0,
+                "duration": null,
+                "sourcePresent": true,
+                "paused": true,
+                "errorCode": null,
+                "ad": false
+              }
+            ],
+            "error": "\n        "
+          },
+          {
+            "videoId": "aqz-KE-bpKQ",
+            "visibility": "visible",
+            "playerClasses": "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-modern-caption ytp-exp-ppp-update ytp-livebadge-color ytp-grid-scrollable ytp-delhi-modern ytp-delhi-modern-icons ytp-delhi-horizontal-volume-controls ytp-delhi-modern-compact-controls ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-cards-teaser-dismissible ytp-hide-info-bar ytp-large-width-mode ytp-disable-bottom-gradient ytp-autonav-endscreen-cancelled-state ytp-hide-fullscreen-title ytp-fullscreen-metadata-top ytp-heat-map ytp-autohide",
+            "players": [
+              {
+                "readyState": 0,
+                "networkState": 0,
+                "position": 0,
+                "duration": null,
+                "sourcePresent": true,
+                "paused": true,
+                "errorCode": null,
+                "ad": false
+              }
+            ],
+            "error": "\n        "
+          }
+        ]
+      }
+    }
+  ]
+}

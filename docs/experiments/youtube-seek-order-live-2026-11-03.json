@@ -1,0 +1,636 @@
+{
+  "date": "2026-11-03",
+  "liveYouTube": true,
+  "backend": "Firebase Emulator Suite, demo-watch-together, product Rules",
+  "input": "Playwright trusted input in two independent Chromium profiles",
+  "network": "same Mac and external route; unchanged",
+  "conflict": {
+    "scenario": "YouTube matrix: более позднее действие побеждает из одной revision",
+    "complete": true,
+    "stage": "complete",
+    "browserVersion": "156.0.8078.4",
+    "headless": true,
+    "checkpoints": [
+      {
+        "name": "joined",
+        "distinctUids": true,
+        "playback": {
+          "videoId": "aqz-KE-bpKQ",
+          "positionSeconds": 10,
+          "playbackRate": 1,
+          "isPlaying": false,
+          "revision": 0
+        },
+        "participantCount": 2,
+        "a": {
+          "positionSeconds": 10,
+          "playbackRate": 1,
+          "isPlaying": false
+        },
+        "b": {
+          "positionSeconds": 10,
+          "playbackRate": 1,
+          "isPlaying": false
+        }
+      },
+      {
+        "name": "later user action wins from the same base revision, no replay",
+        "bothCommandsBasedOnSameRevision": true,
+        "acceptedSource": "guest",
+        "playback": {
+          "videoId": "aqz-KE-bpKQ",
+          "positionSeconds": 5,
+          "playbackRate": 1,
+          "isPlaying": false,
+          "revision": 2
+        },
+        "participantCount": 2,
+        "a": {
+          "positionSeconds": 5,
+          "playbackRate": 1,
+          "isPlaying": false
+        },
+        "b": {
+          "positionSeconds": 5,
+          "playbackRate": 1,
+          "isPlaying": false
+        }
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "scenario": "YouTube: удержание и drag защищены от чужой перемотки до отпускания",
+      "complete": false,
+      "stage": "scenario",
+      "browserVersion": "156.0.8078.4",
+      "headless": true,
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "keyboard: remote seek does not interrupt held gesture",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "keyboard: release wins, both players converge, no echo",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: remote seek does not interrupt held gesture",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 3
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "attempt": 1,
+      "dragTargetFraction": 0.18
+    },
+    {
+      "scenario": "YouTube: удержание и drag защищены от чужой перемотки до отпускания",
+      "complete": true,
+      "stage": "complete",
+      "browserVersion": "156.0.8078.4",
+      "headless": true,
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "keyboard: remote seek does not interrupt held gesture",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "keyboard: release wins, both players converge, no echo",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: bounds",
+          "bounds": {
+            "x": 28,
+            "y": 468.59375,
+            "width": 798,
+            "height": 6
+          },
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: remote seek does not interrupt held gesture",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 3
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: release wins, both players converge, no echo",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 37.374227,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 4
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 37.374227,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 37.374227,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "attempt": 2,
+      "dragTargetFraction": 0.06
+    },
+    {
+      "scenario": "YouTube: удержание и drag защищены от чужой перемотки до отпускания",
+      "complete": false,
+      "stage": "scenario",
+      "browserVersion": "156.0.8078.4",
+      "headless": true,
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "keyboard: remote seek does not interrupt held gesture",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "keyboard: release wins, both players converge, no echo",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: bounds",
+          "bounds": {
+            "x": 28,
+            "y": 501,
+            "width": 856,
+            "height": 6
+          },
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: remote seek does not interrupt held gesture",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 3
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 25,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "pointer: release failed",
+          "media": {
+            "readyState": 1,
+            "seeking": true,
+            "ad": false
+          },
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 3
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 30,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 114.162694,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "attempt": 3,
+      "dragTargetFraction": 0.18
+    }
+  ],
+  "deliveryControl": {
+    "startedAt": "2026-11-03T12:10:04.614Z",
+    "finishedAt": "2026-11-03T12:10:43.292Z",
+    "extension": false,
+    "firebase": false,
+    "browser": "156.0.8078.4",
+    "channel": "chromium",
+    "headless": true,
+    "videoId": "aqz-KE-bpKQ",
+    "position": 114,
+    "complete": false,
+    "state": {
+      "position": 0,
+      "readyState": 0,
+      "networkState": 0,
+      "paused": true,
+      "status": "OK",
+      "error": "Something went wrong. Refresh or try again later. Learn more"
+    },
+    "samples": [],
+    "events": [
+      {
+        "at": 1793707809746,
+        "type": "dom",
+        "event": "emptied",
+        "readyState": 0,
+        "networkState": 3,
+        "position": 0,
+        "paused": true,
+        "rate": 1,
+        "errorCode": null,
+        "page": 0
+      },
+      {
+        "at": 1793707810062,
+        "type": "dom",
+        "event": "loadstart",
+        "readyState": 0,
+        "networkState": 2,
+        "position": 0,
+        "paused": true,
+        "rate": 1,
+        "errorCode": null,
+        "page": 0
+      },
+      {
+        "at": 1793707810747,
+        "page": 0,
+        "type": "media",
+        "event": "kMediaLogCreated"
+      },
+      {
+        "at": 1793707810747,
+        "page": 0,
+        "type": "media",
+        "event": "kWebMediaPlayerCreated"
+      },
+      {
+        "at": 1793707810747,
+        "page": 0,
+        "type": "media",
+        "event": "kLoad"
+      },
+      {
+        "at": 1793707810747,
+        "page": 0,
+        "type": "media",
+        "event": "kPipelineStateChange",
+        "pipeline_state": "kStarting"
+      },
+      {
+        "at": 1793707810747,
+        "page": 0,
+        "type": "media",
+        "event": "kDurationChanged"
+      },
+      {
+        "at": 1793707812927,
+        "page": 0,
+        "type": "media",
+        "event": "kDurationChanged"
+      },
+      {
+        "at": 1793707813047,
+        "type": "dom",
+        "event": "loadedmetadata",
+        "readyState": 1,
+        "networkState": 2,
+        "position": 0,
+        "paused": true,
+        "rate": 1,
+        "errorCode": null,
+        "page": 0
+      },
+      {
+        "at": 1793707813287,
+        "type": "dom",
+        "event": "seeking",
+        "readyState": 1,
+        "networkState": 2,
+        "position": 114,
+        "paused": true,
+        "rate": 1,
+        "errorCode": null,
+        "page": 0
+      },
+      {
+        "at": 1793707813294,
+        "page": 0,
+        "type": "media-network",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kPipelineStateChange",
+        "pipeline_state": "kPlaying"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kVideoSizeChanged"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kSeek"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kPipelineStateChange",
+        "pipeline_state": "kSeeking"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kBufferingStateChanged"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kBufferingStateChanged"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kBufferingStateChanged"
+      },
+      {
+        "at": 1793707813930,
+        "page": 0,
+        "type": "media",
+        "event": "kPause"
+      },
+      {
+        "at": 1793707832910,
+        "page": 0,
+        "type": "media",
+        "event": "kWebMediaPlayerDestroyed"
+      },
+      {
+        "at": 1793707832911,
+        "type": "dom",
+        "event": "emptied",
+        "readyState": 0,
+        "networkState": 3,
+        "position": 0,
+        "paused": true,
+        "rate": 1,
+        "errorCode": null,
+        "page": 0
+      }
+    ],
+    "exitCode": 1,
+    "failure": "Timeout 30000ms waiting for readyState >= 3 after seek to 114s"
+  }
+}

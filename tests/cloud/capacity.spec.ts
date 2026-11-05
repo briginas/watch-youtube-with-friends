@@ -1,0 +1,62 @@
+import { test, expect } from '@playwright/test';
+import { writeFile, mkdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { launchExtension } from '../e2e/fixtures';
+import { frameOf, popup, workerOf, watch } from '../room-transport/fixtures';
+import { readyPlayer } from '../room-transport/playback-fixture';
+import { firebaseSettings } from '../../src/lib/firebase/settings';
+import { invitationRoomSchema } from '../../src/lib/room/invitation';
+
+test('QA capacity: два профиля, REST, offline/stop/retry, detached и отсутствие эха', async () => {
+  test.skip(process.env.CAPACITY_QA !== '1', 'Отдельный opt-in QA smoke.');
+  test.setTimeout(180_000);
+  const config = firebaseSettings(process.env);
+  if (!config || config.emulators || !/(?:^|-)qa(?:-|$)/.test(config.projectId)) throw new Error('Нужен отдельный QA-проект.');
+  const contexts = await Promise.all([0, 1].map(() => launchExtension(resolve('.output/cloud/chrome-mv3'), [], true)));
+  let diagnostics = async (): Promise<unknown> => null;
+  let stage = 'YouTube'; const checks: string[] = [];
+  try {
+    const [first, second] = contexts;
+    const ids = await Promise.all(contexts.map(async c => new URL((await workerOf(c)).url()).host));
+    const a = await first!.newPage(); await a.goto(watch, { waitUntil: 'domcontentloaded' }); await readyPlayer(a);
+    await a.locator('video.html5-main-video').first().evaluate((v: HTMLVideoElement) => { v.pause(); });
+    stage = 'Auth/create';
+    const creator = await popup(first!, a, ids[0]!); const frameA = await frameOf(a); const targetA = new URL(frameA.url()).hash.slice(1);
+    await expect.poll(async () => (await creator.request(targetA)).connected).toBe(true);
+    diagnostics = async () => { const state = await creator.request(targetA); return { phase: state.phase, connected: state.connected, roomReady: state.roomReady, creating: state.creating, hasInvitation: !!state.invitation, error: state.error, roomError: state.roomError, creationError: state.creationError, ui: await creator.evaluate("Array.from(document.querySelectorAll('[role=alert]')).map(e=>e.textContent)") }; };
+    await expect.poll(() => creator.evaluate<boolean>("Array.from(document.querySelectorAll('button')).some(b=>b.textContent==='Смотреть вместе'&&!b.disabled)")).toBe(true);
+    await creator.evaluate("Array.from(document.querySelectorAll('button')).find(b=>b.textContent==='Смотреть вместе').click(); true");
+    await expect.poll(async () => !!(await creator.request(targetA)).invitation).toBe(true);
+    const created = await creator.request(targetA); await creator.close();
+    stage = 'invitation/REST/CSP';
+    const invitation = await second!.newPage(); await invitation.goto(created.invitation!);
+    await expect.poll(() => invitation.frames().some(f => f.url().includes('/invitation.html#'))).toBe(true);
+    const join = invitation.frames().find(f => f.url().includes('/invitation.html#'))!;
+    const opening = second!.waitForEvent('page'); await join.locator('#join').click(); const b = await opening;
+    const frameB = await frameOf(b); await readyPlayer(b); await expect(frameB.getByRole('listitem')).toHaveCount(2);
+    const guest = await popup(second!, b, ids[1]!); const targetB = new URL(frameB.url()).hash.slice(1);
+    const state = await guest.request(targetB); expect(state.uid === created.uid).toBe(false);
+    checks.push('independent UID; authenticated REST join and exact CSP; two participants');
+    const initial = invitationRoomSchema.parse(state.room).playback.revision;
+    stage = 'shared command/no echo'; await a.bringToFront(); await a.locator('#movie_player').focus(); await a.keyboard.press('ArrowRight');
+    await expect.poll(async () => invitationRoomSchema.parse((await guest.request(targetB)).room).playback.revision).toBe(initial + 1);
+    await b.waitForTimeout(1000); expect(invitationRoomSchema.parse((await guest.request(targetB)).room).playback.revision).toBe(initial + 1);
+    checks.push('one shared seek, one revision, no echo');
+    stage = 'offline'; await second!.setOffline(true); await expect(frameB.locator('#status')).toContainText('Просмотр остаётся локальным');
+    stage = 'stop/retry'; await guest.request(targetB, 'stop'); await second!.setOffline(false);
+    expect((await guest.request(targetB)).roomReady).toBe(false);
+    await guest.request(targetB, 'retry'); await expect.poll(async () => (await guest.request(targetB)).roomReady).toBe(true);
+    checks.push('offline local mode; stop retains binding; explicit retry reads fresh state'); await guest.close();
+    stage = 'detached'; await b.goto('https://www.youtube.com/watch?v=dQw4w9WgXcQ', { waitUntil: 'domcontentloaded' });
+    const detached = await frameOf(b); await expect(detached.locator('#status')).toContainText('Локальный просмотр');
+    const control = await popup(second!, b, ids[1]!); const target = new URL(detached.url()).hash.slice(1);
+    await control.request(target, 'stop'); await control.request(target, 'retry');
+    await expect(detached.locator('#status')).toContainText('Локальный просмотр'); checks.push('detached survives stop and fresh reconnect');
+    await control.close(); stage = 'complete';
+  } finally {
+    const observed = await diagnostics().catch(() => null);
+    await Promise.all(contexts.map(c => c.close()));
+    await mkdir('.output/cloud', { recursive: true });
+    await writeFile('.output/cloud/capacity-smoke.json', JSON.stringify({ at: new Date().toISOString(), environment: 'QA Firebase; actual YouTube; two isolated Chromium profiles on one Mac/network', stage, checks, observed, complete: stage === 'complete' }, null, 2) + '\n');
+  }
+});

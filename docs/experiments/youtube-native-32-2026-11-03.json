@@ -1,0 +1,1584 @@
+{
+  "mode": "ordinary Chrome; native input; QA-only observation in extension",
+  "environment": {
+    "browsers": [
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
+    ],
+    "videoIds": [
+      "aqz-KE-bpKQ",
+      "aqz-KE-bpKQ"
+    ],
+    "clients": "two independent profiles on the same Mac; shared route",
+    "network": "unchanged; access type, geography and VPN unknown",
+    "firebaseProject": "example-qa",
+    "firebaseRegion": "europe-west1",
+    "browserVersion": "156.0.8078.74"
+  },
+  "methodology": {
+    "samplingPeriodMs": 10,
+    "stableApplicationMs": 100,
+    "maximumSampleDelayMs": 50,
+    "minimumEligible": 30,
+    "percentile": "nearest rank ceil(0.95*N)",
+    "status": "existing read-only popup API; UID hashes compared only for distinctness; one revision per input; no extra final revisions",
+    "eligibility": "same as cloud measurement: no ads/readyState<3 during first 3s, both ready at sample; commands >3.1s apart"
+  },
+  "summary": {
+    "collected": 32,
+    "eligible": 22,
+    "applied": 22,
+    "p95Ms": 343.099853515625,
+    "maxDifferenceSeconds": 0.20406981689450276,
+    "distinctUids": true,
+    "acceptedOnce": false,
+    "matchingStates": false,
+    "statusErrors": [
+      0,
+      0
+    ],
+    "initialRevisions": [
+      1,
+      1
+    ],
+    "finalRevisions": [
+      33,
+      33
+    ],
+    "meetsLatencyTarget": false,
+    "meetsPositionTarget": false
+  },
+  "observations": [
+    {
+      "revision": 2,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700711127.9001,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 223.89990234375,
+      "differenceSeconds": 0.06373804882809964,
+      "samplesAt3s": [
+        {
+          "at": 1793700714138.6,
+          "position": 319.702547,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700714131.4001,
+          "position": 319.631609,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3010.699951171875,
+        3003.5
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 3,
+      "source": 1,
+      "key": "Ю",
+      "code": "Period",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700715905.6,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 205.39990234375,
+      "differenceSeconds": 0.09389493896486556,
+      "samplesAt3s": [
+        {
+          "at": 1793700718905.7002,
+          "position": 325.184545,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700718911.4001,
+          "position": 325.097775,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3000.10009765625,
+        3005.800048828125
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 4,
+      "source": 1,
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700720181.1,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 450.699951171875,
+      "differenceSeconds": 0.28007793896478006,
+      "samplesAt3s": [
+        {
+          "at": 1793700723188.1,
+          "position": 336.606972,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700723181.8,
+          "position": 336.319019,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007,
+        3000.699951171875
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 5,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700724971.5,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 219.800048828125,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700727975.8,
+          "position": 338.850756,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700727971.8,
+          "position": 338.850756,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3004.300048828125,
+        3000.300048828125
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 6,
+      "source": 1,
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700729767.4001,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 424.599853515625,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700732775.9001,
+          "position": 332.600756,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700732771.8,
+          "position": 332.600756,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.5,
+        3004.39990234375
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 7,
+      "source": 1,
+      "key": "Б",
+      "code": "Comma",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700734567.6,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 204.800048828125,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700737575.9001,
+          "position": 332.600756,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700737572.1,
+          "position": 332.600756,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.300048828125,
+        3004.5
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 8,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700738841.4001,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 220.099853515625,
+      "differenceSeconds": 0.06371695117189802,
+      "samplesAt3s": [
+        {
+          "at": 1793700741845.8,
+          "position": 335.514651,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700741842,
+          "position": 335.447134,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3004.39990234375,
+        3000.599853515625
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 9,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700743630,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 211.400146484375,
+      "differenceSeconds": 0.03612899999995989,
+      "samplesAt3s": [
+        {
+          "at": 1793700746635,
+          "position": 337.30234,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700746632.1,
+          "position": 337.338469,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3005,
+        3002.10009765625
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 10,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700799022.2,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 222.800048828125,
+      "differenceSeconds": 0.14309585351566056,
+      "samplesAt3s": [
+        {
+          "at": 1793700802025,
+          "position": 340.083302,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700802030.9001,
+          "position": 340.232298,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3002.800048828125,
+        3008.7001953125
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 11,
+      "source": 2,
+      "key": "Ю",
+      "code": "Period",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700803580.4001,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 344.89990234375,
+      "differenceSeconds": 0.20406981689450276,
+      "samplesAt3s": [
+        {
+          "at": 1793700806588.5,
+          "position": 345.30358,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700806580.9001,
+          "position": 345.49815,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.099853515625,
+        3000.5
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 12,
+      "source": 2,
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700808378.2,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 419.500244140625,
+      "differenceSeconds": 0.2662731220702881,
+      "samplesAt3s": [
+        {
+          "at": 1793700811387.4001,
+          "position": 357.30621,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700811380.8,
+          "position": 357.564233,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3009.2001953125,
+        3002.60009765625
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 13,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700813162.8,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 242.199951171875,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700816165,
+          "position": 359.80836,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700816172.4001,
+          "position": 359.80836,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3002.199951171875,
+        3009.60009765625
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 14,
+      "source": 2,
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700817684.5,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 460.800048828125,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700820694.6,
+          "position": 353.55836,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700820692.1,
+          "position": 353.55836,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3010.10009765625,
+        3007.60009765625
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 15,
+      "source": 2,
+      "key": "Б",
+      "code": "Comma",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700822486.1,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 219.89990234375,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700825495.1,
+          "position": 353.55836,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700825492.4001,
+          "position": 353.55836,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3009,
+        3006.300048828125
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 16,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700826744.7,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": true,
+      "matchingStates": true,
+      "latencyMs": 220.300048828125,
+      "differenceSeconds": 0.06426099999998769,
+      "samplesAt3s": [
+        {
+          "at": 1793700829745.8,
+          "position": 356.40516,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700829753.8,
+          "position": 356.477421,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3001.10009765625,
+        3009.10009765625
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 17,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700831796.5,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 219.10009765625,
+      "differenceSeconds": 0.03493500000001859,
+      "samplesAt3s": [
+        {
+          "at": 1793700834805,
+          "position": 358.558482,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700834801.2,
+          "position": 358.523547,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.5,
+        3004.699951171875
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 18,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700869480.6,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 221.39990234375,
+      "differenceSeconds": 0.11990785351565592,
+      "samplesAt3s": [
+        {
+          "at": 1793700872488.4001,
+          "position": 361.449468,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700872481,
+          "position": 361.32216,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007.800048828125,
+        3000.39990234375
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 19,
+      "source": 1,
+      "key": "Ю",
+      "code": "Period",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700874547.1,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 215.599853515625,
+      "differenceSeconds": 0.15232612207029206,
+      "samplesAt3s": [
+        {
+          "at": 1793700877555,
+          "position": 367.23605,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700877554.1,
+          "position": 367.082599,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007.89990234375,
+        3007
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 20,
+      "source": 1,
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700878838.7002,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 465.2998046875,
+      "differenceSeconds": 0.2920240610351357,
+      "samplesAt3s": [
+        {
+          "at": 1793700881846.5,
+          "position": 378.644191,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700881841.8,
+          "position": 378.346292,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007.7998046875,
+        3003.099853515625
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 21,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700883630.2002,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 231.499755859375,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700886634.9001,
+          "position": 380.879904,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700886632.3,
+          "position": 380.879904,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3004.699951171875,
+        3002.099853515625
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 22,
+      "source": 1,
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700888167.1,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 444.199951171875,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700891175.6,
+          "position": 374.629904,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700891171.8,
+          "position": 374.629904,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.5,
+        3004.699951171875
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 23,
+      "source": 1,
+      "key": "Б",
+      "code": "Comma",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700892966.9001,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 214.7998046875,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700895975.2002,
+          "position": 374.629904,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700895971.7,
+          "position": 374.629904,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.300048828125,
+        3004.7998046875
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 24,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700897255.8,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 215.10009765625,
+      "differenceSeconds": 0.06385290234379681,
+      "samplesAt3s": [
+        {
+          "at": 1793700900264.4001,
+          "position": 377.547995,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700900262.3,
+          "position": 377.482042,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3008.60009765625,
+        3006.5
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 25,
+      "source": 1,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700902305.1,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 216.89990234375,
+      "differenceSeconds": 0.03447699999998122,
+      "samplesAt3s": [
+        {
+          "at": 1793700905305.3,
+          "position": 379.591809,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700905311.7,
+          "position": 379.626286,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3000.199951171875,
+        3006.599853515625
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 26,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700920610.4001,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 227,
+      "differenceSeconds": 0.12010709765621641,
+      "samplesAt3s": [
+        {
+          "at": 1793700923614.2002,
+          "position": 382.396454,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700923612.1,
+          "position": 382.514461,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3003.800048828125,
+        3001.699951171875
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 27,
+      "source": 2,
+      "key": "Ю",
+      "code": "Period",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700925646.6,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 218.60009765625,
+      "differenceSeconds": 0.1505508168945653,
+      "samplesAt3s": [
+        {
+          "at": 1793700928654.5,
+          "position": 388.124397,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700928653.9001,
+          "position": 388.274198,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007.89990234375,
+        3007.300048828125
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 28,
+      "source": 2,
+      "key": "ArrowRight",
+      "code": "ArrowRight",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700929938.2,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 357.000244140625,
+      "differenceSeconds": 0.245314061035117,
+      "samplesAt3s": [
+        {
+          "at": 1793700932944.5,
+          "position": 399.520368,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700932945.2,
+          "position": 399.766557,
+          "rate": 1.25,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3006.300048828125,
+        3007
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 29,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700934488.1,
+      "eligible": false,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 226.89990234375,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700937495.2002,
+          "position": 401.689911,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700937492.6,
+          "position": 401.689911,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007.10009765625,
+        3004.5
+      ],
+      "buffering": true,
+      "ad": false
+    },
+    {
+      "revision": 30,
+      "source": 2,
+      "key": "ArrowLeft",
+      "code": "ArrowLeft",
+      "shift": false,
+      "trusted": true,
+      "event": "seeking",
+      "inputAt": 1793700938991.9001,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": true,
+      "latencyMs": 343.099853515625,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700941994.8,
+          "position": 395.439911,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700942001.9001,
+          "position": 395.439911,
+          "rate": 1.25,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3002.89990234375,
+        3010
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 31,
+      "source": 2,
+      "key": "Б",
+      "code": "Comma",
+      "shift": true,
+      "trusted": true,
+      "event": "ratechange",
+      "inputAt": 1793700943517,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 208.7001953125,
+      "differenceSeconds": 0,
+      "samplesAt3s": [
+        {
+          "at": 1793700946524.9001,
+          "position": 395.439911,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700946521.9001,
+          "position": 395.439911,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3007.900146484375,
+        3004.900146484375
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 32,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "play",
+      "inputAt": 1793700947809.1,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": true,
+      "matchingStates": true,
+      "latencyMs": 215.60009765625,
+      "differenceSeconds": 0.0643652441406175,
+      "samplesAt3s": [
+        {
+          "at": 1793700950814.2002,
+          "position": 398.291762,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700950812.7,
+          "position": 398.354627,
+          "rate": 1,
+          "playing": true,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3005.10009765625,
+        3003.599853515625
+      ],
+      "buffering": false,
+      "ad": false
+    },
+    {
+      "revision": 33,
+      "source": 2,
+      "key": " ",
+      "code": "Space",
+      "shift": false,
+      "trusted": true,
+      "event": "pause",
+      "inputAt": 1793700952354.5,
+      "eligible": true,
+      "timingValid": true,
+      "acceptedOnce": false,
+      "matchingStates": false,
+      "latencyMs": 221.7001953125,
+      "differenceSeconds": 0.034241000000008626,
+      "samplesAt3s": [
+        {
+          "at": 1793700955355.2002,
+          "position": 399.933788,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        },
+        {
+          "at": 1793700955361.7,
+          "position": 399.899547,
+          "rate": 1,
+          "playing": false,
+          "ready": true,
+          "ad": false,
+          "buffering": false
+        }
+      ],
+      "sampleDelayMs": [
+        3000.7001953125,
+        3007.199951171875
+      ],
+      "buffering": false,
+      "ad": false
+    }
+  ],
+  "stage": "complete",
+  "acceptance": "insufficient eligible sample; frozen background status tabs",
+  "artifact": {
+    "baseCommit": "7fc1190",
+    "localPlayerSourceSha256": "b03f1344c396d575ec721bf2680952089825297b05e58d4ec69c83f68b47b1d9",
+    "files": [
+      {
+        "path": "assets/popup-B0nS6zFK.css",
+        "sha256": "73f86f62737a79f03268eb4a78c4020e4ad6323b6bcbc196994472569b5c3f6f"
+      },
+      {
+        "path": "assets/style-DgY1fGrS.css",
+        "sha256": "51ada01e4ff62e33c6767ae9d9d274a7dd9be693a5b89103ef336f842bc5f10e"
+      },
+      {
+        "path": "background.js",
+        "sha256": "08b9a5c254e22d42d809e2b4e29003638c443586befaba409b499acce97db2a2"
+      },
+      {
+        "path": "chunks/creation-DP7xWx_e.js",
+        "sha256": "53e302b5577933b99ebac9bf9963e03bb35866e0881b034d5682ba62127189a6"
+      },
+      {
+        "path": "chunks/invitation-CCYtL083.js",
+        "sha256": "8b656eb18c2d003cf1972378885853983161eea1cc632fbfb7f03116009f91f4"
+      },
+      {
+        "path": "chunks/popup-B5I48O_I.js",
+        "sha256": "1b364cd8147dd76b04126aa161958b5117570472c1f1dd4a63f332d829107c5b"
+      },
+      {
+        "path": "chunks/session-1V4q0k6q.js",
+        "sha256": "24f961b13913c4b464336501803b57c86156724875510eb3b77d000185a3310d"
+      },
+      {
+        "path": "chunks/status-D8lNi9TA.js",
+        "sha256": "e34ed21234290579705bfcc1dfb9b2c8539fde6d7f40532dc4d4fc2dc32fc32f"
+      },
+      {
+        "path": "chunks/style-Bf9HgpMN.js",
+        "sha256": "9409328a1380aba16ee54a4335f359ae05bc9b232cc29a7cd0cab442ccfa3a85"
+      },
+      {
+        "path": "content-scripts/invitation-bridge.js",
+        "sha256": "fe882d95a396771eeecff9d4c23b552cd8c8384b13a1868152430de7c649f0a2"
+      },
+      {
+        "path": "content-scripts/watch-session.js",
+        "sha256": "41bea7971df1155fa30ebfb498604994155906aeed6c16f89ffc1d033997b683"
+      },
+      {
+        "path": "content-scripts/youtube-rate.js",
+        "sha256": "30cd0e8a00b9da65b7bb876ed299c37da35d5e3ad5989d4314d2f4534e190ab7"
+      },
+      {
+        "path": "invitation.html",
+        "sha256": "dee0a23a8cf2a9c898a39af858fe4c1303d096206c7f6e79442c43dd50d5fd6a"
+      },
+      {
+        "path": "manifest.json",
+        "sha256": "6fe4a90c9ea7a3f7f7eb60642ea3e1c08ad80454fa6073611baf34de2c97ab54"
+      },
+      {
+        "path": "native-media.js",
+        "sha256": "6e10c5bf81f91ea714db6c536e5d5503ee4919b477a7e9304d3eecdc21850416"
+      },
+      {
+        "path": "native-status.js",
+        "sha256": "49430d6eea99a977d50a81932ed7c900569f244f0503ca5e80cf880063b4f6f1"
+      },
+      {
+        "path": "popup.html",
+        "sha256": "4c29d53264a11831bf9af541cc04ccd450f1c58bc0551b1af89f35b1adec4712"
+      },
+      {
+        "path": "session.html",
+        "sha256": "e8e699d81dcaf5e5cb4e35f3ccfe6835781a1627db969313598d1031eb9bb811"
+      }
+    ]
+  },
+  "raw": {
+    "file": "youtube-native-32-2026-11-03.raw.json.gz",
+    "sha256": "10039d246b39c73f8336ce17bbb9518493d0920fc7bc8496efda301a1a7614fb",
+    "format": "gzip JSON; {media:[A,B],status:[A,B]}"
+  },
+  "exclusions": [
+    {
+      "revision": 4,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3007,
+        3000.699951171875
+      ]
+    },
+    {
+      "revision": 6,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3008.5,
+        3004.39990234375
+      ]
+    },
+    {
+      "revision": 12,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3009.2001953125,
+        3002.60009765625
+      ]
+    },
+    {
+      "revision": 13,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3002.199951171875,
+        3009.60009765625
+      ]
+    },
+    {
+      "revision": 14,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3010.10009765625,
+        3007.60009765625
+      ]
+    },
+    {
+      "revision": 20,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3007.7998046875,
+        3003.099853515625
+      ]
+    },
+    {
+      "revision": 21,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3004.699951171875,
+        3002.099853515625
+      ]
+    },
+    {
+      "revision": 22,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3008.5,
+        3004.699951171875
+      ]
+    },
+    {
+      "revision": 28,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3006.300048828125,
+        3007
+      ]
+    },
+    {
+      "revision": 29,
+      "buffering": true,
+      "ad": false,
+      "timingValid": true,
+      "sampleDelayMs": [
+        3007.10009765625,
+        3004.5
+      ]
+    }
+  ]
+}

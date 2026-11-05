@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-04T11:01:33.479Z",
+  "environment": "QA Firebase; actual YouTube; two isolated Chromium profiles on one Mac/network",
+  "stage": "complete",
+  "checks": [
+    "independent UID; authenticated REST join and exact CSP; two participants",
+    "one shared seek, one revision, no echo",
+    "offline local mode; stop retains binding; explicit retry reads fresh state",
+    "detached survives stop and fresh reconnect"
+  ],
+  "observed": null,
+  "complete": true
+}

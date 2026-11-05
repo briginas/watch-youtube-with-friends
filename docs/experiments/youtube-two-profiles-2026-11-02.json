@@ -1,0 +1,147 @@
+{
+  "live": false,
+  "manual": false,
+  "stage": "complete",
+  "browserVersion": "156.0.8078.4",
+  "identity": {
+    "participantCount": 2,
+    "distinctUids": true
+  },
+  "checkpoints": [
+    {
+      "action": "creator: play",
+      "revision": 1,
+      "source": 1,
+      "a": {
+        "positionSeconds": 5.952081,
+        "playbackRate": 1,
+        "isPlaying": true
+      },
+      "b": {
+        "positionSeconds": 5.960305,
+        "playbackRate": 1,
+        "isPlaying": true
+      }
+    },
+    {
+      "action": "creator: pause (keyboard)",
+      "revision": 2,
+      "source": 1,
+      "a": {
+        "positionSeconds": 6.016857,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 6.012456,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "action": "creator: seek",
+      "revision": 3,
+      "source": 1,
+      "a": {
+        "positionSeconds": 11.016857,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 11.016857,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "action": "creator: rate",
+      "revision": 4,
+      "source": 1,
+      "a": {
+        "positionSeconds": 11.016857,
+        "playbackRate": 1.25,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 11.016857,
+        "playbackRate": 1.25,
+        "isPlaying": false
+      }
+    },
+    {
+      "action": "guest: play",
+      "revision": 5,
+      "source": 2,
+      "a": {
+        "positionSeconds": 12.139273,
+        "playbackRate": 1.25,
+        "isPlaying": true
+      },
+      "b": {
+        "positionSeconds": 12.196117,
+        "playbackRate": 1.25,
+        "isPlaying": true
+      }
+    },
+    {
+      "action": "guest: pause (keyboard)",
+      "revision": 6,
+      "source": 2,
+      "a": {
+        "positionSeconds": 12.225169,
+        "playbackRate": 1.25,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 12.232284,
+        "playbackRate": 1.25,
+        "isPlaying": false
+      }
+    },
+    {
+      "action": "guest: seek",
+      "revision": 7,
+      "source": 2,
+      "a": {
+        "positionSeconds": 7.232284,
+        "playbackRate": 1.25,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 7.232284,
+        "playbackRate": 1.25,
+        "isPlaying": false
+      }
+    },
+    {
+      "action": "guest: rate",
+      "revision": 8,
+      "source": 2,
+      "a": {
+        "positionSeconds": 7.232284,
+        "playbackRate": 1.5,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 7.232284,
+        "playbackRate": 1.5,
+        "isPlaying": false
+      }
+    },
+    {
+      "action": "guest: play after creator leaves",
+      "revision": 9,
+      "source": 2,
+      "a": {
+        "positionSeconds": 9.365275,
+        "playbackRate": 1.5,
+        "isPlaying": true
+      },
+      "b": {
+        "positionSeconds": 8.573655,
+        "playbackRate": 1.5,
+        "isPlaying": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "scenario": "YouTube: локальный SPA, смена от обоих участников, reload detached и возврат",
+  "complete": true,
+  "stage": "complete",
+  "browserVersion": "156.0.8078.4",
+  "headless": true,
+  "checkpoints": [
+    {
+      "name": "joined",
+      "distinctUids": true,
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 0
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "name": "creator switch result",
+      "switchStatus": "Видео комнаты изменено.",
+      "media": {
+        "duration": 705.781,
+        "seeking": false,
+        "readyState": 4,
+        "ad": false,
+        "error": null
+      },
+      "playback": {
+        "videoId": "xOXolSQcEb4",
+        "positionSeconds": 20,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 1
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 20,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 0,
+        "playbackRate": 1,
+        "isPlaying": true
+      }
+    },
+    {
+      "name": "creator switch: same room, loaded native players",
+      "playback": {
+        "videoId": "xOXolSQcEb4",
+        "positionSeconds": 20,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "revision": 1
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 20,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "b": {
+        "positionSeconds": 20,
+        "playbackRate": 1,
+        "isPlaying": false
+      }
+    },
+    {
+      "name": "guest switch: native players converged",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 30.613543,
+        "playbackRate": 1,
+        "isPlaying": true,
+        "revision": 2
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 32.306542,
+        "playbackRate": 1,
+        "isPlaying": true
+      },
+      "b": {
+        "positionSeconds": 32.700591,
+        "playbackRate": 1,
+        "isPlaying": true
+      }
+    },
+    {
+      "name": "detached reload and explicit return: no revision or echo",
+      "tabsUnchanged": true,
+      "otherUrl": "https://www.youtube.com/watch?v=xOXolSQcEb4&hl=en",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 30.613543,
+        "playbackRate": 1,
+        "isPlaying": true,
+        "revision": 2
+      },
+      "participantCount": 2,
+      "a": {
+        "positionSeconds": 42.430307,
+        "playbackRate": 1,
+        "isPlaying": true
+      },
+      "b": {
+        "positionSeconds": 42.442091,
+        "playbackRate": 1,
+        "isPlaying": true
+      }
+    }
+  ]
+}

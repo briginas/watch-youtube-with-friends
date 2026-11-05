@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-03",
+  "environment": "two independent browser profiles, product RTDB Rules, Firebase emulators",
+  "observations": [
+    {
+      "scenario": "смена поколения после autoplay-blocked: восстановление нового ролика и общей скорости без эха",
+      "status": "passed",
+      "name": "new-generation-autoplay",
+      "observation": {
+        "blocked": false
+      }
+    },
+    {
+      "scenario": "поздняя транзакция seek из первого A не меняет комнату после A → B → A",
+      "status": "passed",
+      "name": "late-generation-result",
+      "observation": {
+        "sequence": "A → B → A",
+        "revision": 2,
+        "videoRevision": 2,
+        "positionSeconds": 34,
+        "lateCommandChangedServer": false,
+        "detachedStayedLocal": true
+      }
+    }
+  ]
+}

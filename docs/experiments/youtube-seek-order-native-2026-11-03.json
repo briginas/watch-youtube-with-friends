@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-03",
+  "sourceCommit": "73add92cfb6c0928ad2deda556aa3c58983c165f",
+  "node": "24.19.0",
+  "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "liveYouTube": true,
+  "backend": "cloud Firebase example-qa, europe-west1",
+  "profiles": "Watch Together QA A/B, same Mac and external route",
+  "input": "native Computer Use; no Playwright/CDP in this run",
+  "network": "unchanged; connection type, geography and VPN not established",
+  "distinctUids": true,
+  "statusErrors": [
+    0,
+    0
+  ],
+  "revisionHistoryComplete": true,
+  "revisions": [
+    1,
+    6
+  ],
+  "sharedCommands": 5,
+  "echo": false,
+  "finalMedia": [
+    {
+      "at": 1793707564906.7,
+      "position": 461.231344,
+      "rate": 1,
+      "playing": false,
+      "ready": true,
+      "ad": false,
+      "buffering": false
+    },
+    {
+      "at": 1793707517179.2,
+      "position": 461.231344,
+      "rate": 1,
+      "playing": false,
+      "ready": true,
+      "ad": false,
+      "buffering": false
+    }
+  ],
+  "rawSha256": "60c9cb6287dd70ae6bb212ff89e6be37d563288a23eaf7b77c5ed0bbe155e19b",
+  "artifactSha256": {
+    "assets/popup-B0nS6zFK.css": "73f86f62737a79f03268eb4a78c4020e4ad6323b6bcbc196994472569b5c3f6f",
+    "assets/style-DgY1fGrS.css": "51ada01e4ff62e33c6767ae9d9d274a7dd9be693a5b89103ef336f842bc5f10e",
+    "background.js": "ed14ebc087e0a20e11771611eefec05146e40ed78aed44bdaa669b94c72f61ac",
+    "chunks/creation-C2Z2gqAG.js": "3d71a9b9d57fcc7123193d8162ec570ad859ab2b8d258609a7b5211ae378b62a",
+    "chunks/invitation-BDFiF16q.js": "a24c075ec38e0ddf13e1ecda140d0b0141a9c5a404726ecf47fa817451fe3519",
+    "chunks/popup-DH8IzdQQ.js": "5c7fc22b65bb57f867b6a92451f5083d3326611c2064b5dce3254d1139d26b8b",
+    "chunks/session-DJDUpIpa.js": "472d1f8f94fc1ac0e45b04131ff2c095ae6459d0e9989bd0347e2f4e1ce20610",
+    "chunks/status-D8lNi9TA.js": "e34ed21234290579705bfcc1dfb9b2c8539fde6d7f40532dc4d4fc2dc32fc32f",
+    "chunks/style-CjKC24Ge.js": "62da359f60989495fc2601ba84705045c14bfcb599ee5cd230ed5bb93d386bcb",
+    "content-scripts/invitation-bridge.js": "680ca23dd7d2454b813ce757449754ea0eb62d049e5019b6839b74784d9745aa",
+    "content-scripts/watch-session.js": "45feee915e2a6b2fffc433591a934cf76b886d2034246ff7de07c99398f86acc",
+    "content-scripts/youtube-rate.js": "30cd0e8a00b9da65b7bb876ed299c37da35d5e3ad5989d4314d2f4534e190ab7",
+    "invitation.html": "23fd646e97120ff1b1c2e4ac389dccee6438baa75e27e5423a5ccfe02f03d570",
+    "manifest.json": "6fe4a90c9ea7a3f7f7eb60642ea3e1c08ad80454fa6073611baf34de2c97ab54",
+    "native-media.js": "0e2f1cf4f38395585b62dab4265a02d8b41addfa60babe3eedee905d6e299c98",
+    "native-status.js": "49430d6eea99a977d50a81932ed7c900569f244f0503ca5e80cf880063b4f6f1",
+    "popup.html": "722f06e993426d0fe2fac08e4d68247b47a9c36ad234b0ac48b050b706be0950",
+    "session.html": "df716a2dd67947298f6837d6f7124b796ff3b55e16c8903fd8fb9e5f49bf1953"
+  },
+  "commands": [
+    {
+      "scenario": "A: ArrowRight held 1.0s",
+      "actor": "A",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 75.568663,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "updatedAt": 1793707416558,
+        "actionAt": 1793707416336,
+        "sampledAt": 1793707416465,
+        "revision": 2
+      },
+      "observedAt": {
+        "A": 1793707416676.4001,
+        "B": 1793707416659.4001
+      }
+    },
+    {
+      "scenario": "A: 3 ArrowRight taps in 21ms",
+      "actor": "A",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 90.568663,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "updatedAt": 1793707423825,
+        "actionAt": 1793707423566,
+        "sampledAt": 1793707423740,
+        "revision": 3
+      },
+      "observedAt": {
+        "A": 1793707423875.6,
+        "B": 1793707423960.3
+      }
+    },
+    {
+      "scenario": "B: ArrowLeft held 1.6s plus 3 taps",
+      "actor": "B",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 70.568663,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "updatedAt": 1793707447693,
+        "actionAt": 1793707447456,
+        "sampledAt": 1793707447602,
+        "revision": 4
+      },
+      "observedAt": {
+        "A": 1793707447775.6,
+        "B": 1793707447760.3
+      }
+    },
+    {
+      "scenario": "B: click seek bar",
+      "actor": "B",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 316.785243,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "updatedAt": 1793707466938,
+        "actionAt": 1793707466493,
+        "sampledAt": 1793707466851,
+        "revision": 5
+      },
+      "observedAt": {
+        "A": 1793707467075.3,
+        "B": 1793707467060.6
+      }
+    },
+    {
+      "scenario": "B: drag seek bar",
+      "actor": "B",
+      "playback": {
+        "videoId": "aqz-KE-bpKQ",
+        "positionSeconds": 461.231344,
+        "playbackRate": 1,
+        "isPlaying": false,
+        "updatedAt": 1793707483109,
+        "actionAt": 1793707482697,
+        "sampledAt": 1793707483022,
+        "revision": 6
+      },
+      "observedAt": {
+        "A": 1793707483179.2002,
+        "B": 1793707483160.9001
+      }
+    }
+  ],
+  "limitations": [
+    "Not a new p95 or 3-second drift acceptance run.",
+    "Native key holds produced no OS auto-repeat; repeat is covered separately by live browser test.",
+    "B media recording began after A gestures; status A/B both cover all five commands.",
+    "Occluded media windows have sampling gaps; no continuous high-frequency coverage claim.",
+    "Concurrent active gestures and reverse packet delivery are tested separately with real YouTube and Firebase emulators."
+  ]
+}

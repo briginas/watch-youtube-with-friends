@@ -1,0 +1,857 @@
+{
+  "date": "2026-11-02",
+  "task": "4.2",
+  "taskComplete": false,
+  "environment": {
+    "os": "macOS arm64",
+    "node": "24.19.0",
+    "browser": "Chromium / Chrome for Testing 156.0.8078.4",
+    "youtubeAccounts": "not signed in; fresh independent persistent profiles",
+    "firebase": "local demo-watch-together Auth/RTDB/Hosting with product Rules",
+    "trace": "off"
+  },
+  "baselineLiveRun": {
+    "result": "3 passed",
+    "scenarios": [
+      "bidirectional play/pause, seek, rate and creator leaves",
+      "real autoplay denial: latest room state play",
+      "real autoplay denial: latest room state pause"
+    ]
+  },
+  "matrix": [
+    {
+      "scenario": "YouTube matrix: настоящее buffering локально, восстановление последней revision",
+      "complete": true,
+      "browserVersion": "156.0.8078.4",
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "media network offline: buffering with connected RTDB",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 552.10287,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "buffering recovered: latest revision without echo",
+          "recovery": "network restored, explicit local seek to cached 10s",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "headless": true
+    },
+    {
+      "scenario": "YouTube matrix: одновременные действия из одной revision",
+      "complete": true,
+      "browserVersion": "156.0.8078.4",
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "one accepted revision, loser converged without replay",
+          "bothCommandsBasedOnSameRevision": true,
+          "acceptedSource": "creator",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "headless": true
+    },
+    {
+      "scenario": "YouTube matrix: SPA-навигация локальна, возврат применяет последнюю revision",
+      "complete": true,
+      "browserVersion": "156.0.8078.4",
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "SPA: other video stays local",
+          "sameDocument": true,
+          "otherVideoId": "xOXolSQcEb4",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 0.9982,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "name": "return to shared video: latest revision, no echo",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 16.706381,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        }
+      ],
+      "headless": true
+    },
+    {
+      "scenario": "YouTube matrix: offline-действия не переигрываются после reconnect",
+      "complete": true,
+      "browserVersion": "156.0.8078.4",
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "offline: local play and seek do not write",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 1,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 16.753228,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "name": "reconnect: latest remote state, no queued actions",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "new guest action after reconnect",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "headless": true
+    },
+    {
+      "scenario": "YouTube matrix: popup, остановка worker, reload и сохранение UID",
+      "complete": true,
+      "browserVersion": "156.0.8078.4",
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "bidirectional sync with stopped workers",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "reload: same UID and latest revision, no echo",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10.614294,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "name": "guest controls after reload",
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15.675815,
+            "playbackRate": 1,
+            "isPlaying": true,
+            "revision": 3
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15.820004,
+            "playbackRate": 1,
+            "isPlaying": true
+          },
+          "b": {
+            "positionSeconds": 15.942239,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        }
+      ],
+      "headless": true
+    },
+    {
+      "scenario": "YouTube matrix: обрыв транзакции before-server, новое действие другого участника",
+      "complete": true,
+      "browserVersion": "156.0.8078.4",
+      "headless": true,
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "interrupted transaction, newer remote command",
+          "cut": "before-server",
+          "guestWrites": 1,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 1,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "reconnect: no retry or rollback",
+          "cut": "before-server",
+          "guestWrites": 1,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "new guest command accepted",
+          "cut": "before-server",
+          "guestWrites": 2,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ]
+    },
+    {
+      "scenario": "YouTube matrix: обрыв транзакции before-ack, новое действие другого участника",
+      "complete": true,
+      "stage": "complete",
+      "browserVersion": "156.0.8078.4",
+      "headless": true,
+      "checkpoints": [
+        {
+          "name": "joined",
+          "distinctUids": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 0
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 10,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "transaction cut attempt",
+          "cut": "before-ack",
+          "guestWrites": 1,
+          "intercepted": true,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 1
+          },
+          "participantCount": 1,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "interrupted transaction, newer remote command",
+          "cut": "before-ack",
+          "guestWrites": 1,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 20,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 1,
+          "a": {
+            "positionSeconds": 20,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "reconnect: no retry or rollback",
+          "cut": "before-ack",
+          "guestWrites": 1,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 20,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 2
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 20,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 20,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "name": "new guest command accepted",
+          "cut": "before-ack",
+          "guestWrites": 2,
+          "playback": {
+            "videoId": "aqz-KE-bpKQ",
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false,
+            "revision": 3
+          },
+          "participantCount": 2,
+          "a": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          },
+          "b": {
+            "positionSeconds": 15,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ]
+    }
+  ],
+  "naturalAds": {
+    "verified": false,
+    "playerProbe": [
+      {
+        "verified": false,
+        "attempts": [
+          {
+            "videoId": "dQw4w9WgXcQ",
+            "adObserved": false,
+            "status": "ready"
+          },
+          {
+            "videoId": "kJQP7kiw5Fk",
+            "adObserved": false,
+            "status": "ready"
+          },
+          {
+            "videoId": "9bZkp7q19f0",
+            "adObserved": false,
+            "status": "ready"
+          }
+        ]
+      }
+    ],
+    "roomAttempts": [
+      {
+        "scenario": "YouTube matrix: естественная реклама у гостя (dQw4w9WgXcQ)",
+        "complete": true,
+        "browserVersion": "156.0.8078.4",
+        "headless": false,
+        "checkpoints": [
+          {
+            "name": "no natural ad in observation window",
+            "videoId": "dQw4w9WgXcQ",
+            "adObserved": false,
+            "windowMs": 20000
+          },
+          {
+            "name": "joined",
+            "distinctUids": true,
+            "playback": {
+              "videoId": "dQw4w9WgXcQ",
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false,
+              "revision": 0
+            },
+            "participantCount": 2,
+            "a": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "b": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            }
+          },
+          {
+            "name": "natural ad observation",
+            "videoId": "dQw4w9WgXcQ",
+            "adObserved": false,
+            "playback": {
+              "videoId": "dQw4w9WgXcQ",
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false,
+              "revision": 0
+            },
+            "participantCount": 2,
+            "a": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "b": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            }
+          }
+        ]
+      },
+      {
+        "scenario": "YouTube matrix: естественная реклама у гостя (9bZkp7q19f0)",
+        "complete": true,
+        "browserVersion": "156.0.8078.4",
+        "headless": false,
+        "checkpoints": [
+          {
+            "name": "no natural ad in observation window",
+            "videoId": "9bZkp7q19f0",
+            "adObserved": false,
+            "windowMs": 20000
+          },
+          {
+            "name": "joined",
+            "distinctUids": true,
+            "playback": {
+              "videoId": "9bZkp7q19f0",
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false,
+              "revision": 0
+            },
+            "participantCount": 2,
+            "a": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "b": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            }
+          },
+          {
+            "name": "natural ad observation",
+            "videoId": "9bZkp7q19f0",
+            "adObserved": false,
+            "playback": {
+              "videoId": "9bZkp7q19f0",
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false,
+              "revision": 0
+            },
+            "participantCount": 2,
+            "a": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "b": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            }
+          }
+        ]
+      },
+      {
+        "scenario": "YouTube matrix: естественная реклама у гостя (kJQP7kiw5Fk)",
+        "complete": true,
+        "stage": "complete",
+        "browserVersion": "156.0.8078.4",
+        "headless": false,
+        "checkpoints": [
+          {
+            "name": "no natural ad in observation window",
+            "videoId": "kJQP7kiw5Fk",
+            "adObserved": false,
+            "windowMs": 20000
+          },
+          {
+            "name": "joined",
+            "distinctUids": true,
+            "playback": {
+              "videoId": "kJQP7kiw5Fk",
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false,
+              "revision": 0
+            },
+            "participantCount": 2,
+            "a": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "b": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            }
+          },
+          {
+            "name": "natural ad observation",
+            "videoId": "kJQP7kiw5Fk",
+            "adObserved": false,
+            "playback": {
+              "videoId": "kJQP7kiw5Fk",
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false,
+              "revision": 0
+            },
+            "participantCount": 2,
+            "a": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            },
+            "b": {
+              "positionSeconds": 10,
+              "playbackRate": 1,
+              "isPlaying": false
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "unsuccessfulAttempts": [
+    {
+      "scenario": "YouTube matrix: естественная реклама у гостя (kJQP7kiw5Fk)",
+      "result": "failed",
+      "failure": "210s timeout; cause not established",
+      "followup": "completed, no natural ad observed"
+    },
+    {
+      "scenario": "YouTube matrix: обрыв транзакции before-ack, новое действие другого участника",
+      "result": "failed",
+      "failure": "expected network cut was not observed within 15s; cause not established",
+      "followup": "passed with diagnostic checkpoint: one write and intercepted ack"
+    }
+  ],
+  "limitations": [
+    "No natural ad was served; task 4.2 and 1.4 remain open.",
+    "Buffering recovery used a local seek to cached 10s after network restoration; distant delivery recovery is not established.",
+    "Speed menu UI observations from 3.3 remain for task 4.4.",
+    "Cloud p95/position criteria belong to task 4.3 and were not measured."
+  ]
+}

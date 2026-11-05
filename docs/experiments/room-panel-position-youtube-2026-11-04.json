@@ -1,0 +1,51 @@
+{
+  "browserVersion": "156.0.8078.4",
+  "headless": false,
+  "fullscreenEntry": "YouTube .ytp-fullscreen-button (entry and exit)",
+  "positions": [
+    {
+      "expanded": false,
+      "before": {
+        "x": 12,
+        "y": 650,
+        "width": 320,
+        "height": 58
+      },
+      "after": {
+        "x": 112,
+        "y": 590,
+        "width": 320,
+        "height": 58
+      }
+    },
+    {
+      "expanded": true,
+      "before": {
+        "x": 112,
+        "y": 459,
+        "width": 320,
+        "height": 249
+      },
+      "after": {
+        "x": 212,
+        "y": 399,
+        "width": 320,
+        "height": 249
+      }
+    }
+  ],
+  "restored": {
+    "x": 212,
+    "y": 399,
+    "width": 320,
+    "height": 249
+  },
+  "small": {
+    "x": 212,
+    "y": 219,
+    "width": 320,
+    "height": 249
+  },
+  "playbackUnchanged": true,
+  "released": true
+}

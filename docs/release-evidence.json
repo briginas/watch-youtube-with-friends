@@ -1,0 +1,8 @@
+{
+  "kind": "historical-public-summary",
+  "version": "0.1.0",
+  "checkedAt": "2026-11-04",
+  "productionSmoke": "passed in two isolated browser profiles on one host/network",
+  "storeStatusAtObservation": "Pending review; deferred publishing",
+  "publicationNote": "Operator accounts, console URLs, resource identifiers and original package inventory are omitted. This historical record does not attest to the current source tree, store status or deployment."
+}

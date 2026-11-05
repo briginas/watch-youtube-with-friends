@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "releaseVersion": "0.2.3",
+  "mode": "reuse",
+  "backendGeneration": "prod-v1",
+  "firstRelease": "0.2.1",
+  "previous": {
+    "releaseVersion": "0.2.2",
+    "backendGeneration": "prod-v1"
+  },
+  "backend": {
+    "projectId": "example-production-backend",
+    "databaseOrigin": "https://example-production-backend-default-rtdb.europe-west1.firebasedatabase.app"
+  },
+  "control": {
+    "projectId": "example-control",
+    "origin": "https://example-control.web.app/"
+  },
+  "contract": {
+    "rulesPath": "contracts/prod-v1/database.rules.json",
+    "rulesSha256": "5421bb187bf4e1a39ab3f09959c6bb8ef1f154fd1a7d87bed7c46c71f0de8d21",
+    "schemaPath": "contracts/prod-v1/schema.json",
+    "schemaSha256": "9cea6bd0f406e93568306dee2af45aef0fc80b3629e9c0e8e70015ca2d2b07c3"
+  }
+}

@@ -1,0 +1,703 @@
+{
+  "date": "2026-11-02",
+  "environment": "macOS arm64; Node 24.19.0; bundled Chromium 156; fresh persistent profile; no sign-in",
+  "observations": {
+    "controls": "passed",
+    "bufferingRecovery": "network restored, local seek back to cached 10s",
+    "adObserved": false,
+    "playerReplacement": "tested on controlled fixture, not forced on live YouTube",
+    "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "mediaFailures": [
+      {
+        "host": "rr5---sn-4g5ednr7.googlevideo.com",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "host": "rr5---sn-4g5ednr7.googlevideo.com",
+        "error": "net::ERR_INTERNET_DISCONNECTED"
+      },
+      {
+        "host": "rr1---sn-u15hn5-5h.googlevideo.com",
+        "error": "net::ERR_INTERNET_DISCONNECTED"
+      },
+      {
+        "host": "rr5---sn-4g5ednr7.googlevideo.com",
+        "error": "net::ERR_INTERNET_DISCONNECTED"
+      },
+      {
+        "host": "rr1---sn-u15hn5-5h.googlevideo.com",
+        "error": "net::ERR_INTERNET_DISCONNECTED"
+      }
+    ],
+    "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "media": {
+      "readyState": 4,
+      "networkState": 2,
+      "duration": 634.601,
+      "position": 10,
+      "paused": true,
+      "class": "html5-video-player ytp-transparent ytp-exp-bottom-control-flexbox ytp-modern-caption ytp-exp-ppp-update ytp-livebadge-color ytp-grid-scrollable ytp-delhi-modern ytp-delhi-modern-icons ytp-delhi-horizontal-volume-controls ytp-delhi-modern-compact-controls ytp-fit-cover-video ytp-fine-scrubbing-exp ytp-cards-teaser-dismissible ytp-hide-info-bar ytp-large-width-mode ytp-disable-bottom-gradient ytp-autonav-endscreen-cancelled-state ytp-branding-shown ytp-hide-fullscreen-title ytp-fullscreen-metadata-top ytp-heat-map paused-mode buffering-mode"
+    }
+  },
+  "checkpoints": {
+    "initial": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 0.033763,
+        "playbackRate": 1,
+        "isPlaying": true
+      },
+      "intents": [],
+      "mediaEvents": [
+        {
+          "event": "durationchange",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "durationchange",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "loadedmetadata",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "system"
+        }
+      ]
+    },
+    "buttons": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 10.031959,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [
+        {
+          "kind": "play",
+          "sample": {
+            "positionSeconds": 10.004132,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "kind": "pause",
+          "sample": {
+            "positionSeconds": 10.031959,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "mediaEvents": [
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "play"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "pause",
+          "trusted": true,
+          "detail": "pause"
+        }
+      ]
+    },
+    "keyboard": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 15.124915,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [
+        {
+          "kind": "play",
+          "sample": {
+            "positionSeconds": 10.109756,
+            "playbackRate": 1,
+            "isPlaying": true
+          }
+        },
+        {
+          "kind": "pause",
+          "sample": {
+            "positionSeconds": 10.124915,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        },
+        {
+          "kind": "seek",
+          "sample": {
+            "positionSeconds": 15.124915,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "mediaEvents": [
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "play"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "pause",
+          "trusted": true,
+          "detail": "pause"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "seek"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "seek"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "seek"
+        }
+      ]
+    },
+    "seek": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 11.861059,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [
+        {
+          "kind": "seek",
+          "sample": {
+            "positionSeconds": 11.861059,
+            "playbackRate": 1,
+            "isPlaying": false
+          }
+        }
+      ],
+      "mediaEvents": [
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "seek"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "seek"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "seek"
+        }
+      ]
+    },
+    "rate-menu": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 11.861059,
+        "playbackRate": 1.5,
+        "isPlaying": false
+      },
+      "intents": [
+        {
+          "kind": "rate",
+          "sample": {
+            "positionSeconds": 11.861059,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        }
+      ],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "rate"
+        }
+      ]
+    },
+    "rate-keyboard": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 11.861059,
+        "playbackRate": 1.75,
+        "isPlaying": false
+      },
+      "intents": [
+        {
+          "kind": "rate",
+          "sample": {
+            "positionSeconds": 11.861059,
+            "playbackRate": 1.5,
+            "isPlaying": false
+          }
+        },
+        {
+          "kind": "rate",
+          "sample": {
+            "positionSeconds": 11.861059,
+            "playbackRate": 1.75,
+            "isPlaying": false
+          }
+        }
+      ],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "rate"
+        },
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "rate"
+        }
+      ]
+    },
+    "remote-play": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 10.057333,
+        "playbackRate": 1.25,
+        "isPlaying": true
+      },
+      "intents": [],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "remote"
+        }
+      ]
+    },
+    "remote-pause": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 11,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "pause",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        }
+      ]
+    },
+    "network-buffering": {
+      "status": "buffering",
+      "sample": {
+        "positionSeconds": 552.10287,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "pause",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "system"
+        }
+      ]
+    },
+    "network-restored": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "pause",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "system"
+        }
+      ]
+    },
+    "final": {
+      "status": "ready",
+      "sample": {
+        "positionSeconds": 10,
+        "playbackRate": 1,
+        "isPlaying": false
+      },
+      "intents": [],
+      "mediaEvents": [
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "play",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "playing",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "ratechange",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "waiting",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "pause",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "remote"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "seeking",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "seeked",
+          "trusted": true,
+          "detail": "system"
+        },
+        {
+          "event": "canplay",
+          "trusted": true,
+          "detail": "system"
+        }
+      ]
+    }
+  },
+  "naturalAdProbe": {
+    "verified": false,
+    "attempts": [
+      {
+        "videoId": "dQw4w9WgXcQ",
+        "adObserved": false,
+        "status": "ready"
+      },
+      {
+        "videoId": "kJQP7kiw5Fk",
+        "adObserved": false,
+        "status": "ready"
+      },
+      {
+        "videoId": "9bZkp7q19f0",
+        "adObserved": false,
+        "status": "ready"
+      }
+    ]
+  }
+}
