@@ -99,5 +99,19 @@
 .catalogRow { display: flex; align-items: center; gap: 4px; }
 .catalogRow .roomName { padding-block: 6px; }
 .catalogRow .iconButton { color: var(--muted); }
+.pendingEntry { display: flex; flex: none; align-items: center; gap: 8px; }
+.pendingEntry [role="status"] { display: flex; align-items: center; }
+.spinner {
+  display: block;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
 .currentRoom { flex-shrink: 0; color: var(--muted); font-size: 12px; }
 .srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

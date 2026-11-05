@@ -328,12 +328,33 @@ test('показ списка не создаёт presence, ошибка сет�
     await created.page.close();
     const d = await driver(profile);
     await expect.poll(async () => Object.keys((await serverRoom(created.key)).presence ?? {}).length).toBe(0);
+    await d.setViewportSize({ width: 336, height: 600 });
     await profile.context.setOffline(true);
     await d.getByRole('button', { name: 'Открыть', exact: true }).click();
+    const row = d.getByRole('region', { name: 'Мои комнаты' }).getByRole('listitem');
+    const cancel = row.getByRole('button', { name: 'Отмена', exact: true });
+    const pending = row.getByRole('status');
+    await expect(cancel).toBeEnabled();
+    await expect(pending).toHaveText('Открываем комнату…');
+    await expect(row.getByRole('button', { name: /Подождите|Открыть/ })).toHaveCount(0);
+    const [spinnerBox, cancelBox, removeBox] = await Promise.all([
+      pending.boundingBox(), cancel.boundingBox(), row.getByRole('button', { name: 'Убрать из списка' }).boundingBox(),
+    ]);
+    if (!spinnerBox || !cancelBox || !removeBox) throw new Error('Элементы ожидания должны быть видимы');
+    expect(spinnerBox.width).toBeGreaterThan(0);
+    expect(spinnerBox.x + spinnerBox.width).toBeLessThan(cancelBox.x);
+    expect(Math.abs(spinnerBox.y + spinnerBox.height / 2 - (cancelBox.y + cancelBox.height / 2))).toBeLessThan(1);
+    expect(Math.abs(cancelBox.y + cancelBox.height / 2 - (removeBox.y + removeBox.height / 2))).toBeLessThan(1);
+    expect(removeBox.x + removeBox.width).toBeLessThanOrEqual(336);
     await expect(d.getByRole('alert')).toContainText('Проверьте интернет', { timeout: 25_000 });
+    await expect(cancel).toBeEnabled();
+    await expect(row.getByRole('button', { name: 'Повторить', exact: true })).toBeVisible();
     expect((await list(d)).entries).toHaveLength(1);
     // Завершаем попытку первого документа перед входом из отдельного popup.
-    await d.getByRole('button', { name: 'Отмена', exact: true }).click();
+    await cancel.click();
+    await expect(pending).toHaveCount(0);
+    await expect(cancel).toHaveCount(0);
+    await expect(row.getByRole('button', { name: 'Открыть', exact: true })).toBeEnabled();
     await profile.context.setOffline(false);
     const outside = await profile.context.newPage(); await outside.goto('about:blank');
     const control = await popup(profile.context, outside, profile.extensionId);

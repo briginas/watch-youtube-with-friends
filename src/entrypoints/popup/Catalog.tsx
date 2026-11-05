@@ -19,7 +19,7 @@ export function Catalog() {
   const [snapshot, setSnapshot] = useState<CatalogPopupSnapshot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string | null>>({});
-  const [busy, setBusy] = useState<string | null>(null);
+  const [busy, setBusy] = useState<{ key: string; action: 'open' | 'remove' } | null>(null);
   const [attempt, setAttempt] = useState(0);
   const lifetime = useRef<AbortController | null>(null);
   const entryOwner = useRef<ReturnType<typeof createReadOnlyEntry> | null>(null);
@@ -68,7 +68,7 @@ export function Catalog() {
 
   async function operate(entry: CatalogEntry, remove = false) {
     if (busy) return;
-    setBusy(entry.key);
+    setBusy({ key: entry.key, action: remove ? 'remove' : 'open' });
     setErrors(value => ({ ...value, [entry.key]: null }));
     try {
       if (remove) {
@@ -125,19 +125,25 @@ export function Catalog() {
         {!!snapshot?.entries.length && <ul>{snapshot.entries.map(entry => <li key={entry.key}>
           <div className={styles.catalogRow}>
             <span className={styles.roomName}>{entry.name}</span>
-            {snapshot.tabStates[entry.key] === 'current'
+            {busy?.key === entry.key && busy.action === 'open'
+              ? <div className={styles.pendingEntry}>
+                <span role="status">
+                  <span className={styles.spinner} aria-hidden="true" />
+                  <span className={styles.srOnly}>Открываем комнату…</span>
+                </span>
+                <button type="button" onClick={cancelEntry}>Отмена</button>
+              </div>
+              : snapshot.tabStates[entry.key] === 'current'
               ? <span className={styles.currentRoom}>В этой вкладке</span>
-              : <button disabled={!!busy} onClick={() => { void operate(entry); }}>{busy === entry.key
-                ? 'Подождите…' : snapshot.tabStates[entry.key] === 'other' ? 'Перейти' : 'Открыть'}</button>}
+              : <button disabled={!!busy} onClick={() => { void operate(entry); }}>{snapshot.tabStates[entry.key] === 'other' ? 'Перейти' : 'Открыть'}</button>}
             <button type="button" className={styles.iconButton} aria-label="Убрать из списка" title="Убрать из списка"
               disabled={!!busy} onClick={() => { void operate(entry, true); }}>
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
             </button>
           </div>
           {errors[entry.key] && <p role="alert">{errors[entry.key]}</p>}
-          {busy === entry.key && <>
+          {busy?.key === entry.key && busy.action === 'open' && <>
             {recovery?.retryAt && <p>Следующая попытка через {Math.max(0, Math.ceil((recovery.retryAt - Date.now()) / 1000))} с.</p>}
-            <button onClick={cancelEntry}>Отмена</button>
             {recovery?.phase === 'waiting' && <button onClick={() => { void entryOwner.current?.restart(); }}>Повторить</button>}
           </>}
         </li>)}</ul>}
