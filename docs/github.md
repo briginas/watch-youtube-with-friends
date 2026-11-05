@@ -30,10 +30,11 @@ CI проверяет историю HEAD, typecheck, unit-тесты, сбор�
 На исходной машине установлен локальный pre-push guard: он блокирует отправку
 старой истории, в том числе под новым именем ветки. Guard не переносится при clone.
 
-После создания пустого репозитория на GitHub добавьте свой URL и отправьте только main:
+Репозиторий проекта: https://github.com/briginas/watch-youtube-with-friends.
+Для первоначальной загрузки добавьте remote и отправьте только main:
 
 ```sh
-git remote add origin <your-repository-url>
+git remote add origin https://github.com/briginas/watch-youtube-with-friends.git
 git push -u origin main
 ```
 
@@ -41,6 +42,6 @@ git push -u origin main
 репозитория соответствует намерению. Авторский email сохранён по явному решению владельца;
 его присутствие в metadata коммита допустимо. Операторские email в документах удалены.
 
-Лицензия проекта пока не выбрана. Этот шаг не выполняет публикацию и не меняет
-Chrome Web Store или Firebase. Исторические отчёты обезличены, их старые commit IDs и
+Проект распространяется по [MIT License](../LICENSE). Загрузка исходников на GitHub
+не меняет Chrome Web Store или Firebase. Исторические отчёты обезличены, их старые commit IDs и
 package hashes не подтверждают содержимое новой main; полные оригиналы остаются локально.

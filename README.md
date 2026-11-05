@@ -31,8 +31,16 @@ npm run release:build
 QA-сборка: `.output/cloud/chrome-mv3`. Production-сборка: `.output/release/chrome-mv3`.
 Реальные настройки, инвентарь и внутренние отчёты не входят в Git.
 [Настройка окружений](docs/configuration.md) · [Подготовка к GitHub](docs/github.md).
-Команды сборки не выполняют deploy. Выбор лицензии проекта пока не сделан;
-лицензия включённой OpenSpec schema сохранена отдельно.
+Команды сборки не выполняют deploy.
+
+## Репозиторий и лицензия
+
+[GitHub](https://github.com/briginas/watch-youtube-with-friends) ·
+[История изменений](CHANGELOG.md) · [Участие в разработке](CONTRIBUTING.md) ·
+[Сообщить об ошибке](https://github.com/briginas/watch-youtube-with-friends/issues).
+
+Проект распространяется по [MIT License](LICENSE).
+Лицензия включённой OpenSpec schema [сохранена отдельно](openspec/schemas/product-refined/LICENSE.upstream).
 
 ## Состояние проекта
 

@@ -3,6 +3,15 @@
   "version": "0.2.5",
   "private": true,
   "description": "Chrome extension for watching YouTube together",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briginas/watch-youtube-with-friends.git"
+  },
+  "homepage": "https://github.com/briginas/watch-youtube-with-friends#readme",
+  "bugs": {
+    "url": "https://github.com/briginas/watch-youtube-with-friends/issues"
+  },
   "scripts": {
     "spec:validate": "openspec validate --all --strict --no-interactive",
     "dev": "wxt",
