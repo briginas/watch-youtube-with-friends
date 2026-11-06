@@ -69,6 +69,16 @@ Browser-матрица использует основной код с лока�
 
 Сброс media воспроизведён и в Chromium без расширения/Firebase. Это не основание менять backend: доставку видео RTDB не обслуживает. Причина сбоя YouTube/среды не установлена, полная приёмка плеера остаётся открытой. Исходные результаты — в [разборе 4.4](../experiments/youtube-sync-prototype.md#разбор-сброса-media--задача-44).
 
+## Публичный выпуск — 2026-11-06
+
+Версия 0.2.6 опубликована и установлена из Chrome Web Store в двух независимых
+Chrome profiles. На production подтверждены соединение, создание комнаты,
+вход по приглашению после установки и общие play/pause на реальном YouTube.
+Этот smoke проверяет работу опубликованного extension ID с backend; измерения
+между разными сетями и длительную приёмку он не заменяет. Архитектура поколений
+описана в ADR-0004; квоты, хранение комнат и ограничения App Check — в
+[runbook](../release.md). [Результаты](../../openspec/changes/archive/2026-11-06-prepare-public-release/verification.md).
+
 ## Источники
 
 - [Firebase Auth в MV3](https://firebase.google.com/docs/auth/web/chrome-extension)

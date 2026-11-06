@@ -50,12 +50,12 @@ Anonymous Auth-токены и секреты комнат; их нельзя д
 0.2.1 с явным `previous: null`. Исторические доказательства первого выпуска
 сохранены в `docs/release-evidence.json` и OpenSpec archive.
 
-Старый облачный проект пока ACTIVE: публичная карточка Store ещё использует его
-privacy URL. Новый URL на control Hosting проверен (HTTPS 200, CSP, no-referrer,
-nosniff) и отправлен на review 2026-11-06 без автопубликации. После одобрения нужно
-опубликовать изменение, проверить публичную ссылку, затем удалить только старый
-проект и записать подтверждённое состояние удаления в локальный инвентарь.
-До этого legacy остаётся в инвентаре; QA, control и prod-v1 не меняются.
+Последнее наблюдение старого облачного проекта — ACTIVE; удаление не запрашивалось.
+2026-11-06 публичная карточка Store уже ссылается на privacy на control Hosting
+(HTTPS 200, CSP, no-referrer, nosniff проверены). Зависимость карточки от старого
+Hosting устранена. Удаление остаётся отдельным шагом `remove-legacy-deployment`:
+повторно сверить роли и live project ID, удалить только legacy и записать состояние
+у провайдера в локальный инвентарь. QA, control и prod-v1 сохраняются.
 
 ## Chrome Web Store
 
@@ -67,15 +67,19 @@ Draft/review не означают публикацию.
 Item ID: `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`.
 Dashboard и ID operator account хранятся только в локальном журнале.
 Публичная карточка подтверждает версию 0.2.6 (2026-11-06). Исторические сведения о
-ZIP 0.1.0 сохранены в `docs/release-evidence.json`. Изменение только privacy URL
-отправлено на review 2026-11-06; dashboard показывает **Pending review**.
-Автоматическая публикация этого изменения выключена; после одобрения требуется Publish.
-Dashboard предупреждает: staged item истекает через 30 дней после одобрения.
-Установка из Store в этой задаче не проверялась.
+ZIP 0.1.0 сохранены в `docs/release-evidence.json`. Публичная privacy-ссылка уже
+переключена на control Hosting. На 0.2.6 проверены установка из Store в двух
+независимых Chrome profiles, возврат к приглашению после установки, вход второго
+участника и play/pause между профилями. Исходный ZIP 0.2.6 связан с commit `4ad0b28`,
+SHA-256 `9119f7b581f659ec465759fdaef30197a8b1df8a7ae6c79e9fd699bcbb2dc438`.
+Полный журнал — [verification](../openspec/changes/archive/2026-11-06-prepare-public-release/verification.md).
 
 После фактической публикации проверить публичную карточку, записать ID в `RELEASE_STORE_ID`
 и установить `RELEASE_STORE_PUBLISHED=1` в локальном env. Выполнить `release:prepare-control`, проверить
 ссылку и выполнить `release:deploy-control` для нового control-проекта. До этого страница честно сообщает об ожидании публикации.
+Этот переход выполнен 2026-11-06: опубликован control Hosting с рабочей Store-ссылкой,
+без сообщения об ожидании; публичный реестр поколений не изменился. HTTPS 200,
+CSP, no-referrer и nosniff подтверждены. Backend повторно не разворачивался.
 Ссылка в Store и privacy находятся вне секрета fragment; privacy остаётся доступна при скрытии
 `#installation` и не подключает invitation iframe.
 

@@ -2,6 +2,9 @@
 
 # Verification — 0.1.0, 2026-11-04
 
+Первоначальная проверка ниже сохранена как история. Публикация и Store installation
+завершены на 0.2.6 2026-11-06; актуальное подтверждение — в последнем разделе.
+
 ## Артефакт и исходники
 
 ZIP: `.output/release/watch-together-0.1.0.zip`, 19 файлов, SHA-256:
@@ -71,3 +74,73 @@ User activity, Website content. Health/financial/personal communications не с
 Для review выключена автоматическая публикация. Dashboard подтвердил «Your extension was submitted for review» и статус **Pending review**
 2026-11-04. Deferred publishing включён (автоматическая публикация выключена).
 Одобрение/публикация/Store installation пока не подтверждены.
+
+
+## Завершение публичного выпуска — 0.2.6, 2026-11-06
+
+Пользователь подтвердил публикацию. Независимая проверка dashboard показывает
+Published package 0.2.6, публичная карточка — Version 0.2.6 и кнопку Add to Chrome.
+Privacy в публичной карточке уже указывает на постоянный control Hosting.
+Точные Store/project IDs и локальные доказательства остаются вне Git.
+
+Загруженный при подготовке 0.2.6 ZIP собран после чистого commit `4ad0b28`:
+SHA-256 `9119f7b581f659ec465759fdaef30197a8b1df8a7ae6c79e9fd699bcbb2dc438`.
+При подготовке этого пакета прошли typecheck, 304 unit-теста, spec validation
+и release build/audit. Новая локальная версия 0.2.7 не загружалась в Store в рамках
+финализации; её артефакты не подменяют контрольную сумму опубликованной 0.2.6.
+
+### Hosting
+
+В локальном production env включены фактический Store ID и
+`RELEASE_STORE_PUBLISHED=1`. Control Hosting собран с текущим публичным реестром,
+затем опубликован Hosting-only командой. Backend/Auth/Rules не разворачивались.
+Файлы Hosting и генератор не изменялись с commit выпуска 0.2.6.
+
+| Проверка | Exit | Результат |
+|---|---:|---|
+| `npm run release:prepare-control -- <snapshot текущего реестра>` | 0 | Рабочая ссылка Store, ожидание публикации выключено |
+| `npm test -- tests/release/hosting.test.mjs tests/release/control.test.mjs` | 0 | 7 тестов, 2 файла |
+| `npm run release:deploy-control` | 0 | Только control Hosting, Deploy complete |
+| Публичная HTTP-проверка, 12:52:27 UTC | 0 | HTTPS 200; ожидаемая Store-ссылка; pending=false; реестр побайтно не изменился; CSP, no-referrer, nosniff присутствуют |
+
+Команды финализации выполнялись с Node 24.19.0. Санитизированный live-отчёт:
+`.local/release-finalization/hosting-check.json`.
+
+### Store smoke в обычном Chrome
+
+На одном Mac в одной сети использованы независимые профили Watch Together QA A/B.
+В обоих прежняя unpacked 0.2.5 отключена, 0.2.6 установлена именно через Store.
+Установленная версия и официальный extension ID проверены через popup.
+
+1. Профиль A: установка, открытие настоящего YouTube, соединение с backend,
+   создание комнаты; popup показывает одного участника.
+2. Профиль B без активного расширения: приглашение показывает установку из Store
+   и инструкцию вернуться и обновить страницу. Ссылка Store не содержит fragment.
+3. Переход по этой ссылке, установка 0.2.6, возврат кнопкой Back: доступна кнопка
+   «Присоединиться». Дополнительный reload не понадобился.
+4. Явный вход открывает отдельную вкладку с тем же видео. Оба popup показывают
+   0.2.6, одну и ту же комнату, «Комната подключена» и двух участников.
+5. Play в профиле B запускает видео в A; Pause в A останавливает видео в B.
+   Наблюдения UI подтверждают доставку, без измерений задержки или revision.
+
+Локальные снимки без приглашений/UID/токенов:
+`.local/release-finalization/store-profile-a.jpg` и `store-profile-b.jpg`.
+В QA-профилях оставлена установленная Store-версия; прежняя unpacked отключена,
+проверочное видео остановлено общей паузой. Основной профиль не изменён.
+
+README, PRD, backend ADR и runbook обновлены. Разные сети, естественная реклама,
+длительное воспроизведение, полный security audit и полная приёмка MVP не заявляются.
+Удаление legacy Firebase — отдельное изменение и не условие этого архива.
+
+При синхронизации уточнено «production-окружение» вместо единственного проекта:
+это согласует исходный release-сценарий с уже принятым `backend-generations`,
+разделяющим backend и control Hosting. Требование изоляции от QA сохраняется.
+
+### Завершение OpenSpec
+
+Все 18 задач выполнены; пять требований синхронизированы в основную
+`extension-distribution` с проверкой Purpose и полного совпадения requirement blocks.
+`openspec validate --specs`: 7 passed, 0 failed. После переноса архива
+`npm run spec:validate`: 8 passed, 0 failed; `npm run repo:audit`: 438 items,
+0 findings; `git diff --check`: exit 0. Change `remove-legacy-deployment`
+остаётся активным: privacy подтверждена, запрос удаления проекта не выполнен.
