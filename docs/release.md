@@ -85,6 +85,35 @@ CSP, no-referrer и nosniff подтверждены. Backend повторно �
 Ссылка в Store и privacy находятся вне секрета fragment; privacy остаётся доступна при скрытии
 `#installation` и не подключает invitation iframe.
 
+## Черновик обновления 0.2.7 — 2026-11-06
+
+Пакет 0.2.7 загружен в Chrome Web Store и сохранён: раздел Package подтверждает
+`Draft 0.2.7` и `Published 0.2.6`. На review обновление не отправлялось.
+Изменение исправляет начало watch-сессии после SPA-перехода YouTube;
+[OpenSpec change](../openspec/changes/archive/2026-11-06-fix-spa-session-start/verification.md)
+уже проверен, синхронизирован и архивирован. Версия была повышена в этом change;
+при подготовке Store-пакета повторно не менялась.
+
+Сборка из чистого дерева commit `437e9ec` на Node 24.19.0 после `npm ci`:
+
+- ZIP: `.output/release/watch-together-0.2.7.zip`, 20 файлов.
+- SHA-256: `5e1d4619b1a70ff2bbcb2ac74e6893ce9da94de5e05f79df52bdf7ccc7a04238`.
+- Descriptor: `.local/deployment/generations/releases/0.2.7.json`,
+  `reuse 0.2.6 prod-v1`; прежние Rules/schema и backend сохранены.
+- `release:build`, повторный `release:audit`, `release:prepare-control` — успешно.
+  Deploy backend/control не выполнялся.
+- Typecheck, 306 unit-тестов, 7 спецификаций и аудит 503 файлов репозитория — успешно,
+  аудит без находок.
+- Два E2E-теста загрузки расширения/метки сборки и два browser-теста Hosting — успешно.
+  Первый запуск Chromium в sandbox завершился до тестов (`SIGABRT`/`EPERM`);
+  повторный запуск вне sandbox прошёл.
+
+Разрешения и интерфейс не менялись; описание, privacy disclosures и снимки Store
+сохранены. Проверки настоящего YouTube для SPA-исправления приведены в архиве change;
+новая проверка двух production-профилей в этой подготовке не выполнялась.
+Каталог для ручной установки: `.output/release/chrome-mv3`.
+Следующий этап — отправка на review с deferred publishing, затем отдельная публикация.
+
 ## Эксплуатационные ограничения
 
 Комнаты не имеют TTL и автоматического удаления. Удаление из каталога локальное; выход не
@@ -127,7 +156,7 @@ production Auth/RTDB smoke работает без App Check. Web reCAPTCHA Ente
 
 ## Подготовка поколений
 
-Текущая версия 0.2.6 использует поколение `prod-v1`, начавшееся с версии 0.2.1.
+Подготовленная версия 0.2.7 использует поколение `prod-v1`, начавшееся с версии 0.2.1.
 Backend `example-production-backend` использует Anonymous Auth и RTDB в `europe-west1`.
 Страница приглашения, политика конфиденциальности и реестр опубликованы на
 `https://example-control.web.app/`. На обоих проектах отключён биллинг.
