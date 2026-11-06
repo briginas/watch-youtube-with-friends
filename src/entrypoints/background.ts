@@ -154,8 +154,11 @@ export default defineBackground(() => {
     if (typeof tabId !== 'number') return;
     const onYouTube = /^https:\/\/(www\.)?youtube\.com\//u.test(sender.tab?.url ?? '');
     if (action.type === 'room-tab-restore' || action.type === 'room-tab-attach' || action.type === 'room-tab-route') {
+      // sender.url остаётся URL исходного документа при SPA-навигации YouTube.
+      // Источник проверяем отдельно; текущий watch URL берём из вкладки браузера.
       if (sender.id !== browser.runtime.id || sender.frameId !== 0 || !onYouTube
-        || (action.type !== 'room-tab-route' && !getWatchVideoId(sender.url))) return;
+        || !/^https:\/\/(www\.)?youtube\.com\//u.test(sender.url ?? '')
+        || (action.type !== 'room-tab-route' && !getWatchVideoId(sender.tab?.url))) return;
     } else if ((action.type === 'room-tab-open' || action.type === 'room-tab-activate')) {
       const config = firebaseConfig();
       if (!config || !isExtensionFrameSender(sender, browser.runtime.id, 'invitation', action.target)
