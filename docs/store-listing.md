@@ -5,10 +5,10 @@
 Опубликованная версия: 0.2.6 (проверено 2026-11-06). Издатель: **briginas**. Developer account: `operator@example.invalid`.
 Публичный контакт: `support@example.invalid`.
 Privacy URL: `https://<control-project>.web.app/privacy.html` — постоянный control
-Hosting. Страница проверена: HTTPS 200, CSP, no-referrer и nosniff. Изменение URL
-отправлено на review 2026-11-06, статус Pending review, автопубликация выключена.
-Публичная карточка пока ссылается на старый Hosting; его удаление отложено до
-публикации и проверки новой ссылки. Пакет 0.2.6 повторно не загружался.
+Hosting. Страница проверена: HTTPS 200, CSP, no-referrer и nosniff. Публичная
+карточка подтверждена с новым URL 2026-11-06. После проверки Google Cloud принял
+удаление старого legacy-проекта (`DELETE_REQUESTED`); control Hosting остаётся
+`ACTIVE`. Пакет 0.2.6 повторно не загружался.
 
 ## Название и описание
 

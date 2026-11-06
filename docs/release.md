@@ -50,12 +50,14 @@ Anonymous Auth-токены и секреты комнат; их нельзя д
 0.2.1 с явным `previous: null`. Исторические доказательства первого выпуска
 сохранены в `docs/release-evidence.json` и OpenSpec archive.
 
-Последнее наблюдение старого облачного проекта — ACTIVE; удаление не запрашивалось.
 2026-11-06 публичная карточка Store уже ссылается на privacy на control Hosting
-(HTTPS 200, CSP, no-referrer, nosniff проверены). Зависимость карточки от старого
-Hosting устранена. Удаление остаётся отдельным шагом `remove-legacy-deployment`:
-повторно сверить роли и live project ID, удалить только legacy и записать состояние
-у провайдера в локальный инвентарь. QA, control и prod-v1 сохраняются.
+(HTTPS 200, CSP, no-referrer, nosniff проверены). После повторной сверки project ID,
+номера проекта, ролей и текущих descriptors запрошено удаление только legacy.
+Google Cloud подтвердил `DELETE_REQUESTED` в 13:07:46 UTC. QA, control и prod-v1
+повторно проверены: все `ACTIVE`. Локальный инвентарь хранит legacy как
+`delete-requested` с live provenance; исторические доказательства сохранены.
+Это подтверждение принятого запроса, не окончательного удаления: Google выполняет
+его асинхронно. [Журнал завершения](../openspec/changes/archive/2026-11-06-remove-legacy-deployment/verification.md).
 
 ## Chrome Web Store
 
