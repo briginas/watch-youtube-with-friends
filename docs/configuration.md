@@ -50,9 +50,11 @@ npm run deploy:cloud
    свои, укажите роли и фактическое состояние. `provenance: fixture` не является
    подтверждением живого проекта; `live` требует фактической проверки и `observedAt`.
 3. Согласуйте всю цепочку descriptors в `releases/` с инвентарём и env. Пример
-   иллюстрирует переход `legacy` → `prod-v1` и несколько reuse-релизов; это не история
-   вашего сервера. Для существующей установки переносите её собственные descriptors
-   и contracts целиком, не заменяйте сохранённые Rules сгенерированными.
+   начинается с `prod-v1` и `previous: null`, затем показывает несколько reuse-релизов;
+   это не история вашего сервера. Для нового развёртывания уберите примерные
+   descriptors и contracts, согласуйте firstRelease с версией пакета и выполните
+   `npm run release:prepare -- initial`. Для существующей установки переносите её
+   собственные descriptors и contracts целиком, не заменяйте сохранённые Rules сгенерированными.
 4. Настройте `.local/deployment/control/backend-generations.json` и статусы всех
    поколений. Сохраняйте retired-отметки. Свежий статус можно создать через
    `npm run status:prepare -- prod-v1 operational - 3600`.

@@ -3,7 +3,7 @@ import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'nod
 import { resolve } from 'node:path';
 import { assertBuildEnvFiles, buildEnvironment, readProduction } from './release/config.mjs';
 import { auditDirectory, createPackage } from './release/audit.mjs';
-import { deployRelease, json, loadRelease, prepareBackend, prepareRelease, readJson } from './release/generation.mjs';
+import { deployRelease, json, loadRelease, parsePrepareArgs, prepareBackend, prepareRelease, readJson } from './release/generation.mjs';
 import { controlHostingConfig, prepareControlHosting } from './release/hosting.mjs';
 import { parseRegistry } from '../src/lib/backend-generations.ts';
 
@@ -22,8 +22,8 @@ try {
   }
   const { config, values } = readProduction();
   if (command === 'prepare') {
-    const [mode, releaseVersion, backendGeneration] = process.argv.slice(3);
-    prepareRelease(config, version, mode, { releaseVersion, backendGeneration });
+    const { mode, previous } = parsePrepareArgs(process.argv.slice(3));
+    prepareRelease(config, version, mode, previous);
     console.log(`Release ${version}: descriptor и контракт подготовлены.`);
   } else if (command === 'build' || command === 'audit') {
     const { descriptor } = loadRelease(config, version);

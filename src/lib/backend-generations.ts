@@ -72,7 +72,7 @@ const hash = z.string().regex(/^[a-f0-9]{64}$/);
 export const releaseDescriptorSchema = z.object({
   schemaVersion: z.literal(1), releaseVersion: releaseVersionSchema, mode: z.enum(['new', 'reuse']),
   backendGeneration: generationSchema, firstRelease: releaseVersionSchema,
-  previous: z.object({ releaseVersion: releaseVersionSchema, backendGeneration: generationSchema }).strict(),
+  previous: z.object({ releaseVersion: releaseVersionSchema, backendGeneration: generationSchema }).strict().nullable(),
   backend: z.object({ projectId, databaseOrigin: origin }).strict(),
   control: z.object({ projectId, origin }).strict(),
   contract: z.object({ rulesPath: z.string().min(1), rulesSha256: hash,
@@ -81,10 +81,12 @@ export const releaseDescriptorSchema = z.object({
   if (value.backend.projectId === value.control.projectId ||
       new URL(value.control.origin).hostname !== `${value.control.projectId}.web.app` ||
       new URL(value.backend.databaseOrigin).hostname !== `${value.backend.projectId}-default-rtdb.europe-west1.firebasedatabase.app` ||
-      compareVersions(value.releaseVersion, value.previous.releaseVersion) <= 0 ||
       compareVersions(value.firstRelease, value.releaseVersion) > 0 ||
-      (value.mode === 'new' && (value.backendGeneration === value.previous.backendGeneration || value.firstRelease !== value.releaseVersion)) ||
-      (value.mode === 'reuse' && value.backendGeneration !== value.previous.backendGeneration))
+      (value.mode === 'new' && value.firstRelease !== value.releaseVersion) ||
+      (value.previous === null ? value.mode !== 'new' :
+        compareVersions(value.releaseVersion, value.previous.releaseVersion) <= 0 ||
+        (value.mode === 'new' && value.backendGeneration === value.previous.backendGeneration) ||
+        (value.mode === 'reuse' && value.backendGeneration !== value.previous.backendGeneration)))
     ctx.addIssue({ code: 'custom', message: 'Contradictory release mapping' });
 });
 export type ReleaseDescriptor = z.infer<typeof releaseDescriptorSchema>;

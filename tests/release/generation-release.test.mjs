@@ -1,8 +1,8 @@
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { expect, it, vi } from 'vitest';
-import { deployRelease, json, loadRelease, prepareBackend, prepareRelease, readJson } from '../../scripts/release/generation.mjs';
+import { deployRelease, json, loadRelease, parsePrepareArgs, prepareBackend, prepareRelease } from '../../scripts/release/generation.mjs';
 
 it('готовит неизменяемый new, reuse использует тот же снимок, deploy строго разделён', () => {
   const root = mkdtempSync(join(tmpdir(), 'release-generation-'));
@@ -10,20 +10,23 @@ it('готовит неизменяемый new, reuse использует то
     const config = { backendGeneration: 'g1', projectId: 'fixture-backend', controlProjectId: 'fixture-control',
       databaseURL: 'https://fixture-backend-default-rtdb.europe-west1.firebasedatabase.app',
       invitationBaseUrl: 'https://fixture-control.web.app/' };
-    const inventory = readJson('tests/fixtures/generations/release-inventory.json');
-    inventory.projects.push({ role: 'control', projectId: config.controlProjectId },
-      { role: 'backend', projectId: config.projectId, generation: 'g1', firstRelease: '0.3.0', state: 'provisioned', provenance: 'fixture' });
+    const inventory = { schemaVersion: 1, projects: [
+      { role: 'qa', projectId: 'fixture-qa' },
+      { role: 'control', projectId: config.controlProjectId },
+      { role: 'backend', projectId: config.projectId, generation: 'g1', firstRelease: '0.3.0', state: 'provisioned', provenance: 'fixture' },
+    ] };
     const inventoryFile = join(root, 'inventory.json');
     json(inventoryFile, inventory);
-    const prior = { releaseVersion: '0.2.0', backendGeneration: 'legacy' };
-    expect(() => prepareRelease({ ...config, projectId: 'fixture-legacy',
-      databaseURL: 'https://fixture-legacy-default-rtdb.europe-west1.firebasedatabase.app' }, '0.3.0', 'new', prior, root)).toThrow();
+    const prior = null;
+    expect(() => prepareRelease({ ...config, projectId: 'fixture-other',
+      databaseURL: 'https://fixture-other-default-rtdb.europe-west1.firebasedatabase.app' }, '0.3.0', 'new', prior, root)).toThrow();
     const created = prepareRelease(config, '0.3.0', 'new', prior, root);
     const file = join(root, created.contract.rulesPath);
     const saved = readFileSync(file);
     expect(() => prepareRelease(config, '0.3.0', 'new', prior, root)).toThrow();
     expect(readFileSync(file)).toEqual(saved);
     const release = loadRelease(config, '0.3.0', root);
+    expect(release.descriptor.previous).toBeNull();
     expect(prepareBackend(join(root, 'backend'), release)).toEqual({
       database: { instance: 'fixture-backend-default-rtdb', rules: join(root, 'backend', 'database.rules.json') },
       auth: { providers: { anonymous: true } },
@@ -42,10 +45,53 @@ it('готовит неизменяемый new, reuse использует то
     expect(reused.contract).toEqual(created.contract);
     expect(() => prepareBackend(root, loadRelease(config, '0.3.1', root))).toThrow();
     writeFileSync(file, '{}');
+    expect(() => loadRelease(config, '0.3.0', root)).toThrow('хэш');
     expect(() => loadRelease(config, '0.3.1', root)).toThrow('хэш');
     expect(() => prepareRelease(config, '0.3.2', 'reuse', { releaseVersion: '0.3.1', backendGeneration: 'g1' }, root)).toThrow('неизменный');
     inventory.projects.at(-1).state = 'retiring';
     json(inventoryFile, inventory);
     expect(() => loadRelease(config, '0.3.0', root)).toThrow('выведено');
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+it('начинает историю явно, проверяет последующий new и не позволяет повторить initial', () => {
+  const root = mkdtempSync(join(tmpdir(), 'release-initial-'));
+  try {
+    const config = { backendGeneration: 'g1', projectId: 'fixture-first', controlProjectId: 'fixture-control',
+      databaseURL: 'https://fixture-first-default-rtdb.europe-west1.firebasedatabase.app',
+      invitationBaseUrl: 'https://fixture-control.web.app/' };
+    const inventory = { schemaVersion: 1, projects: [{ role: 'control', projectId: config.controlProjectId },
+      { role: 'backend', projectId: config.projectId, generation: 'g1', firstRelease: '0.9.0', state: 'active', provenance: 'fixture' },
+      { role: 'backend', projectId: 'fixture-second', generation: 'g2', firstRelease: '0.10.0', state: 'active', provenance: 'fixture' }] };
+    json(join(root, 'inventory.json'), inventory);
+    expect(() => prepareRelease(config, '0.9.0', 'new', undefined, root)).toThrow();
+    expect(() => prepareRelease(config, '0.9.0', 'reuse', null, root)).toThrow();
+    expect(existsSync(join(root, 'contracts'))).toBe(false);
+    const initial = prepareRelease(config, '0.9.0', 'new', null, root);
+    expect(initial.previous).toBeNull();
+    expect(loadRelease(config, '0.9.0', root).descriptor).toEqual(initial);
+    const nextConfig = { ...config, backendGeneration: 'g2', projectId: 'fixture-second',
+      databaseURL: 'https://fixture-second-default-rtdb.europe-west1.firebasedatabase.app' };
+    expect(() => prepareRelease(nextConfig, '0.10.0', 'new', null, root)).toThrow('initial');
+    expect(() => prepareRelease(nextConfig, '0.10.0', 'new', { releaseVersion: '0.9.1', backendGeneration: 'g1' }, root)).toThrow('отсутствует');
+    expect(existsSync(join(root, 'contracts/g2'))).toBe(false);
+    const next = prepareRelease(nextConfig, '0.10.0', 'new', { releaseVersion: '0.9.0', backendGeneration: 'g1' }, root);
+    expect(loadRelease(nextConfig, '0.10.0', root).descriptor).toEqual(next);
+    expect(loadRelease(config, '0.9.0', root).descriptor).toEqual(initial);
+    json(join(root, 'releases/0.10.0.json'), { ...next, previous: null });
+    expect(() => loadRelease(nextConfig, '0.10.0', root)).toThrow('первым');
+    json(join(root, 'releases/0.10.0.json'), next);
+    json(join(root, 'releases/0.9.0.json'), { ...initial, backend: next.backend });
+    expect(() => loadRelease(nextConfig, '0.10.0', root)).toThrow('противоречит');
+    rmSync(join(root, 'releases/0.9.0.json'));
+    expect(() => loadRelease(nextConfig, '0.10.0', root)).toThrow('отсутствует');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+it('CLI принимает только явный initial или полный выбор предшественника', () => {
+  expect(parsePrepareArgs(['initial'])).toEqual({ mode: 'new', previous: null });
+  for (const mode of ['new', 'reuse'])
+    expect(parsePrepareArgs([mode, '0.9.0', 'g1'])).toEqual({ mode, previous: { releaseVersion: '0.9.0', backendGeneration: 'g1' } });
+  for (const args of [[], ['new'], ['reuse', '0.9.0'], ['initial', '0.9.0', 'g1'], ['other', '0.9.0', 'g1'], ['new', '0.9.0', 'g1', 'extra']])
+    expect(() => parsePrepareArgs(args)).toThrow('подготовка');
 });

@@ -2,11 +2,13 @@
 
 # Chrome Web Store — подготовленные поля
 
-Версия draft: 0.2.6 (загружена 2026-11-05). Опубликованная версия: 0.1.0. Издатель: **briginas**. Developer account: `operator@example.invalid`.
+Опубликованная версия: 0.2.6 (проверено 2026-11-06). Издатель: **briginas**. Developer account: `operator@example.invalid`.
 Публичный контакт: `support@example.invalid`.
-Текущая privacy URL legacy-релиза: https://example-legacy-backend.web.app/privacy.html
-
-Для первого релиза поколений укажите `https://<control-project>.web.app/privacy.html` после проверки публикации.
+Privacy URL: `https://<control-project>.web.app/privacy.html` — постоянный control
+Hosting. Страница проверена: HTTPS 200, CSP, no-referrer и nosniff. Изменение URL
+отправлено на review 2026-11-06, статус Pending review, автопубликация выключена.
+Публичная карточка пока ссылается на старый Hosting; его удаление отложено до
+публикации и проверки новой ссылки. Пакет 0.2.6 повторно не загружался.
 
 ## Название и описание
 
@@ -106,8 +108,7 @@ invitation secrets, UID, tokens or developer diagnostics.
 REST GET комнаты передаёт Firebase ID token и ключ только настроенному RTDB origin;
 статус Hosting не содержит данных пользователя. Новых permission или категорий
 собираемых данных нет; прежние disclosures Auth/network/playback сохраняются.
-Карточка и её версия 0.1.0 выше — исторические сведения: загрузка ZIP 0.2.0, review
-и публикация выполняются отдельным этапом в той же карточке.
+Подготовка 0.2.0 — исторические сведения; актуальный статус указан в начале документа.
 
 Rooms require a compatible release of the same backend generation. Rooms remain available
 while that backend operates. New invitation pages stay on the control site and report

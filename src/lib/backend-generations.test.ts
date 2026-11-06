@@ -7,13 +7,13 @@ const registry = { schemaVersion: 1 as const, revision: 1, updatedAt: '2020-01-0
 describe('generation contracts', () => {
   it('инвентарь различает данные runbook, живые проекты и тестовые записи', () => {
     const inventory = { schemaVersion: 1, projects: [
-      { role: 'backend', projectId: 'fixture-legacy', generation: 'legacy', firstRelease: '0.1.0', state: 'active', provenance: 'runbook' },
+      { role: 'backend', projectId: 'fixture-recorded', generation: 'recorded-v1', firstRelease: '0.1.0', state: 'deleted', provenance: 'runbook' },
       { role: 'backend', projectId: 'fixture-live', generation: 'g1', firstRelease: '0.2.1', state: 'active', provenance: 'live', observedAt: '2026-11-04T00:00:00Z' },
     ] };
     expect(inventorySchema.parse(inventory).projects).toEqual(inventory.projects);
     const backends = inventorySchema.parse(inventory).projects.filter(item => item.role === 'backend');
-    expect(backends.find(item => item.generation === 'legacy')).toMatchObject({ provenance: 'runbook' });
-    expect(backends.filter(item => item.generation !== 'legacy' && item.state === 'active').every(item => item.provenance === 'live')).toBe(true);
+    expect(backends.find(item => item.generation === 'recorded-v1')).toMatchObject({ provenance: 'runbook' });
+    expect(backends.filter(item => item.state === 'active').every(item => item.provenance === 'live')).toBe(true);
     expect(inventorySchema.parse(fixture).projects.filter(item => item.role === 'backend' && item.state === 'planned')).toHaveLength(1);
   });
   it('сравнивает версии численно и ограничивает идентификаторы', () => {
@@ -43,12 +43,14 @@ describe('generation contracts', () => {
   });
   it('требует явный предыдущий релиз и согласованное отображение проектов', () => {
     const descriptor = { schemaVersion: 1, releaseVersion: '0.3.0', firstRelease: '0.3.0', mode: 'new', backendGeneration: 'g2',
-      previous: { releaseVersion: '0.2.0', backendGeneration: 'legacy' },
+      previous: { releaseVersion: '0.2.0', backendGeneration: 'g1' },
       backend: { projectId: 'fixture-backend', databaseOrigin: 'https://fixture-backend-default-rtdb.europe-west1.firebasedatabase.app' },
       control: { projectId: 'fixture-control', origin: 'https://fixture-control.web.app' },
       contract: { rulesPath: 'rules.json', rulesSha256: 'a'.repeat(64), schemaPath: 'schema.json', schemaSha256: 'b'.repeat(64) } };
     expect(releaseDescriptorSchema.safeParse(descriptor).success).toBe(true);
-    for (const change of [{ previous: undefined }, { backendGeneration: 'legacy' }, { mode: 'reuse' }, { releaseVersion: '0.1.0' },
+    expect(releaseDescriptorSchema.safeParse({ ...descriptor, previous: null }).success).toBe(true);
+    for (const change of [{ previous: undefined }, { previous: null, mode: 'reuse' }, { previous: null, firstRelease: '0.2.0' },
+      { backendGeneration: 'g1' }, { mode: 'reuse' }, { releaseVersion: '0.1.0' },
       { control: { projectId: 'fixture-backend', origin: 'https://fixture-backend.web.app' } }])
       expect(releaseDescriptorSchema.safeParse({ ...descriptor, ...change }).success).toBe(false);
   });

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
-import { mkdirSync, mkdtempSync, readFileSync, realpathSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { compareVersions, inventorySchema, releaseDescriptorSchema } from '../../src/lib/backend-generations.ts';
+import { compareVersions, inventorySchema, releaseDescriptorSchema, releaseVersionSchema } from '../../src/lib/backend-generations.ts';
 import { generationRules } from '../generation-rules.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -15,6 +15,20 @@ export const readJson = file => {
 };
 const occupied = new Set(['provisioned', 'active', 'retiring']);
 const descriptorPath = (root, version) => join(root, 'releases', version + '.json');
+
+export function parsePrepareArgs(args) {
+  if (args.length === 1 && args[0] === 'initial') return { mode: 'new', previous: null };
+  if (args.length === 3 && ['new', 'reuse'].includes(args[0]))
+    return { mode: args[0], previous: { releaseVersion: args[1], backendGeneration: args[2] } };
+  throw new Error('Release: подготовка initial либо new|reuse <previousVersion> <generation>.');
+}
+
+function releaseVersions(root) {
+  let files;
+  try { files = readdirSync(join(root, 'releases')); }
+  catch (error) { if (error.code === 'ENOENT') return []; throw error; }
+  return files.filter(file => file.endsWith('.json')).map(file => releaseVersionSchema.parse(file.slice(0, -5)));
+}
 
 function snapshot(root, generation) {
   root = realpathSync(root);
@@ -36,18 +50,21 @@ function validateMapping(descriptor, inventory) {
   const entry = inventory.projects.find(item => item.role === 'backend' && item.generation === descriptor.backendGeneration);
   const control = inventory.projects.find(item => item.role === 'control' && item.projectId === descriptor.control.projectId);
   const allowed = descriptor.mode === 'new' ? ['planned', 'provisioned', 'active'] : ['active'];
-  if (descriptor.backendGeneration === 'legacy' || !entry || entry.projectId !== descriptor.backend.projectId || entry.firstRelease !== descriptor.firstRelease ||
+  if (!entry || entry.projectId !== descriptor.backend.projectId || entry.firstRelease !== descriptor.firstRelease ||
       !control || !allowed.includes(entry.state)) throw new Error('Release: descriptor не совпадает с инвентарём или поколение выведено.');
   return entry;
 }
 
 function previous(root, inventory, descriptor) {
   const ref = descriptor.previous;
+  if (ref === null) {
+    if (releaseVersions(root).some(version => compareVersions(version, descriptor.releaseVersion) < 0))
+      throw new Error('Release: начальный descriptor не является первым в истории.');
+    return null;
+  }
   const entry = inventory.projects.find(item => item.role === 'backend' && item.generation === ref.backendGeneration);
   if (!entry || compareVersions(ref.releaseVersion, entry.firstRelease) < 0)
     throw new Error('Release: предшествующий релиз отсутствует в истории.');
-  // Legacy 0.2.0 уже подготовлен до появления descriptors.
-  if (ref.backendGeneration === 'legacy' && ref.releaseVersion === '0.2.0' && descriptor.mode === 'new') return;
   const prior = releaseDescriptorSchema.parse(readJson(descriptorPath(root, ref.releaseVersion)));
   if (prior.releaseVersion !== ref.releaseVersion || prior.backendGeneration !== ref.backendGeneration ||
       prior.backend.projectId !== entry.projectId || prior.firstRelease !== entry.firstRelease ||
@@ -76,7 +93,9 @@ export function prepareRelease(config, version, mode, prior, root = '.local/depl
   const inventory = inventorySchema.parse(readJson(join(root, 'inventory.json')));
   const generation = config.backendGeneration;
   const entry = inventory.projects.find(item => item.role === 'backend' && item.generation === generation);
-  if (!entry || generation === 'legacy') throw new Error('Release: требуется поколение нового формата из инвентаря.');
+  if (!entry) throw new Error('Release: требуется поколение из инвентаря.');
+  if (prior === null && releaseVersions(root).length)
+    throw new Error('Release: initial допустим только без истории release descriptors.');
   const { contract } = mode === 'reuse' ? snapshot(root, generation) : { contract: {
     rulesPath: join('contracts', generation, 'database.rules.json'), rulesSha256: '0'.repeat(64),
     schemaPath: join('contracts', generation, 'schema.json'), schemaSha256: '0'.repeat(64),

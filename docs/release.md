@@ -43,27 +43,19 @@ ZIP создаётся из разрешённых типов файлов, ра
 секрета и не проверяет runtime IndexedDB/storage. При использовании расширения там появляются
 Anonymous Auth-токены и секреты комнат; их нельзя добавлять к release-материалам.
 
-## Legacy production и опубликованные артефакты
+## Отключение legacy
 
-2026-11-04 создан отдельный проект `example-legacy-backend` (number `000000000000`),
-Web App `1:000000000000:web:00000000000000000000`, default RTDB
-`example-legacy-backend-default-rtdb`, регион `europe-west1`.
-Конфигурация сохранена локально в `.env.production.legacy`. Проверено через Cloud Billing API:
-`billingEnabled: false`, план Spark; новый платёжный аккаунт не подключался.
+2026-11-06 пользователь подтвердил, что legacy больше не используется. Её env и
+снимки удалены из рабочего deployment и примеров; история начинается с prod-v1
+0.2.1 с явным `previous: null`. Исторические доказательства первого выпуска
+сохранены в `docs/release-evidence.json` и OpenSpec archive.
 
-Эти данные описывают ранее развёрнутое legacy-поколение. Оно остаётся в инвентаре,
-а его Rules сохранены отдельным снимком.
-
-Страница приглашения: `https://example-legacy-backend.web.app/`.
-Privacy URL: `https://example-legacy-backend.web.app/privacy.html`.
-Оба адреса проверены после production-деплоя: HTTPS 200, CSP, no-referrer и nosniff.
-Anonymous Auth включён. Неавторизованное и authenticated корневое чтение RTDB отклоняется (401).
-Signup и refresh токена после настройки API restrictions возвращают 200.
-
-Hosting release: `1793772903377000`, версия `0ee249ec38199e8d` (FINALIZED).
-SHA-256 нормализованных deployed Rules:
-`3662db01560cdc1f5f439474d30312baa82639726e9e2aaa57f45471127be688`; `_probes` отсутствует.
-Точные сведения о пакете, исходниках и ресурсах: `docs/release-evidence.json`.
+Старый облачный проект пока ACTIVE: публичная карточка Store ещё использует его
+privacy URL. Новый URL на control Hosting проверен (HTTPS 200, CSP, no-referrer,
+nosniff) и отправлен на review 2026-11-06 без автопубликации. После одобрения нужно
+опубликовать изменение, проверить публичную ссылку, затем удалить только старый
+проект и записать подтверждённое состояние удаления в локальный инвентарь.
+До этого legacy остаётся в инвентаре; QA, control и prod-v1 не меняются.
 
 ## Chrome Web Store
 
@@ -74,12 +66,12 @@ Draft/review не означают публикацию.
 
 Item ID: `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`.
 Dashboard и ID operator account хранятся только в локальном журнале.
-Загружена версия 0.1.0, SHA-256 ZIP:
-`2f91485dd773f3c9e1ec20cfcb2bae2965e820a472f45eddaceca0fe2aa04366`.
-Public, Free of charge, All regions. **Pending review** — подтверждено dashboard 2026-11-04.
-Автоматическая публикация выключена; после одобрения требуется Publish.
+Публичная карточка подтверждает версию 0.2.6 (2026-11-06). Исторические сведения о
+ZIP 0.1.0 сохранены в `docs/release-evidence.json`. Изменение только privacy URL
+отправлено на review 2026-11-06; dashboard показывает **Pending review**.
+Автоматическая публикация этого изменения выключена; после одобрения требуется Publish.
 Dashboard предупреждает: staged item истекает через 30 дней после одобрения.
-Публикация и установка из Store пока не подтверждены.
+Установка из Store в этой задаче не проверялась.
 
 После фактической публикации проверить публичную карточку, записать ID в `RELEASE_STORE_ID`
 и установить `RELEASE_STORE_PUBLISHED=1` в локальном env. Выполнить `release:prepare-control`, проверить
@@ -121,14 +113,15 @@ production Auth/RTDB smoke работает без App Check. Web reCAPTCHA Ente
 расширения пригодность ещё не подтверждена. Enforcement не включён.
 Документация: https://firebase.google.com/docs/app-check/web/recaptcha-enterprise-provider
 
-Наблюдение: https://console.firebase.google.com/project/example-legacy-backend/usage
-и https://console.cloud.google.com/apis/dashboard?project=example-legacy-backend
+Наблюдение: `https://console.firebase.google.com/project/<backend-project>/usage`
+и `https://console.cloud.google.com/apis/dashboard?project=<backend-project>`.
+Используйте project ID активного поколения из локального инвентаря.
 Проверять Auth signup/ошибки, RTDB connections/storage/download и квоты указанных API.
 Ответственный за реакцию — briginas, `support@example.invalid`.
 
-## Первое внедрение поколений
+## Подготовка поколений
 
-Для ручной установки подготовлена версия 0.2.1 с поколением `prod-v1`.
+Текущая версия 0.2.6 использует поколение `prod-v1`, начавшееся с версии 0.2.1.
 Backend `example-production-backend` использует Anonymous Auth и RTDB в `europe-west1`.
 Страница приглашения, политика конфиденциальности и реестр опубликованы на
 `https://example-control.web.app/`. На обоих проектах отключён биллинг.
@@ -142,20 +135,25 @@ Backend `example-production-backend` использует Anonymous Auth и RTDB
 Новый backend получает новый ID, первое поколение нового формата и собственный Auth/RTDB.
 Control получает постоянный отдельный Firebase project с Hosting. QA остаётся отдельным
 стендом. Перед заведением кандидата сверить доступную квоту Google Cloud и фактические
-проекты. При первом внедрении legacy и новый backend помещаются в лимит трёх.
+проекты. Старые проекты учитываются до подтверждения их удаления.
 
-Выберите версию пакета и явно укажите предшествующий релиз. Для первого релиза нового
-формата используется ссылка на legacy 0.2.0 из истории подготовки выпуска.
+Выберите версию пакета. Только для нового развёртывания без release descriptors
+используйте `initial`: он создаёт descriptor нового поколения с `previous: null`.
+Версия пакета должна совпадать с firstRelease в инвентаре. Не используйте initial
+поверх примера или существующей истории.
 
 ```sh
-npm run release:prepare -- new 0.2.0 legacy
+npm run release:prepare -- initial
 npm run release:prepare-backend
 npm run release:prepare-control
 npm run release:build
 npm run release:audit
 ```
 
-`new` сохраняет Rules и schema по поколению и записывает descriptor версии с хэшами.
+Для следующего несовместимого поколения используйте
+`release:prepare -- new <previousVersion> <previousGeneration>` с настоящим
+предыдущим descriptor. `initial` и `new` сохраняют Rules и schema по поколению
+и записывают descriptor версии с хэшами.
 Для следующего совместимого пакета используйте `release:prepare -- reuse <previousVersion> <generation>`.
 Инвентарь должен подтверждать active backend, а предыдущий descriptor должен ссылаться
 на те же снимки. `reuse` не развёртывает новый контракт. Build и audit сверяют descriptor

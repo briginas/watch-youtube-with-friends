@@ -180,12 +180,14 @@ npm exec -- openspec status --change youtube-sync-prototype
 Публичный выпуск готовится в отдельном production-проекте. Команды сборки, аудит ZIP,
 privacy и фактический статус публикации — в [инструкции выпуска](docs/release.md).
 
-Для задачи 4.3 создан отдельный Firebase-проект `example-qa`: RTDB в `europe-west1`, Anonymous Auth и [публичная страница приглашения](https://example-qa.web.app/). Публикация в Chrome Web Store ещё не выполнена.
+Для задачи 4.3 создан отдельный Firebase-проект `example-qa`: RTDB в `europe-west1`, Anonymous Auth и страница приглашения. IDs в публичной документации — примеры; рабочие настройки хранятся локально.
 
 `npm run build:cloud`, `npm run deploy:cloud`, `npm run deploy:rules` и `npm run test:cloud` используют локальный `.env.cloud` и отдельную сборку `.output/cloud/chrome-mv3`. Образец публичных настроек — `.env.example`; ключи service account в расширение не добавляются. `deploy:rules` публикует только Database Rules, без Hosting и Auth. Методика измерений и подготовка проекта — в [инструкции](docs/experiments/cloud-measurement.md). Обычная сборка без настройки сервера остаётся отключённой от Firebase.
 
-Release 0.1.0 отправлен на Chrome Web Store review (2026-11-04), публикация отложена.
-Production privacy доступна по [публичной ссылке](https://example-legacy-backend.web.app/privacy.html).
+Версия 0.2.6 опубликована в Chrome Web Store (проверено 2026-11-06).
+Production privacy размещается на постоянном control Hosting:
+`https://<control-project>.web.app/privacy.html`. Перенос ссылки в карточке Store
+отправлен на review; до публичного переключения старый Hosting сохраняется.
 
 При недоступном сервере расширение ограничивает ожидание подключения, показывает
 следующую попытку и позволяет остановить восстановление, сохранив комнату.

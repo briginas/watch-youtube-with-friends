@@ -4,10 +4,7 @@
   "mode": "new",
   "backendGeneration": "prod-v1",
   "firstRelease": "0.2.1",
-  "previous": {
-    "releaseVersion": "0.2.0",
-    "backendGeneration": "legacy"
-  },
+  "previous": null,
   "backend": {
     "projectId": "example-production-backend",
     "databaseOrigin": "https://example-production-backend-default-rtdb.europe-west1.firebasedatabase.app"

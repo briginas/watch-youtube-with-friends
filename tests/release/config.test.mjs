@@ -25,7 +25,7 @@ describe('release environment', () => {
     { WXT_FIREBASE_DATABASE_URL: 'https://another-project.firebaseio.com' },
     { WXT_FIREBASE_INVITATION_BASE_URL: 'https://another-project.web.app/' },
     { WXT_CONTROL_PROJECT_ID: 'watch-together-production', WXT_FIREBASE_INVITATION_BASE_URL: 'https://watch-together-production.web.app/' },
-    { WXT_BACKEND_GENERATION: '../legacy' }, { WXT_BACKEND_GENERATION: '' },
+    { WXT_BACKEND_GENERATION: '../generation' }, { WXT_BACKEND_GENERATION: '' },
     { WXT_FIREBASE_PROBE: '1' }, { WXT_PLAYER_PROBE: '1' }, { WXT_FIREBASE_EMULATORS: '1' },
     { WXT_UNKNOWN: 'synthetic-private-value' },
   ])('отказывается без раскрытия значений: %j', override => {
