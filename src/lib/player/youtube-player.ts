@@ -192,6 +192,19 @@ export function createYouTubePlayerAdapter(options: {
     return !!target.closest('[role="menuitemradio"]') && !!menu
       && [...menu.querySelectorAll('.ytp-menuitem-label')].filter(item => /^(?:0\.\d+|[1-4](?:\.\d+)?)$/.test(item.textContent?.trim() ?? '')).length >= 3;
   }
+  function chapterControl(target: Element) {
+    if (target.closest('ytd-macro-markers-list-item-renderer')) return true;
+    const link = target.closest<HTMLAnchorElement>('ytd-watch-metadata #description a[href]');
+    if (!link) return false;
+    try {
+      const url = new URL(link.href, location.href);
+      const time = url.searchParams.get('t') ?? url.searchParams.get('start');
+      return url.origin === location.origin && getWatchVideoId(url.href) === options.videoId
+        && !!time && /^(?:\d+|(?:\d+h)?(?:\d+m)?(?:\d+s)?)$/.test(time);
+    } catch {
+      return false;
+    }
+  }
   function onInput(event: Event) {
     if (!event.isTrusted || disposed) return;
     refresh();
@@ -206,10 +219,17 @@ export function createYouTubePlayerAdapter(options: {
     }
     if (!target || target.closest('textarea, [contenteditable]:not([contenteditable="false"])')
       || (target.closest('input') && !target.matches('.ytp-speedslider'))) return;
+    const chapter = chapterControl(target);
     let kind: PlayerIntent['kind'] | null = null;
     if (event instanceof KeyboardEvent) {
-      if (event.ctrlKey || event.altKey || event.metaKey) return;
-      if (root?.contains(target) && target.closest(RATE_CONTROLS)
+      // YouTube chapters: Ctrl+Arrow on Windows, Option+Arrow on macOS.
+      // Other modified shortcuts must not authorize subsequent media events.
+      const chapterShortcut = root?.contains(target) && ['ArrowLeft', 'ArrowRight'].includes(event.key)
+        && event.ctrlKey !== event.altKey && !event.metaKey && !event.shiftKey;
+      if (chapterShortcut) kind = 'seek';
+      else if (event.ctrlKey || event.altKey || event.metaKey) return;
+      else if (chapter && ['Enter', ' '].includes(event.key)) kind = 'seek';
+      else if (root?.contains(target) && target.closest(RATE_CONTROLS)
         && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '].includes(event.key)) kind = 'rate';
       else if (['k', 'K', 'MediaPlayPause'].includes(event.key)
         || (event.key === ' ' && root?.contains(target))) kind = video?.paused ? 'play' : 'pause';
@@ -223,7 +243,8 @@ export function createYouTubePlayerAdapter(options: {
         if (target.closest(PLAY_CONTROLS)) kind = video?.paused ? 'play' : 'pause';
         else if (target.closest(RATE_CONTROLS) || rateMenu(target)) kind = 'rate';
       }
-    } else if (root?.contains(target)) {
+    } else if (chapter && ['pointerdown', 'click'].includes(event.type)) kind = 'seek';
+    else if (root?.contains(target)) {
       if (target.closest(PLAY_CONTROLS)) kind = video?.paused ? 'play' : 'pause';
       else if (target.closest(SEEK_CONTROLS)) kind = 'seek';
       else if (target.closest(RATE_CONTROLS) || rateMenu(target)) kind = 'rate';
