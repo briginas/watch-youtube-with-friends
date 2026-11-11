@@ -1,3 +1,8 @@
+:global(html), .catalog ul {
+  scrollbar-color: var(--muted) var(--page);
+  scrollbar-width: thin;
+}
+
 :global(body) {
   margin: 0;
   background: var(--page);

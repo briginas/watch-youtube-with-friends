@@ -75,6 +75,53 @@ test('неизвестная тема, отказы чтения и сохран
   await expect(page.getByRole('button', { name: 'Копировать приглашение' })).toBeEnabled();
 });
 
+test('скроллбары окна и каталога следуют теме и сохраняют прокрутку', async () => {
+  await context.addInitScript(() => {
+    if (location.pathname !== '/popup.html') return;
+    const sendMessage = chrome.runtime.sendMessage;
+    chrome.runtime.sendMessage = (async (message: { type: string }) => {
+      if (message.type === 'room-catalog') return {
+        entries: Array.from({ length: 8 }, (_, i) => ({ key: `room-${i}`, name: `Комната ${i + 1}` })),
+        tabStates: {},
+      };
+      return sendMessage(message);
+    }) as typeof chrome.runtime.sendMessage;
+  });
+  const page = await open();
+  const catalog = page.getByRole('region', { name: 'Мои комнаты' }).getByRole('list');
+  await expect(catalog.getByRole('listitem')).toHaveCount(8);
+  const palettes = {
+    light: 'rgb(123, 97, 90) rgb(255, 243, 232)',
+    dark: 'rgb(212, 180, 205) rgb(48, 32, 44)',
+  };
+  for (const width of [400, 336]) {
+    await page.setViewportSize({ width, height: 600 });
+    for (const theme of ['light', 'dark', 'light'] as const) {
+      if (await themeSwitch(page).getAttribute('aria-checked') !== String(theme === 'dark')) {
+        await themeSwitch(page).click();
+      }
+      for (const area of [page.locator('html'), catalog]) {
+        await expect(area).toHaveCSS('scrollbar-color', palettes[theme]);
+        await expect(area).toHaveCSS('scrollbar-width', 'thin');
+        const overflow = await area.evaluate(element => ({
+          vertical: element.scrollHeight > element.clientHeight,
+          horizontal: element.scrollWidth > element.clientWidth,
+        }));
+        expect(overflow).toEqual({ vertical: true, horizontal: false });
+      }
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.mouse.move(10, 300);
+      await page.mouse.wheel(0, 2000);
+      await expect.poll(() => page.evaluate(() => window.scrollY + innerHeight >= document.documentElement.scrollHeight)).toBe(true);
+      await catalog.hover();
+      await page.mouse.wheel(0, 2000);
+      await expect.poll(() => catalog.evaluate(element => element.scrollTop + element.clientHeight >= element.scrollHeight)).toBe(true);
+      await expect(catalog.getByText('Комната 8', { exact: true })).toBeInViewport();
+      await catalog.evaluate(element => { element.scrollTop = 0; });
+    }
+  }
+});
+
 test('две палитры сохраняют геометрию, контраст и доступность длинных названий', async () => {
   const page = await open();
   const errors: string[] = [];
