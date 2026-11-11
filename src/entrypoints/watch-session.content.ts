@@ -43,7 +43,7 @@ export default defineContentScript({
       const visible = !!presentation?.visible && !!getWatchVideoId(location.href);
       fullscreen = isFullscreen();
       host.style.visibility = visible && !fullscreen ? 'visible' : 'hidden';
-      host.style.width = `${Math.max(1, Math.min(presentation?.width ?? 256, innerWidth - 24))}px`;
+      host.style.width = `${Math.max(1, Math.min(presentation?.width ?? 380, innerWidth - 24))}px`;
       host.style.height = `${Math.max(1, Math.min(presentation?.height ?? 80, innerHeight - 24))}px`;
       if (position) place(position.x, position.bottom);
       if (!visible || fullscreen) cancelDrag();
@@ -107,7 +107,7 @@ export default defineContentScript({
       acceptPresentation = presentationGate();
       drag = undefined; lastGesture = 0;
       host = document.createElement('div');
-      host.style.cssText = 'position:fixed;bottom:12px;left:12px;width:256px;height:80px;overflow:clip;visibility:hidden;z-index:2147483647';
+      host.style.cssText = 'position:fixed;bottom:12px;left:12px;width:380px;height:80px;overflow:clip;visibility:hidden;z-index:2147483647';
       const shadow = host.attachShadow({ mode: 'closed' });
       const frame = document.createElement('iframe');
       sessionFrame = frame;
@@ -115,7 +115,7 @@ export default defineContentScript({
       frame.title = 'Состояние совместного просмотра';
       frame.allow = 'clipboard-write';
       // Меняется область обрезки, а iframe и док остаются у её нижнего края.
-      frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:dark';
+      frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:normal';
       shadow.append(frame);
       const container = host;
       void browser.runtime.sendMessage({ type: 'room-tab-attach', backendGeneration, target }).then(response => {

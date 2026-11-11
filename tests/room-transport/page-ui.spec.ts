@@ -33,6 +33,77 @@ async function panelVisibility(frame: import('@playwright/test').Frame) {
   return (await frame.frameElement()).evaluate(el => getComputedStyle(el as Element).visibility);
 }
 
+test('общие темы popup и панели: live-переключение, контраст, геометрия и сохранение комнаты', async ({}, info) => {
+  const driver = await setup(false, playerFixture());
+  const key = 'watch-together:popup-theme:v1';
+  try {
+    const { page, frame, invitation } = await create(driver, 'Вечер вместе');
+    await openDetails(frame);
+    await settlePanel(frame);
+    const before = await sessionPlayback(frame);
+    const geometry = await frame.locator('#room-panel').boundingBox();
+    const control = await driver.context.newPage();
+    await control.goto(`chrome-extension://${driver.extensionId}/popup.html`);
+    const toggleTheme = control.getByRole('switch', { name: 'Тёмная тема' });
+    const colors = () => {
+      const style = getComputedStyle(document.documentElement);
+      return Object.fromEntries(['page', 'surface', 'surface-hover', 'text', 'muted', 'border', 'accent', 'accent-text', 'error', 'connected', 'warning'].map(name => [name, style.getPropertyValue(`--${name}`).trim()]));
+    };
+    const luminance = (hex: string) => hex.slice(1).match(/../g)!.map(channel => parseInt(channel, 16) / 255)
+      .map(channel => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4)
+      .reduce((total, channel, i) => total + channel * [.2126, .7152, .0722][i]!, 0);
+    const contrast = (a: string, b: string) => (Math.max(luminance(a), luminance(b)) + .05) / (Math.min(luminance(a), luminance(b)) + .05);
+    for (const theme of ['light', 'dark'] as const) {
+      if (theme === 'dark') await toggleTheme.press('Space');
+      await expect(frame.locator('html')).toHaveAttribute('data-theme', theme);
+      await expect(frame.locator('#room-toggle')).toHaveAttribute('aria-expanded', 'true');
+      expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
+      const panelColors = await frame.evaluate(colors);
+      expect(panelColors).toEqual(await control.evaluate(colors));
+      for (const foreground of ['text', 'muted', 'error']) for (const background of ['surface', 'surface-hover']) {
+        expect(contrast(panelColors[foreground]!, panelColors[background]!), `${theme}: ${foreground}/${background}`).toBeGreaterThanOrEqual(4.5);
+      }
+      expect(contrast(panelColors['accent-text']!, panelColors.accent!)).toBeGreaterThanOrEqual(4.5);
+      for (const button of await frame.getByRole('button').all()) {
+        const box = (await button.boundingBox())!;
+        expect(box.width).toBeGreaterThanOrEqual(44);
+        expect(box.height).toBeGreaterThanOrEqual(44);
+      }
+      await expect(frame.locator('.participant-dot')).toHaveCount(1);
+      expect(await frame.locator('li').evaluate(el => getComputedStyle(el).color)).toBe(await frame.locator('h1').evaluate(el => getComputedStyle(el).color));
+      await page.bringToFront();
+      await frame.locator('#room-toggle').evaluate(el => el.blur());
+      await frame.locator('#room-panel').screenshot({ path: info.outputPath(`${theme}.png`) });
+      await control.bringToFront();
+    }
+    expect(await sessionPlayback(frame)).toEqual(before);
+    // A newly opened iframe reads the saved preference, without recreating the room.
+    await page.reload();
+    await readyPlayer(page);
+    const reopened = await frameOf(page, false);
+    await expect(reopened.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(reopened.locator('#room-name')).toHaveText('Вечер вместе');
+    await expect.poll(async () => {
+      const transport = await control.evaluate(target => chrome.runtime.sendMessage({ type: 'room-session', backendGeneration: 'emulator-v1', target, action: 'status' }), new URL(reopened.url()).hash.slice(1));
+      return transport.roomInvitation === invitation;
+    }).toBe(true);
+    for (const value of ['unknown', null]) {
+      await control.evaluate(async ({ key, value }) => {
+        if (value === null) await chrome.storage.local.remove(key);
+        else await chrome.storage.local.set({ [key]: value });
+      }, { key, value });
+      await expect(reopened.locator('html')).toHaveAttribute('data-theme', 'light');
+    }
+    await page.setViewportSize({ width: 336, height: 480 });
+    await openDetails(reopened);
+    await settlePanel(reopened);
+    expect((await panelBounds(reopened)).width).toBeLessThanOrEqual(312);
+    await expect(reopened.locator('#leave')).toBeInViewport();
+    expect(await reopened.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(312);
+    await control.close();
+  } finally { await driver.context.close(); }
+});
+
 test('компактный UI: исходное состояние, клавиатура, размеры, clipboard и неизменность комнаты', async ({}, info) => {
   const driver = await setup(false, playerFixture());
   try {

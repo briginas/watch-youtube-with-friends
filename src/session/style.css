@@ -1,29 +1,28 @@
-:root {
-  color-scheme: dark;
-  --surface: #212121;
-  --border: #414141;
-  --muted: #b3b3b3;
-  --accent: #3ea6ff;
-}
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html, body { height: 100%; margin: 0; overflow: hidden; background: transparent; color: #f1f1f1; font: 13px/1.4 Roboto, Arial, sans-serif; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: transparent; color: var(--text); font: 14px/1.5 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 body { display: flex; flex-direction: column; justify-content: end; }
-#room-panel { display: flex; flex: none; flex-direction: column; gap: 6px; max-height: 100%; }
-#room-dock, #room-details, #copy-status { background: var(--surface); border: 1px solid var(--border); }
-#room-dock { display: flex; align-items: center; flex: none; order: 1; border-radius: 24px; }
-p { margin: 6px 0; overflow-wrap: anywhere; }
+:root:not([data-theme]) #room-panel { visibility: hidden; }
+#room-panel { display: flex; flex: none; flex-direction: column; gap: 12px; max-height: 100%; }
+#room-dock, #room-details, #copy-status { background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+#room-dock { display: flex; align-items: center; flex: none; order: 1; gap: 8px; padding: 8px; border-radius: 20px; }
+p { margin: 12px 0; overflow-wrap: anywhere; }
+p:empty { display: none; }
 button, input { font: inherit; }
-button { border: 0; border-radius: 18px; padding: 8px 12px; background: #383838; color: inherit; cursor: pointer; }
-button:not(:disabled):hover { background: #4a4a4a; }
+button { min-height: 44px; min-width: 44px; border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; background: var(--surface); color: inherit; cursor: pointer; }
+button:not(:disabled):hover { background: var(--surface-hover); }
 button:disabled { opacity: .55; cursor: default; }
-button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--focus); outline-offset: -3px; }
 #room-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   flex: 1;
   min-width: 0;
-  min-height: 44px;
-  border-radius: 24px;
-  padding: 7px 6px 7px 12px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 12px;
+  padding: 4px;
   background: transparent;
   text-align: left;
   cursor: grab;
@@ -31,19 +30,14 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
   touch-action: none;
 }
 #room-toggle.dragging { cursor: grabbing; }
-.heading { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.dock-icon { flex: none; width: 40px; height: 40px; object-fit: contain; pointer-events: none; }
+.dock-content { flex: 1; min-width: 0; }
+.heading { display: flex; align-items: center; gap: 8px; font-weight: 650; }
 .sync-dot { position: relative; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
-[data-synced] .sync-dot { background: var(--accent); }
-[data-problem] .sync-dot { background: #ffce5c; }
+[data-synced] .sync-dot { background: var(--connected); }
+[data-problem] .sync-dot { background: var(--warning); }
 [data-buffering] .sync-dot { background: transparent; }
-.buffering-spinner {
-  display: none;
-  position: absolute;
-  inset: -2.5px;
-  border: 2px solid var(--muted);
-  border-top-color: transparent;
-  border-radius: 50%;
-}
+.buffering-spinner { display: none; position: absolute; inset: -2.5px; border: 2px solid var(--muted); border-top-color: transparent; border-radius: 50%; }
 [data-buffering] .buffering-spinner { display: block; }
 @media (prefers-reduced-motion: no-preference) {
   .buffering-spinner { animation: buffering-spin .8s linear infinite; }
@@ -54,23 +48,41 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 svg { flex: none; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 #chevron { color: var(--muted); }
 [aria-expanded="true"] #chevron { transform: rotate(180deg); }
-.summary { display: block; margin: 2px 0 0 14px; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.summary { display: block; margin: 2px 0 0 15px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 :is([data-synced], [data-buffering]):not([data-problem]) .summary,
 :is([data-synced], [data-buffering]) #status,
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-#problem { color: #ffce5c; }
+#problem { color: var(--warning); }
 #room-panel:not([data-synced], [data-buffering]) #problem::before { content: ' · '; white-space: pre; }
-#copy-invitation { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; padding: 0; background: transparent; }
-#room-dock button:not(:disabled):hover { background: #383838; }
-#copy-invitation svg { width: 19px; height: 19px; }
-#copy-status { flex: none; order: 0; border-radius: 14px; margin: 0; padding: 6px 12px; color: var(--muted); font-size: 12px; }
+#copy-invitation { display: grid; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border-color: transparent; background: var(--accent); color: var(--accent-text); }
+#room-toggle:not(:disabled):hover { background: var(--surface-hover); }
+#copy-invitation:not(:disabled):hover { background: var(--accent-hover); }
+#copy-invitation svg { width: 20px; height: 20px; }
+#copy-status { flex: none; order: 0; border-radius: 14px; margin: 0; padding: 10px 16px; color: var(--muted); font-size: 12px; }
 #copy-status:empty { display: none; }
-#room-details { order: -1; min-height: 0; overflow: auto; scrollbar-width: thin; border-radius: 14px; padding: 10px 12px; }
-h1 { font-size: 13px; line-height: 1.4; margin: 0 0 8px; overflow-wrap: anywhere; }
-#room-details button, #return-video { display: block; margin: 7px 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
-ul { list-style: none; padding: 0; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+#room-details { order: -1; min-height: 0; overflow: auto; scrollbar-width: thin; border-radius: 20px; padding: 16px; }
+.details-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.details-icon { flex: none; width: 64px; height: 64px; object-fit: contain; }
+.details-title { flex: 1; min-width: 0; }
+h1 { font-size: 17px; line-height: 1.35; margin: 0; overflow-wrap: anywhere; }
+#synced-status { margin: 4px 0 0; color: var(--muted); }
+#synced-status::before { content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--connected); }
+#room-details button, #return-video { display: block; margin: 12px 0 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+#return-video { min-height: 44px; padding: 10px 0; }
+#participants { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 4px; }
+#participants p { font-weight: 650; }
+ul { list-style: none; padding: 0; margin: 12px 0 16px; display: flex; flex-direction: column; gap: 8px; }
+li { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 8px 12px; border-radius: 12px; background: var(--surface-hover); overflow-wrap: anywhere; }
+.participant-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; }
 a { color: var(--accent); }
-label { display: block; margin-top: 8px; }
-input { display: block; width: 100%; padding: 7px; margin-top: 4px; border: 1px solid var(--border); border-radius: 7px; }
-.leave { color: #ffb4ab; }
+label { display: block; margin-top: 12px; }
+input { display: block; width: 100%; min-height: 44px; padding: 10px 12px; margin-top: 8px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: var(--page); }
+#leave { width: 100%; color: var(--error); }
 [data-buffering] #synced-status { visibility: hidden; }
+@media (max-width: 300px) {
+  .details-icon { width: 48px; height: 48px; }
+  #room-dock { gap: 4px; }
+  #room-toggle { gap: 6px; }
+  .dock-icon { width: 32px; height: 32px; }
+  .heading { gap: 6px; }
+}

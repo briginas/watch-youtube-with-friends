@@ -1,39 +1,3 @@
-:global(html) {
-  color-scheme: light;
-  --page: #fff3e8;
-  --surface: #fffaf5;
-  --surface-hover: #f4e7e3;
-  --text: #3b241f;
-  --muted: #80665f;
-  --border: #e8d4cd;
-  --accent: #79516d;
-  --accent-hover: #653e5a;
-  --accent-text: #fff8ee;
-  --focus: #7250a2;
-  --error: #a13735;
-  --connected: #4b7b38;
-  --warning: #946710;
-  --shadow: 0 2px 8px #6b34240a;
-}
-
-:global(html[data-theme='dark']) {
-  color-scheme: dark;
-  --page: #30202c;
-  --surface: #422f3c;
-  --surface-hover: #543e4d;
-  --text: #fff0dc;
-  --muted: #d4b4cd;
-  --border: #705264;
-  --accent: #ffc18e;
-  --accent-hover: #ffd3ad;
-  --accent-text: #3b241f;
-  --focus: #e0b9fa;
-  --error: #ffb6aa;
-  --connected: #a2d982;
-  --warning: #ffd08c;
-  --shadow: 0 2px 8px #10081018;
-}
-
 :global(body) {
   margin: 0;
   background: var(--page);

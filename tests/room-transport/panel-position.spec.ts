@@ -244,11 +244,13 @@ test('док сохраняет положение при раскрытии и 
     await toggle.press('Escape');
     await settlePanel(frame);
     const initial = await bounds(frame);
-    await moveDock(1, 1000, -180);
+    // Оставляем место для более просторных подробностей с двумя участниками.
+    // Нехватку места сверху проверяем отдельным движением ниже.
+    await moveDock(1, 1000, -60);
     await expect.poll(async () => {
       const box = await bounds(frame);
       return [box.x + box.width, box.y];
-    }).toEqual([628, initial.y - 180]);
+    }).toEqual([628, initial.y - 60]);
     const right = (await dock.boundingBox())!;
     await setExpanded(true);
     await expectDockAt(right);

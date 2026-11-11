@@ -11,7 +11,11 @@ export function renderParticipants(container: HTMLElement, state: TransportState
   for (const participant of state.participants) {
     const item = document.createElement('li');
     item.textContent = `Участник ${participant.number}${participant.isSelf ? ' (вы)' : ''}`;
-    item.style.color = participant.color;
+    const dot = document.createElement('span');
+    dot.className = 'participant-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dot.style.backgroundColor = participant.color;
+    item.prepend(dot);
     list.append(item);
   }
   container.append(count, list);

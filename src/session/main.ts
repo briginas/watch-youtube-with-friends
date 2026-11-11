@@ -2,7 +2,9 @@ import { backendGeneration } from '../lib/firebase/config';
 import { browser } from 'wxt/browser';
 import { createRoomTransport } from '../lib/room/transport';
 import { isPopupSender, sessionRequestSchema, type PopupSessionState } from '../lib/room/messages';
+import '../lib/appearance.css';
 import './style.css';
+import { observeAppearanceTheme } from '../lib/appearance';
 import { pageState, playerMessages } from '../lib/room/page-state';
 import { invitationUrl } from '../lib/room/creation';
 import type { TransportState } from '../lib/room/transport';
@@ -17,6 +19,8 @@ import { routeSchema, viewSchema } from '../lib/room/view';
 import type { PlayerStatus } from '../lib/player/youtube-player';
 import { bindPanelDrag } from './panel-drag';
 import { generationBlocksEntry } from '../lib/connection-error';
+
+const appearance = observeAppearanceTheme();
 
 // Только публичный адрес получателя. Auth и секрет комнаты в URL не попадают.
 const target = location.hash.slice(1);
@@ -107,7 +111,7 @@ function configureRoom(key: string, name: string) {
 function present() {
   if (closed || tabId === undefined) return;
   const content = {
-    visible: bindingReady && !left, name: roomName, width: 256,
+    visible: bindingReady && !left, name: roomName, width: 380,
     height: Math.max(1, Math.min(4096, Math.ceil(panel.getBoundingClientRect().height))),
   };
   const signature = JSON.stringify(content);
@@ -375,7 +379,7 @@ leave.addEventListener('click', () => {
   void release().catch(() => { actionError = 'Не удалось выйти из комнаты. Повторите попытку.'; })
     .finally(() => { leaving = false; render(); });
 });
-addEventListener('pagehide', () => { closed = true; clearInterval(recoveryTicker); disposeDrag(); clearTimeout(renderFrame); clearTimeout(copyFeedbackTimer); resizeObserver.disconnect(); removeEventListener('resize', measure); clearInterval(reconcileTimer); engine.dispose(); void transport.close(); }, { once: true });
+addEventListener('pagehide', () => { closed = true; appearance.dispose(); clearInterval(recoveryTicker); disposeDrag(); clearTimeout(renderFrame); clearTimeout(copyFeedbackTimer); resizeObserver.disconnect(); removeEventListener('resize', measure); clearInterval(reconcileTimer); engine.dispose(); void transport.close(); }, { once: true });
 
 returnVideo.addEventListener('click', event => {
   event.preventDefault();
