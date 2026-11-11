@@ -2,7 +2,7 @@
 
 # Chrome Web Store — подготовленные поля
 
-Опубликованная версия: 0.2.6 (проверено 2026-11-06). Издатель: **briginas**. Developer account: `operator@example.invalid`.
+Опубликованная версия: 0.2.7 (раздел Package, проверено 2026-11-11). Издатель: **briginas**. Developer account: `operator@example.invalid`.
 Публичный контакт: `support@example.invalid`.
 Privacy URL: `https://<control-project>.web.app/privacy.html` — постоянный control
 Hosting. Страница проверена: HTTPS 200, CSP, no-referrer и nosniff. Публичная
@@ -15,6 +15,13 @@ Hosting. Страница проверена: HTTPS 200, CSP, no-referrer и nos
 подтверждает `Draft 0.2.7` и `Published 0.2.6`. Описание, снимки и disclosures
 сохранены без изменений. На review обновление не отправлялось.
 SHA-256 и проверки пакета приведены в [журнале выпуска](release.md#черновик-обновления-027--2026-11-06).
+
+2026-11-11 загружен и сохранён пакет 0.2.8: Package подтвердил `Draft 0.2.8`
+и `Published 0.2.7`. Обновление исправляет общую перемотку по главам YouTube.
+Оно отправлено на review с отложенной публикацией; dashboard подтвердил
+**Pending review**. Публикация 0.2.8 пока не подтверждена. Описание и снимки
+сохранены без изменений. SHA-256 и проверки — в
+[журнале выпуска](release.md#обновление-028-на-review--2026-11-11).
 
 ## Название и описание
 

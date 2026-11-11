@@ -114,6 +114,36 @@ CSP, no-referrer и nosniff подтверждены. Backend повторно �
 Каталог для ручной установки: `.output/release/chrome-mv3`.
 Следующий этап — отправка на review с deferred publishing, затем отдельная публикация.
 
+## Обновление 0.2.8 на review — 2026-11-11
+
+Перед загрузкой раздел Package подтвердил опубликованную версию 0.2.7.
+Проверенный ZIP 0.2.8 загружен и сохранён; Package подтвердил `Draft 0.2.8`
+и `Published 0.2.7`. После отправки dashboard показал **Pending review**
+и подтверждение `Your extension was submitted for review`.
+Выбрана отложенная публикация: галочка автоматической публикации снята
+и проверена перед отправкой. После одобрения нужен отдельный Publish;
+публикация 0.2.8 пока не подтверждена.
+
+Пакет исправляет общую перемотку по главам YouTube;
+[проверки изменения](../openspec/changes/archive/2026-11-11-fix-chapter-seeking/verification.md)
+сохранены в архиве OpenSpec. Сборка из чистого дерева commit `3d5f870`
+на Node 24.19.0 после `npm ci`:
+
+- ZIP: `.output/release/watch-together-0.2.8.zip`, 20 файлов.
+- SHA-256: `fcfcb65395e777f94e25dc6d04177fa3f0ec4a6b85c8904654926ab7ed6a9bc1`.
+- Descriptor: `.local/deployment/generations/releases/0.2.8.json`,
+  `reuse 0.2.7 prod-v1`; контракт backend сохранён.
+- `release:build`, повторный `release:audit`, `release:prepare-control` — успешно.
+- Typecheck, 306 unit-тестов, 7 спецификаций и аудит 526 файлов репозитория — успешно,
+  аудит без находок.
+- Два E2E-теста загрузки расширения/метки сборки и два browser-теста Hosting — успешно.
+  Chromium в sandbox завершился до тестов (`SIGABRT`/`EPERM`);
+  повторный запуск вне sandbox прошёл.
+
+Каталог для ручной установки: `.output/release/chrome-mv3`.
+Backend/control не разворачивались. Описание и снимки Store не менялись;
+новая проверка двух production-профилей в этой подготовке не выполнялась.
+
 ## Эксплуатационные ограничения
 
 Комнаты не имеют TTL и автоматического удаления. Удаление из каталога локальное; выход не
@@ -156,7 +186,7 @@ production Auth/RTDB smoke работает без App Check. Web reCAPTCHA Ente
 
 ## Подготовка поколений
 
-Подготовленная версия 0.2.7 использует поколение `prod-v1`, начавшееся с версии 0.2.1.
+Подготовленная версия 0.2.8 использует поколение `prod-v1`, начавшееся с версии 0.2.1.
 Backend `example-production-backend` использует Anonymous Auth и RTDB в `europe-west1`.
 Страница приглашения, политика конфиденциальности и реестр опубликованы на
 `https://example-control.web.app/`. На обоих проектах отключён биллинг.
