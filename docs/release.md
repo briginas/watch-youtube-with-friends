@@ -13,7 +13,11 @@
 Node 24.12+ из ветки 24, `npm ci`. Скопировать `.env.production.example` в локальный
 `.env.production` и заполнить публичные Firebase-параметры backend и control и `RELEASE_FIREBASE_PROJECT_ID`.
 Этот файл исключён из Git. Service account, OAuth credentials, room secrets и токены туда не нужны.
-Для воспроизведения иконок: `npm run icons:build`; исходник — `assets/icon.svg`.
+Для воспроизведения иконок и promo tile: `npm run icons:build`; выбранный исходник
+иконки — `assets/icon-plush.png`, обложки — `docs/store-assets/promo-plush-source.png`.
+Готовая иконка Store — `public/icon/128.png`, small promo tile —
+`docs/store-assets/promo-plush-440x280.png`. Промоматериалы загружаются в карточку
+Store отдельно и не входят в ZIP расширения.
 
 ```sh
 npm run release:build
