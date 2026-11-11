@@ -165,15 +165,12 @@ export function App() {
 
   return (
     <main className={styles.panel}>
-      <header className={styles.header}>
-        <img className={styles.brandIcon} src="/icon/128.png" alt="" width="44" height="44" />
-        <div className={styles.brandTitle}>
-          <h1>{t('watchTogether')}</h1>
-          <span className={styles.version}>v{browser.runtime.getManifest().version}</span>
-        </div>
+      <h1 className={styles.srOnly}>{t('watchTogether')}</h1>
+      <div className={styles.hero}>
+        <img className={styles.heroImage} src="/assets/popup-plush.webp" alt="" width="800" height="236" />
         <ThemeToggle />
-      </header>
-      <img className={styles.hero} src="/assets/popup-plush.webp" alt="" width="800" height="236" />
+        <span className={styles.version}>v{browser.runtime.getManifest().version}</span>
+      </div>
       <section className={styles.context} aria-label={t('thisTab')}>
         {hasRoom ? <>
           <div className={styles.roomBar}>

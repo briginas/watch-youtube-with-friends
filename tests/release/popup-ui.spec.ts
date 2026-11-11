@@ -4,10 +4,12 @@ import { resolve } from 'node:path';
 import { expect, test, type BrowserContext, type Page } from '@playwright/test';
 import { launchExtension } from '../e2e/fixtures';
 import type { browser as browserApi } from 'wxt/browser';
+import pkg from '../../package.json' with { type: 'json' };
 
 declare const chrome: typeof browserApi;
 
 const themeKey = 'watch-together:popup-theme:v1';
+const version = pkg.version;
 let context: BrowserContext;
 let url: string;
 
@@ -63,10 +65,17 @@ test('неизвестная тема, отказы чтения и сохран
   await page.evaluate(async key => { await chrome.storage.local.set({ [key]: 'unknown' }); }, themeKey);
   await page.reload();
   await expect(themeSwitch(page)).toHaveAttribute('aria-checked', 'false');
+  const versionLabel = page.getByText(`v${version}`, { exact: true });
+  const versionBeforeError = await versionLabel.boundingBox();
   await page.evaluate(() => { chrome.storage.local.set = async () => { throw new Error('Storage unavailable'); }; });
   await themeSwitch(page).click();
   await expect(themeSwitch(page)).toHaveAttribute('aria-checked', 'true');
-  await expect(page.getByText('Не удалось сохранить тему.', { exact: false })).toBeVisible();
+  const error = page.getByText('Не удалось сохранить тему.', { exact: false });
+  await expect(error).toBeVisible();
+  const image = (await page.locator('img[src="/assets/popup-plush.webp"]').boundingBox())!;
+  expect((await error.boundingBox())!.y).toBeGreaterThanOrEqual(image.y + image.height);
+  expect(await versionLabel.boundingBox()).toEqual(versionBeforeError);
+  await expect(themeSwitch(page)).toHaveAttribute('aria-describedby', 'theme-save-error');
   await themeSwitch(page).click();
   await expect(themeSwitch(page)).toHaveAttribute('aria-checked', 'false');
   await context.addInitScript(() => { chrome.storage.local.get = async () => { throw new Error('Storage unavailable'); }; });
@@ -129,7 +138,8 @@ test('две палитры сохраняют геометрию, контра�
   const bounds = () => page.locator('main').boundingBox();
   const lightBounds = await bounds();
   await mkdir('.output/popup-preview', { recursive: true });
-  await page.screenshot({ path: '.output/popup-preview/light.png', fullPage: true });
+  await expect(page.locator('header')).toHaveCount(0);
+  await expect(page.locator('img[src="/icon/128.png"]')).toHaveCount(0);
   for (const theme of ['light', 'dark']) {
     if (theme === 'dark') await themeSwitch(page).click();
     expect(await bounds()).toEqual(lightBounds);
@@ -145,8 +155,25 @@ test('две палитры сохраняют геометрию, контра�
       expect(contrast(colors[foreground]!, colors[background]!), `${theme}: ${foreground}/${background}`).toBeGreaterThanOrEqual(4.5);
     }
     expect(contrast(colors['accent-text']!, colors.accent!)).toBeGreaterThanOrEqual(4.5);
+    for (const width of [400, 336]) {
+      await page.setViewportSize({ width, height: 600 });
+      const image = (await page.locator('img[src="/assets/popup-plush.webp"]').boundingBox())!;
+      const toggle = (await themeSwitch(page).boundingBox())!;
+      const label = (await page.getByText(`v${version}`, { exact: true }).boundingBox())!;
+      expect(image.y).toBe(width === 400 ? 24 : 16);
+      expect(image.height).toBe(104);
+      expect(toggle.width).toBe(44);
+      expect(toggle.height).toBe(44);
+      expect(toggle.y).toBe(image.y + 8);
+      expect(toggle.x + toggle.width).toBe(image.x + image.width - 8);
+      expect(label.x + label.width).toBe(image.x + image.width - 8);
+      expect(label.y + label.height).toBe(image.y + image.height - 8);
+      expect(label.y).toBeGreaterThan(toggle.y + toggle.height);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+      await page.screenshot({ path: `.output/popup-preview/${theme}-${width}.png`, fullPage: true });
+    }
+    await page.setViewportSize({ width: 400, height: 600 });
   }
-  await page.screenshot({ path: '.output/popup-preview/dark.png', fullPage: true });
   await page.evaluate(() => {
     (globalThis as unknown as { popupFixture: { state: { roomName: string } } }).popupFixture.state.roomName = 'Очень длинное название '.repeat(12);
   });
