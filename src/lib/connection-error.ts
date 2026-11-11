@@ -1,3 +1,4 @@
+import { t } from './i18n';
 import type { ServiceResult } from './service-status';
 
 export type FailureKind = 'network-or-timeout' | 'auth-rate-limited' | 'auth-failed' | 'access-denied'
@@ -30,16 +31,16 @@ export function generationBlocksEntry(failure?: Failure | null): boolean {
 }
 export function failureMessage(failure: Failure): string {
   return {
-    'network-or-timeout': 'Не удалось получить актуальное состояние комнаты. Проверьте интернет или повторите позже.',
-    'auth-rate-limited': 'Слишком много попыток входа. Попробуйте позже.',
-    'auth-failed': 'Не удалось выполнить анонимный вход. Повторите позже.',
-    'access-denied': 'Нет доступа к комнате. Проверьте приглашение.',
-    'not-found': 'Комната не найдена.',
-    'unsupported-room': 'Формат комнаты не поддерживается. Создайте новую комнату.',
-    'generation-retired': 'Поддержка этой комнаты завершена. Обновите расширение, откройте нужное видео и создайте новую комнату.',
-    'generation-update-required': 'Для этой комнаты нужна более новая версия расширения. Обновите расширение и снова откройте приглашение.',
-    'unsupported-generation': 'Эта версия расширения не поддерживает поколение комнаты. Откройте нужное видео и создайте новую комнату.',
-    'service-busy': 'Сервис перегружен. Подождите следующую попытку или повторите позже.',
-    'service-unavailable': failure.reason === 'quota' ? 'Ресурсы сервиса временно исчерпаны. Попробуйте позже.' : 'Сервис временно недоступен: идёт обслуживание. Попробуйте позже.',
+    'network-or-timeout': t('networkFailure'),
+    'auth-rate-limited': t('authRateLimited'),
+    'auth-failed': t('authFailed'),
+    'access-denied': t('accessDenied'),
+    'not-found': t('roomNotFound'),
+    'unsupported-room': t('unsupportedRoom'),
+    'generation-retired': t('generationRetired'),
+    'generation-update-required': t('generationUpdateRequired'),
+    'unsupported-generation': t('unsupportedGeneration'),
+    'service-busy': t('serviceBusy'),
+    'service-unavailable': failure.reason === 'quota' ? t('serviceQuota') : t('serviceMaintenance'),
   }[failure.kind];
 }

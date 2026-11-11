@@ -23,7 +23,8 @@ function fixture() {
   const youtube = ['https://www.youtube.com/*', 'https://youtube.com/*'];
   const invite = `${new URL(config.invitationBaseUrl).origin}/*`;
   const manifest = {
-    manifest_version: 3, version: '0.1.0', name: 'Watch YouTube with friends', description: 'Смотрим вместе',
+    manifest_version: 3, version: '0.1.0', name: 'Watch YouTube with friends',
+    description: '__MSG_extensionDescription__', default_locale: 'en',
     permissions: ['activeTab', 'clipboardWrite', 'storage'], host_permissions: [...youtube, invite],
     icons: Object.fromEntries([16, 32, 48, 128].map(size => [size, `icon/${size}.png`])),
     background: { service_worker: 'background.js' }, action: { default_popup: 'popup.html' },
@@ -33,6 +34,10 @@ function fixture() {
     web_accessible_resources: [{ resources: ['session.html'], matches: youtube }, { resources: ['invitation.html'], matches: [invite] }],
   };
   mkdirSync(join(directory, 'content-scripts')); mkdirSync(join(directory, 'icon'));
+  for (const locale of ['en', 'ru']) {
+    mkdirSync(join(directory, '_locales', locale), { recursive: true });
+    copyFileSync(`public/_locales/${locale}/messages.json`, join(directory, '_locales', locale, 'messages.json'));
+  }
   writeFileSync(join(directory, 'manifest.json'), JSON.stringify(manifest));
   writeFileSync(join(directory, 'background.js'), `const config = ${JSON.stringify(config)};`);
   for (const file of ['popup.html', 'session.html', 'invitation.html']) writeFileSync(join(directory, file), '<!doctype html><title>Extension</title>');
@@ -42,6 +47,23 @@ function fixture() {
 }
 
 describe('проверка поставляемого ZIP', () => {
+  it('включает оба словаря и отклоняет пропущенные переводы и неверный fallback', () => {
+    const f = fixture();
+    createPackage(f.directory, f.destination, config, '0.1.0');
+    expect(execFileSync('unzip', ['-Z1', f.destination], { encoding: 'utf8' })).toContain('_locales/ru/messages.json');
+    f.manifest.default_locale = 'ru';
+    writeFileSync(join(f.directory, 'manifest.json'), JSON.stringify(f.manifest));
+    expect(() => auditDirectory(f.directory, config, '0.1.0')).toThrow('локализация manifest');
+    f.manifest.default_locale = 'en';
+    writeFileSync(join(f.directory, 'manifest.json'), JSON.stringify(f.manifest));
+    const path = join(f.directory, '_locales/ru/messages.json');
+    const messages = JSON.parse(readFileSync(path, 'utf8'));
+    messages.participant.message = 'Участник';
+    writeFileSync(path, JSON.stringify(messages));
+    expect(() => auditDirectory(f.directory, config, '0.1.0')).toThrow('несогласованные словари');
+    rmSync(path);
+    expect(() => auditDirectory(f.directory, config, '0.1.0')).toThrow('словарь локализации');
+  });
   it('включает подготовленный баннер popup, но отклоняет другие изображения', () => {
     const f = fixture();
     mkdirSync(join(f.directory, 'assets'));

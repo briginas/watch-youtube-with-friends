@@ -7,7 +7,7 @@ import { publicKeys } from './config.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const same = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
-const allowedPath = /^(?:manifest\.json|(?:popup|session|invitation)\.html|background\.js|(?:chunks|content-scripts)\/[\w.-]+\.js|assets\/[\w.-]+\.css|assets\/popup-plush\.webp|icon\/(?:16|32|48|128)\.png)$/;
+const allowedPath = /^(?:manifest\.json|_locales\/(?:en|ru)\/messages\.json|(?:popup|session|invitation)\.html|background\.js|(?:chunks|content-scripts)\/[\w.-]+\.js|assets\/[\w.-]+\.css|assets\/popup-plush\.webp|icon\/(?:16|32|48|128)\.png)$/;
 const patterns = {
   'private-key': /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
   'service-account': /["']type["']\s*:\s*["']service_account["']/,
@@ -47,6 +47,24 @@ export function auditDirectory(directory, config, version, { env = {}, knownSecr
     !same(manifest.host_permissions ?? [], [...youtube, invite]) || manifest.optional_permissions?.length ||
     manifest.optional_host_permissions?.length || manifest.externally_connectable || manifest.devtools_page ||
     manifest.update_url || manifest.key) throw new Error('Audit: недопустимый manifest/permissions.');
+  if (manifest.default_locale !== 'en' || manifest.description !== '__MSG_extensionDescription__') {
+    throw new Error('Audit: неверная локализация manifest.');
+  }
+  let catalogs;
+  try {
+    catalogs = ['en', 'ru'].map(locale => JSON.parse(readFileSync(join(directory, '_locales', locale, 'messages.json'), 'utf8')));
+  } catch { throw new Error('Audit: отсутствует или повреждён словарь локализации.'); }
+  const [english, russian] = catalogs;
+  const keys = Object.keys(english ?? {});
+  if (!keys.length || !same(keys, Object.keys(russian ?? {})) || keys.some(key =>
+    catalogs.some(catalog => typeof catalog[key]?.message !== 'string' || !catalog[key].message.trim()) ||
+    !same(english[key].message.match(/\$(?:\d|[a-z][\w]*\$)/gi) ?? [], russian[key].message.match(/\$(?:\d|[a-z][\w]*\$)/gi) ?? []) ||
+    JSON.stringify(english[key].placeholders ?? {}) !== JSON.stringify(russian[key].placeholders ?? {}) ||
+    catalogs.some(catalog => [...catalog[key].message.matchAll(/\$([\w]+)\$/g)]
+      .some(([, name]) => !catalog[key].placeholders?.[name.toLowerCase()]?.content))) ||
+    catalogs.some(catalog => !catalog.extensionDescription?.message || catalog.extensionDescription.message.length > 132)) {
+    throw new Error('Audit: неполные или несогласованные словари локализации.');
+  }
   const hostname = new URL(config.databaseURL).hostname;
   const connect = `https://identitytoolkit.googleapis.com https://securetoken.googleapis.com ${config.databaseURL} ${new URL(config.invitationBaseUrl).origin} wss://*.${hostname.endsWith('.firebaseio.com') ? 'firebaseio.com' : 'firebasedatabase.app'}`;
   const csp = `default-src 'self'; script-src 'self'; connect-src ${connect}; object-src 'none'; frame-ancestors https://www.youtube.com https://youtube.com ${new URL(config.invitationBaseUrl).origin}`;

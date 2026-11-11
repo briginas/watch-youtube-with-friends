@@ -1,3 +1,4 @@
+import { t } from '../lib/i18n';
 import { backendGeneration } from '../lib/firebase/config';
 import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
@@ -127,7 +128,7 @@ export default defineContentScript({
       const frame = document.createElement('iframe');
       sessionFrame = frame;
       frame.src = `${browser.runtime.getURL('/session.html')}#${target}`;
-      frame.title = 'Состояние совместного просмотра';
+      frame.title = t('watchSessionTitle');
       frame.allow = 'clipboard-write';
       // Меняется область обрезки, а iframe и док остаются у её нижнего края.
       frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:light;clip-path:inset(max(0px, calc(100% - 80px)) 0 0)';
@@ -152,7 +153,7 @@ export default defineContentScript({
       }
       if (target && host?.isConnected && isPlayerControlSender(sender, browser.runtime.id, target)
         && playerContextRequestSchema.safeParse(message).success && message.target === target) {
-        void reportRoute().then(sendResponse, () => sendResponse({ error: 'Не удалось проверить вкладку.' }));
+        void reportRoute().then(sendResponse, () => sendResponse({ error: t('checkTabFailed') }));
         return true;
       }
       const control = playerControlSchema.safeParse(message);
@@ -195,7 +196,7 @@ export default defineContentScript({
         const request = playerSnapshotRequestSchema.safeParse(message);
         if (!request.success || request.data.target !== target || !host?.isConnected) return;
         const videoId = getWatchVideoId(location.href);
-        if (!videoId) { sendResponse({ error: 'Откройте обычное видео на YouTube.' }); return; }
+        if (!videoId) { sendResponse({ error: t('openYoutubeVideo') }); return; }
         // Краткое чтение через проверенный адаптер, без исходящих команд.
         const adapter = createYouTubePlayerAdapter({ videoId, onIntent() {} });
         try {
@@ -203,8 +204,8 @@ export default defineContentScript({
           const seeking = document.querySelector<HTMLVideoElement>('#movie_player video.html5-main-video')?.seeking;
           if (status !== 'ready' || !sample || seeking) {
             sendResponse({ error: status === 'ad'
-              ? 'Дождитесь окончания рекламы и повторите попытку.'
-              : 'Дождитесь готовности обычного записанного видео и повторите попытку.' });
+              ? t('waitForAd')
+              : t('waitForVideo') });
           } else {
             if (videoId !== routeVideoId) { routeVideoId = videoId; routeSequence++; stopPlayer(); }
             sendResponse({ playback: { videoId, ...sample }, sampledAt: Date.now(),
@@ -215,7 +216,7 @@ export default defineContentScript({
       }
       if (!fromPopup || message?.type !== 'room-session-ensure') return;
       if (!getWatchVideoId(location.href)) {
-        sendResponse({ error: 'Откройте обычное видео на YouTube.' });
+        sendResponse({ error: t('openYoutubeVideo') });
         return;
       }
       ensureSession();

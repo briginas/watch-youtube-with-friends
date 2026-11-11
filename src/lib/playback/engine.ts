@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { createPlaybackCommand, type CommandResult, type PlaybackCommand } from './commands';
 import { playbackSchema, targetPositionSeconds, type Playback } from './model';
 import type { ApplyResult, PlaybackSample, PlayerIntent, PlayerStatus } from '../player/youtube-player';
@@ -59,7 +60,7 @@ export function createSyncEngine(options: {
       if (disposed || generation !== session || operation !== applying) return;
       inFlight = false;
       needsApply = true;
-      options.onError?.('Не удалось применить состояние к плееру.');
+      options.onError?.(t('applyPlayerFailed'));
       if (readiness !== startedReady && !sending) applyLatest();
     });
   }
@@ -95,7 +96,7 @@ export function createSyncEngine(options: {
       if (result.status === 'rejected') needsApply = true;
     } catch {
       if (disposed || session !== generation) return;
-      options.onError?.('Не удалось отправить действие. Повторите попытку.');
+      options.onError?.(t('sendActionFailed'));
       needsApply = true;
     } finally {
       if (sending === command) {

@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { z } from 'zod';
 import type { FirebaseConfig } from '../firebase/config';
 import { roomKeySchema } from './key';
@@ -16,7 +17,7 @@ export type CatalogEntry = z.infer<typeof catalogEntrySchema>;
 export interface CatalogSnapshot { entries: CatalogEntry[]; warning: string | null }
 /** Вычисляется при чтении для popup, не сохраняется в постоянном каталоге. */
 export interface CatalogPopupSnapshot extends CatalogSnapshot { tabStates: Record<string, 'current' | 'other'> }
-export const catalogError = 'Не удалось обновить список комнат. Повторите действие.';
+export const catalogError = t('updateCatalogFailed');
 
 export function catalogStorageKey(config: FirebaseConfig): string {
   return `roomCatalog:v${localFormatVersion}:${config.backendGeneration}:${JSON.stringify([config.emulators, config.projectId,
@@ -26,7 +27,7 @@ export function catalogStorageKey(config: FirebaseConfig): string {
 export function readCatalog(value: unknown): CatalogSnapshot {
   if (value === undefined) return { entries: [], warning: null };
   const envelope = z.object({ version: z.literal(localFormatVersion), entries: z.array(z.unknown()) }).strict().safeParse(value);
-  if (!envelope.success) throw new Error('Формат списка комнат не поддерживается.');
+  if (!envelope.success) throw new Error(t('unsupportedCatalog'));
   const entries = new Map<string, CatalogEntry>();
   let damaged = false;
   for (const raw of envelope.data.entries) {
@@ -37,7 +38,7 @@ export function readCatalog(value: unknown): CatalogSnapshot {
   }
   return {
     entries: [...entries.values()].sort((a, b) => b.lastOpenedAt - a.lastOpenedAt || a.key.localeCompare(b.key)),
-    warning: damaged ? 'Часть списка комнат не удалось прочитать.' : null,
+    warning: damaged ? t('damagedCatalog') : null,
   };
 }
 

@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { goOffline, goOnline, onValue, ref, serverTimestamp, set, type Unsubscribe } from 'firebase/database';
 import { closeFirebaseClient, getFirebaseClient } from '../firebase/client';
 import { firebaseConfig } from '../firebase/config';
@@ -56,8 +57,8 @@ export function createRoomTransport(onChange: (state: TransportState) => void, o
       ? { ...((fromReader ? state.room : room) as Record<string, unknown>),
         playback: current.data.playback.revision > incoming.data.playback.revision ? current.data.playback : incoming.data.playback }
       : room;
-    state.roomError = room === null ? 'Комната не найдена.'
-      : !incoming.success ? 'Формат комнаты не поддерживается. Создайте новую комнату.' : null;
+    state.roomError = room === null ? t('roomNotFound')
+      : !incoming.success ? t('unsupportedRoom') : null;
     if (state.roomError) { state.roomReady = false; presence?.close(); presence = undefined; }
     state.participants = incoming.success ? roomParticipants((state.room as { presence?: unknown })?.presence, state.uid!) : [];
   }
@@ -66,7 +67,7 @@ export function createRoomTransport(onChange: (state: TransportState) => void, o
     const generation = roomGeneration;
     presence = createPresence(client.database, roomKey, client.uid, () => {
       if (disposed || generation !== roomGeneration) return;
-      state.presenceError = 'Не удалось обновить присутствие. Повторите подключение.'; emit();
+      state.presenceError = t('presenceFailed'); emit();
     });
     presence.setConnected(state.connected);
   }
@@ -197,7 +198,7 @@ export function createRoomTransport(onChange: (state: TransportState) => void, o
       if (disposed || state.invitation) return;
       state.creationError = null;
       if (!client || state.phase !== 'ready' || !state.connected) {
-        state.creationError = 'Нет связи с сервером. Дождитесь подключения и повторите попытку.'; emit(); return;
+        state.creationError = t('createWhileOffline'); emit(); return;
       }
       state.creating = true; emit();
       creating = (async () => {
@@ -229,8 +230,8 @@ export function createRoomTransport(onChange: (state: TransportState) => void, o
         } catch (error) {
           if (classifyFailure(error).kind === 'access-denied') pendingCreation = undefined;
           state.creationError = pendingCreation?.attempted
-            ? 'Результат создания пока неизвестен. Повторите проверку: новая комната не будет создана.'
-            : 'Не удалось создать комнату. ' + failureMessage(classifyFailure(error));
+            ? t('creationUnknown')
+            : t('createRoomFailurePrefix') + failureMessage(classifyFailure(error));
           if (error && typeof error === 'object' && 'failure' in error) state.creationError = failureMessage((error as ConnectionError).failure);
         } finally { state.creating = false; creating = undefined; emit(); }
       })();

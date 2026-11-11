@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { deleteApp, initializeApp } from 'firebase/app';
 import {
   connectAuthEmulator, indexedDBLocalPersistence, initializeAuth, signInAnonymously,
@@ -58,7 +59,7 @@ export async function closeFirebaseClient() {
 
 export function authErrorMessage(error: unknown): string {
   if (error instanceof Error && error.message === 'firebase/not-configured') {
-    return 'Подключение к серверу ещё не настроено.';
+    return t('serverNotConfigured');
   }
   return failureMessage(classifyFailure(error, 'auth'));
 }

@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="ru">
-  <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Сессия совместного просмотра</title></head>
+<html lang="en">
+  <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title data-i18n="sessionTitle">Watch together session</title></head>
   <body>
-    <main id="room-panel" aria-label="Комната совместного просмотра">
+    <main id="room-panel" aria-label="Watch together room" data-i18n-aria-label="watchRoomLabel">
       <div id="room-dock">
         <button id="room-toggle" aria-expanded="false" aria-controls="room-details">
           <img class="dock-icon" src="/icon/128.png" alt="" draggable="false">
           <span class="dock-content">
             <span class="heading">
               <span class="sync-dot" aria-hidden="true"><span class="buffering-spinner"></span></span>
-              <span id="room-name">Комната</span>
-              <span id="participant-count" title="Участники">
+              <span id="room-name" data-i18n="room">Room</span>
+              <span id="participant-count" title="Participants" data-i18n-title="participants">
                 <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/><circle cx="9" cy="7" r="4"/></svg>
-                <span class="sr-only">Участников: </span><span id="participant-number">—</span>
+                <span class="sr-only" data-i18n="participantsPrefix">Participants: </span><span id="participant-number">—</span>
               </span>
               <svg id="chevron" aria-hidden="true" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg>
             </span>
-            <span class="summary"><span id="status" role="status" aria-live="off">Подключаемся…</span><span id="problem" hidden>Требуется внимание</span></span>
+            <span class="summary"><span id="status" role="status" aria-live="off" data-i18n="connecting">Connecting…</span><span id="problem" hidden data-i18n="attentionRequired">Attention required</span></span>
           </span>
         </button>
-        <button id="copy-invitation" aria-label="Копировать приглашение" title="Копировать приглашение" disabled>
+        <button id="copy-invitation" aria-label="Copy invitation" data-i18n-aria-label="copyInvitation" title="Copy invitation" data-i18n-title="copyInvitation" disabled>
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13.5a4 4 0 0 0 5.7 0l4.2-4.2a4 4 0 0 0-5.7-5.7l-2.4 2.4m2.2 4.5a4 4 0 0 0-5.7 0l-4.2 4.2a4 4 0 0 0 5.7 5.7l2.4-2.4"/></svg>
         </button>
-        <button id="notice-open" aria-label="Показать сообщение" title="Показать сообщение" hidden>
+        <button id="notice-open" aria-label="Show message" data-i18n-aria-label="showMessage" title="Show message" data-i18n-title="showMessage" hidden>
           <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 4h.01"/></svg>
         </button>
       </div>
@@ -31,22 +31,22 @@
           <img class="details-icon" src="/icon/128.png" alt="" draggable="false">
           <div class="details-title">
             <h1 id="full-room-name"></h1>
-            <p id="synced-status" hidden>Смотрим вместе</p>
+            <p id="synced-status" hidden data-i18n="watchingTogether">Watching together</p>
           </div>
         </div>
         <p id="player-status" hidden></p>
-        <a id="return-video" target="_top" hidden>Вернуться в комнату</a>
-        <button id="switch-video" hidden>Смотреть это в комнате</button>
+        <a id="return-video" target="_top" hidden data-i18n="returnToRoom">Return to room</a>
+        <button id="switch-video" hidden data-i18n="watchThisInRoom">Watch this in the room</button>
         <div id="participants-slot"><section id="participants" hidden></section></div>
-        <button id="leave" class="leave" hidden>Выйти из комнаты</button>
+        <button id="leave" class="leave" hidden data-i18n="leaveRoom">Leave room</button>
       </div>
       <span id="announcement" class="sr-only" aria-live="polite"></span>
     </main>
     <aside id="room-notice" aria-labelledby="notice-title" hidden>
       <header class="notice-heading">
         <svg id="notice-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6m0 4h.01"/></svg>
-        <h2 id="notice-title">Требуется внимание</h2>
-        <button id="notice-close" aria-label="Закрыть сообщение" title="Закрыть сообщение"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+        <h2 id="notice-title" data-i18n="attentionRequired">Attention required</h2>
+        <button id="notice-close" aria-label="Close message" data-i18n-aria-label="closeMessage" title="Close message" data-i18n-title="closeMessage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
       </header>
       <div id="notice-content">
         <p id="connection-status"></p>
@@ -54,10 +54,10 @@
         <p id="switch-status"></p>
         <p id="catalog-status" hidden></p>
         <p id="copy-status"></p>
-        <button id="retry" hidden>Повторить подключение</button>
-        <button id="stop-recovery" hidden>Остановить попытки</button>
-        <button id="catalog-retry" hidden>Повторить сохранение</button>
-        <label id="manual-invitation" hidden>Ссылка-приглашение<input id="invitation-link" aria-label="Ссылка-приглашение" aria-describedby="copy-status" readonly></label>
+        <button id="retry" hidden data-i18n="reconnect">Reconnect</button>
+        <button id="stop-recovery" hidden data-i18n="stopAttempts">Stop trying</button>
+        <button id="catalog-retry" hidden data-i18n="retrySaving">Retry saving</button>
+        <label id="manual-invitation" hidden data-i18n="invitationLink">Invitation link<input id="invitation-link" aria-label="Invitation link" data-i18n-aria-label="invitationLink" aria-describedby="copy-status" readonly></label>
       </div>
     </aside>
     <script type="module" src="../session/main.ts"></script>

@@ -1,3 +1,4 @@
+import { installPopupFixture } from './popup-fixture';
 import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { expect, test, type BrowserContext, type Page } from '@playwright/test';
@@ -17,27 +18,7 @@ test.beforeEach(async () => {
   // UI-стенд: реальные React/CSS и storage расширения, комнатный transport подменён.
   // Никакие комнаты или обращения к production Firebase не создаются.
   await context.route('https://**/*', route => route.abort());
-  await context.addInitScript(() => {
-    if (typeof chrome === 'undefined' || !chrome.storage) return;
-    const state = {
-      phase: 'ready', connected: true, roomReady: true, roomName: '🎬 4812',
-      room: 'ui-fixture', roomInvitation: 'https://example.invalid/#fixture',
-      participants: [{ number: 1, color: '#a05a79', isSelf: true }, { number: 2, color: '#7454a1', isSelf: false }],
-    };
-    const fixture = { state, commands: [] as string[] };
-    (globalThis as unknown as { popupFixture: typeof fixture }).popupFixture = fixture;
-    chrome.tabs.query = (async () => [{ id: 123, url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ' }]) as unknown as typeof chrome.tabs.query;
-    chrome.tabs.sendMessage = (async () => ({ target: 'popup-ui-fixture' })) as typeof chrome.tabs.sendMessage;
-    chrome.runtime.sendMessage = (async (message: { type: string; action: string }) => {
-      fixture.commands.push(`${message.type}/${message.action}`);
-      if (message.type === 'room-session') return fixture.state;
-      if (message.type === 'room-catalog') return {
-        entries: [{ key: 'current', name: '🎬 4812' }, { key: 'saved', name: 'Музыка для вечера' }],
-        tabStates: { current: 'current' },
-      };
-      throw new Error('Unexpected UI fixture request');
-    }) as typeof chrome.runtime.sendMessage;
-  });
+  await installPopupFixture(context);
 });
 
 test.afterEach(async () => { await context?.close(); });

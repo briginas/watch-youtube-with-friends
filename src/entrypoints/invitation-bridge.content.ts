@@ -1,3 +1,4 @@
+import { t } from '../lib/i18n';
 import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
 import { firebaseConfig } from '../lib/firebase/config';
@@ -15,7 +16,7 @@ export default defineContentScript({
     const shadow = host.attachShadow({ mode: 'closed' });
     const frame = document.createElement('iframe');
     frame.src = `${browser.runtime.getURL('/invitation.html')}#${target}`;
-    frame.title = 'Вход в комнату';
+    frame.title = t('joinRoomTitle');
     frame.style.cssText = 'width:100%;height:240px;border:0;border-radius:12px;color-scheme:dark';
     shadow.append(frame);
     const fallback = document.querySelector<HTMLElement>('#installation');

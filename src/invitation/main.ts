@@ -1,3 +1,4 @@
+import { localizeDocument, t } from '../lib/i18n';
 import { backendGeneration } from '../lib/firebase/config';
 import { browser } from 'wxt/browser';
 import { firebaseConfig } from '../lib/firebase/config';
@@ -8,6 +9,7 @@ import { failureMessage, generationBlocksEntry } from '../lib/connection-error';
 import type { AttemptState } from '../lib/connection-attempt';
 import '../session/style.css';
 
+localizeDocument();
 const target = location.hash.slice(1);
 const status = document.querySelector<HTMLParagraphElement>('#status')!;
 const join = document.querySelector<HTMLButtonElement>('#join')!;
@@ -20,11 +22,11 @@ let last: AttemptState | undefined;
 let received = false;
 function render(state: AttemptState) {
   last = state;
-  const waiting = state.retryAt ? ` Следующая попытка через ${Math.max(0, Math.ceil((state.retryAt - Date.now()) / 1000))} с.` : '';
-  status.textContent = state.phase === 'succeeded' ? 'Комната открыта во вкладке YouTube.'
-    : state.phase === 'stopped' ? 'Вход отменён. Приглашение сохранено.'
-      : state.failure ? failureMessage(state.failure) + waiting : 'Подключаемся…';
-  join.textContent = state.phase === 'succeeded' ? 'Открыть вкладку комнаты' : 'Повторить';
+  const waiting = state.retryAt ? ' ' + t('retryCountdown', String(Math.max(0, Math.ceil((state.retryAt - Date.now()) / 1000)))) : '';
+  status.textContent = state.phase === 'succeeded' ? t('roomOpened')
+    : state.phase === 'stopped' ? t('entryCancelled')
+      : state.failure ? failureMessage(state.failure) + waiting : t('connecting');
+  join.textContent = state.phase === 'succeeded' ? t('openRoomTab') : t('retry');
   join.disabled = state.phase === 'running';
   join.hidden = generationBlocksEntry(state.failure);
   cancel.hidden = !['running', 'waiting'].includes(state.phase);
@@ -45,8 +47,8 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
   received = true;
   stop(); key = request.data.key; invitedGeneration = request.data.backendGeneration; last = undefined;
-  join.hidden = !key; join.disabled = false; join.textContent = 'Присоединиться'; cancel.hidden = true;
-  status.textContent = key ? 'Приглашение готово. Нажмите «Присоединиться».' : 'Приглашение повреждено. Попросите новую ссылку.';
+  join.hidden = !key; join.disabled = false; join.textContent = t('join'); cancel.hidden = true;
+  status.textContent = key ? t('invitationReady') : t('invalidInvitation');
   sendResponse({ accepted: true });
 });
 join.addEventListener('click', () => {

@@ -1,3 +1,4 @@
+import { t } from '../../lib/i18n';
 import { backendGeneration } from '../../lib/firebase/config';
 import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
@@ -48,8 +49,8 @@ export function App() {
         const watch = !!getWatchVideoId(tab?.url);
         setPageState(watch ? 'watch' : 'unsupported');
         if (!watch) return;
-        if (!firebaseConfig()) { setConnection('Подключение к серверу ещё не настроено.'); return; }
-        setConnection('Подключаемся…');
+        if (!firebaseConfig()) { setConnection(t('serverNotConfigured')); return; }
+        setConnection(t('connecting'));
         try {
           const { target } = await abortable(browser.tabs.sendMessage(tab!.id!, { type: 'room-session-ensure' }), controller.signal);
           if (typeof target !== 'string') throw new Error('session/unavailable');
@@ -107,15 +108,15 @@ export function App() {
       if (snapshot?.error) throw new Error(snapshot.error);
       const playback = initialPlaybackSchema.safeParse(snapshot?.playback);
       const metadata = roomMetadataSchema.safeParse(snapshot?.metadata);
-      if (!playback.success || !metadata.success) throw new Error('Не удалось прочитать состояние плеера. Повторите попытку.');
+      if (!playback.success || !metadata.success) throw new Error(t('readPlayerFailed'));
       const state: PopupSessionState = await browser.runtime.sendMessage({
         type: 'room-session', backendGeneration, target: session.target, action: 'create', playback: playback.data, metadata: metadata.data,
       });
-      if (!state || !('phase' in state)) throw new Error('Не удалось создать комнату. Откройте расширение ещё раз.');
+      if (!state || !('phase' in state)) throw new Error(t('createRoomReopen'));
       setTransport(state);
       setConnection(connectionMessage(state));
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : 'Не удалось создать комнату. Повторите попытку.');
+      setActionError(error instanceof Error ? error.message : t('createRoomFailed'));
     } finally { setBusy(false); }
   }
 
@@ -141,15 +142,15 @@ export function App() {
       if (!state || !('phase' in state)) throw new Error();
       setTransport(state);
       setConnection(connectionMessage(state));
-    } catch { setActionError('Не удалось выйти из комнаты. Повторите попытку.'); }
+    } catch { setActionError(t('leaveRoomFailed')); }
     finally { setBusy(false); }
   }
 
   const message = {
-    loading: 'Проверяем открытую вкладку…',
-    watch: 'Видео YouTube открыто.',
-    unsupported: 'Откройте обычное видео на YouTube.',
-    error: 'Не удалось проверить вкладку. Откройте расширение ещё раз.',
+    loading: t('checkingTab'),
+    watch: t('youtubeVideoOpen'),
+    unsupported: t('openYoutubeVideo'),
+    error: t('checkTabReopen'),
   }[pageState];
 
   const hasRoom = !!(transport?.roomName || transport?.room || invitation);
@@ -157,9 +158,9 @@ export function App() {
   const participants = roomReady && !transport?.presenceError ? transport?.participants : undefined;
   const hasProblem = !!(transport?.error || transport?.roomError || transport?.presenceError);
   let roomStatus = connection;
-  if (roomReady && !hasProblem) roomStatus = 'Комната подключена.';
+  if (roomReady && !hasProblem) roomStatus = t('roomConnected');
   else if (transport?.roomName && transport.connected && !hasProblem && transport.recovery?.phase !== 'stopped') {
-    roomStatus = 'Получаем актуальное состояние комнаты…';
+    roomStatus = t('loadingRoomState');
   }
 
   return (
@@ -167,41 +168,41 @@ export function App() {
       <header className={styles.header}>
         <img className={styles.brandIcon} src="/icon/128.png" alt="" width="44" height="44" />
         <div className={styles.brandTitle}>
-          <h1>Смотреть вместе</h1>
+          <h1>{t('watchTogether')}</h1>
           <span className={styles.version}>v{browser.runtime.getManifest().version}</span>
         </div>
         <ThemeToggle />
       </header>
       <img className={styles.hero} src="/assets/popup-plush.webp" alt="" width="800" height="236" />
-      <section className={styles.context} aria-label="Эта вкладка">
+      <section className={styles.context} aria-label={t('thisTab')}>
         {hasRoom ? <>
           <div className={styles.roomBar}>
             <span className={styles.dot} data-connected={roomReady || undefined} data-problem={hasProblem || undefined} aria-hidden="true" />
-            <strong className={styles.roomName}>{transport?.roomName ?? 'Комната'}</strong>
+            <strong className={styles.roomName}>{transport?.roomName ?? t('room')}</strong>
             {participants && <span className={styles.count}>
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/><circle cx="9" cy="7" r="4"/></svg>
-              <span><span className={styles.srOnly}>Участников: </span>{participants.length}</span>
+              <span><span className={styles.srOnly}>{t('participantsPrefix')}</span>{participants.length}</span>
             </span>}
           </div>
           <p role="status" className={styles.note}>{roomStatus}</p>
-          <button type="button" className={styles.primary} aria-label="Копировать приглашение"
+          <button type="button" className={styles.primary} aria-label={t('copyInvitation')}
             disabled={!invitation || busy} onClick={() => { void copyInvitation(); }}>
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13.5a4 4 0 0 0 5.7 0l4.2-4.2a4 4 0 0 0-5.7-5.7l-2.4 2.4m2.2 4.5a4 4 0 0 0-5.7 0l-4.2 4.2a4 4 0 0 0 5.7 5.7l2.4-2.4"/></svg>
-            Копировать приглашение
+            {t('copyInvitation')}
           </button>
           {copyFeedback && <p role="status" className={styles.note}>{copyFeedback.copied
-            ? 'Приглашение скопировано.'
-            : 'Не удалось скопировать приглашение. Скопируйте ссылку вручную.'}</p>}
-          {copyFeedback?.copied === false && invitation && <label className={styles.invitation}>Ссылка-приглашение
+            ? t('invitationCopied')
+            : t('copyInvitationFailed')}</p>}
+          {copyFeedback?.copied === false && invitation && <label className={styles.invitation}>{t('invitationLink')}
             <input ref={invitationField} readOnly value={invitation} onFocus={(event) => event.target.select()} />
           </label>}
           <details className={styles.details}>
-            <summary>Подробности комнаты</summary>
-            {!!participants?.length && <ul aria-label="Участники">{participants.map(participant => <li key={participant.number}>
+            <summary>{t('roomDetails')}</summary>
+            {!!participants?.length && <ul aria-label={t('participants')}>{participants.map(participant => <li key={participant.number}>
               <span className={styles.participantDot} style={{ backgroundColor: participant.color }} aria-hidden="true" />
-              Участник {participant.number}{participant.isSelf ? ' (вы)' : ''}
+              {t('participant', [String(participant.number), participant.isSelf ? t('participantSelf') : ''])}
             </li>)}</ul>}
-            <button className={styles.leave} disabled={!session || busy} onClick={() => { void leaveRoom(); }}>Выйти из комнаты</button>
+            <button className={styles.leave} disabled={!session || busy} onClick={() => { void leaveRoom(); }}>{t('leaveRoom')}</button>
           </details>
         </> : <>
           <p role="status" className={styles.note}>{message}</p>
@@ -210,14 +211,14 @@ export function App() {
         {failed && !generationBlocksEntry(transport?.recovery?.failure) && <button onClick={() => {
           if (session) void browser.runtime.sendMessage({ type: 'room-session', backendGeneration, target: session.target, action: 'retry' });
           setAttempt((value) => value + 1);
-        }}>Повторить</button>}
+        }}>{t('retry')}</button>}
         {session && ['running', 'waiting'].includes(transport?.recovery?.phase ?? '') && <button onClick={() => {
           void browser.runtime.sendMessage({ type: 'room-session', backendGeneration, target: session.target, action: 'stop' });
-        }}>Остановить попытки</button>}
+        }}>{t('stopAttempts')}</button>}
         {pageState === 'watch' && !hasRoom && <button className={styles.primary}
           disabled={!session || !transport?.connected || busy || transport.creating}
           onClick={() => { void createRoom(); }}
-        >{busy || transport?.creating ? 'Создаём комнату…' : 'Смотреть вместе'}</button>}
+        >{busy || transport?.creating ? t('creatingRoom') : t('watchTogether')}</button>}
         {(actionError || transport?.creationError) && <p role="alert">{actionError ?? transport?.creationError}</p>}
       </section>
       <Catalog />

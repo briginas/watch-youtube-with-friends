@@ -67,7 +67,8 @@ export default defineConfig({
   ...(mainBuild && !firebase ? { filterEntrypoints: ['background', 'popup', 'session', 'watch-session', 'youtube-rate'] } : {}),
   manifest: {
     name: 'Watch YouTube with friends',
-    description: 'Совместный просмотр видео на YouTube.',
+    description: '__MSG_extensionDescription__',
+    default_locale: 'en',
     icons: { 16: 'icon/16.png', 32: 'icon/32.png', 48: 'icon/48.png', 128: 'icon/128.png' },
     permissions: ['activeTab', ...(mainBuild ? ['clipboardWrite', 'storage'] : [])],
     ...(mainBuild ? {

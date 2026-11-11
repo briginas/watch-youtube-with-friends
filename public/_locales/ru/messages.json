@@ -1,0 +1,394 @@
+{
+  "serverNotConfigured": {
+    "message": "Подключение к серверу ещё не настроено."
+  },
+  "catalogEntryMissing": {
+    "message": "Комнаты нет в списке. Откройте popup ещё раз."
+  },
+  "openRoomTabFailed": {
+    "message": "Не удалось открыть вкладку комнаты. Повторите попытку."
+  },
+  "joinRoomTitle": {
+    "message": "Вход в комнату"
+  },
+  "connecting": {
+    "message": "Подключаемся…"
+  },
+  "readPlayerFailed": {
+    "message": "Не удалось прочитать состояние плеера. Повторите попытку."
+  },
+  "createRoomReopen": {
+    "message": "Не удалось создать комнату. Откройте расширение ещё раз."
+  },
+  "createRoomFailed": {
+    "message": "Не удалось создать комнату. Повторите попытку."
+  },
+  "leaveRoomFailed": {
+    "message": "Не удалось выйти из комнаты. Повторите попытку."
+  },
+  "checkingTab": {
+    "message": "Проверяем открытую вкладку…"
+  },
+  "youtubeVideoOpen": {
+    "message": "Видео YouTube открыто."
+  },
+  "openYoutubeVideo": {
+    "message": "Откройте обычное видео на YouTube."
+  },
+  "checkTabReopen": {
+    "message": "Не удалось проверить вкладку. Откройте расширение ещё раз."
+  },
+  "roomConnected": {
+    "message": "Комната подключена."
+  },
+  "loadingRoomState": {
+    "message": "Получаем актуальное состояние комнаты…"
+  },
+  "watchTogether": {
+    "message": "Смотреть вместе"
+  },
+  "thisTab": {
+    "message": "Эта вкладка"
+  },
+  "room": {
+    "message": "Комната"
+  },
+  "participantsPrefix": {
+    "message": "Участников: "
+  },
+  "copyInvitation": {
+    "message": "Копировать приглашение"
+  },
+  "invitationCopied": {
+    "message": "Приглашение скопировано."
+  },
+  "copyInvitationFailed": {
+    "message": "Не удалось скопировать приглашение. Скопируйте ссылку вручную."
+  },
+  "invitationLink": {
+    "message": "Ссылка-приглашение"
+  },
+  "roomDetails": {
+    "message": "Подробности комнаты"
+  },
+  "participants": {
+    "message": "Участники"
+  },
+  "participantSelf": {
+    "message": " (вы)"
+  },
+  "leaveRoom": {
+    "message": "Выйти из комнаты"
+  },
+  "retry": {
+    "message": "Повторить"
+  },
+  "stopAttempts": {
+    "message": "Остановить попытки"
+  },
+  "creatingRoom": {
+    "message": "Создаём комнату…"
+  },
+  "readCatalogFailed": {
+    "message": "Не удалось прочитать список комнат. Повторите действие."
+  },
+  "actionFailed": {
+    "message": "Не удалось выполнить действие."
+  },
+  "myRooms": {
+    "message": "Мои комнаты"
+  },
+  "reloadCatalog": {
+    "message": "Повторить загрузку списка"
+  },
+  "loadingCatalog": {
+    "message": "Загружаем список…"
+  },
+  "emptyCatalog": {
+    "message": "Здесь появятся созданные и принятые комнаты."
+  },
+  "inThisTab": {
+    "message": "В этой вкладке"
+  },
+  "openingRoom": {
+    "message": "Открываем комнату…"
+  },
+  "cancel": {
+    "message": "Отмена"
+  },
+  "goToRoom": {
+    "message": "Перейти"
+  },
+  "openRoom": {
+    "message": "Открыть"
+  },
+  "removeFromList": {
+    "message": "Убрать из списка"
+  },
+  "darkTheme": {
+    "message": "Тёмная тема"
+  },
+  "useLightTheme": {
+    "message": "Включить светлую тему"
+  },
+  "useDarkTheme": {
+    "message": "Включить тёмную тему"
+  },
+  "saveThemeFailed": {
+    "message": "Не удалось сохранить тему. При следующем открытии выбор может сброситься."
+  },
+  "watchSessionTitle": {
+    "message": "Состояние совместного просмотра"
+  },
+  "checkTabFailed": {
+    "message": "Не удалось проверить вкладку."
+  },
+  "waitForAd": {
+    "message": "Дождитесь окончания рекламы и повторите попытку."
+  },
+  "waitForVideo": {
+    "message": "Дождитесь готовности обычного записанного видео и повторите попытку."
+  },
+  "roomOpened": {
+    "message": "Комната открыта во вкладке YouTube."
+  },
+  "entryCancelled": {
+    "message": "Вход отменён. Приглашение сохранено."
+  },
+  "openRoomTab": {
+    "message": "Открыть вкладку комнаты"
+  },
+  "join": {
+    "message": "Присоединиться"
+  },
+  "invitationReady": {
+    "message": "Приглашение готово. Нажмите «Присоединиться»."
+  },
+  "invalidInvitation": {
+    "message": "Приглашение повреждено. Попросите новую ссылку."
+  },
+  "networkFailure": {
+    "message": "Не удалось получить актуальное состояние комнаты. Проверьте интернет или повторите позже."
+  },
+  "authRateLimited": {
+    "message": "Слишком много попыток входа. Попробуйте позже."
+  },
+  "authFailed": {
+    "message": "Не удалось выполнить анонимный вход. Повторите позже."
+  },
+  "accessDenied": {
+    "message": "Нет доступа к комнате. Проверьте приглашение."
+  },
+  "roomNotFound": {
+    "message": "Комната не найдена."
+  },
+  "unsupportedRoom": {
+    "message": "Формат комнаты не поддерживается. Создайте новую комнату."
+  },
+  "generationRetired": {
+    "message": "Поддержка этой комнаты завершена. Обновите расширение, откройте нужное видео и создайте новую комнату."
+  },
+  "generationUpdateRequired": {
+    "message": "Для этой комнаты нужна более новая версия расширения. Обновите расширение и снова откройте приглашение."
+  },
+  "unsupportedGeneration": {
+    "message": "Эта версия расширения не поддерживает поколение комнаты. Откройте нужное видео и создайте новую комнату."
+  },
+  "serviceBusy": {
+    "message": "Сервис перегружен. Подождите следующую попытку или повторите позже."
+  },
+  "serviceQuota": {
+    "message": "Ресурсы сервиса временно исчерпаны. Попробуйте позже."
+  },
+  "serviceMaintenance": {
+    "message": "Сервис временно недоступен: идёт обслуживание. Попробуйте позже."
+  },
+  "applyPlayerFailed": {
+    "message": "Не удалось применить состояние к плееру."
+  },
+  "sendActionFailed": {
+    "message": "Не удалось отправить действие. Повторите попытку."
+  },
+  "updateCatalogFailed": {
+    "message": "Не удалось обновить список комнат. Повторите действие."
+  },
+  "unsupportedCatalog": {
+    "message": "Формат списка комнат не поддерживается."
+  },
+  "damagedCatalog": {
+    "message": "Часть списка комнат не удалось прочитать."
+  },
+  "playerAd": {
+    "message": "Реклама в этой вкладке. Синхронизация продолжится после неё."
+  },
+  "playerBuffering": {
+    "message": "Видео загружается. Синхронизация продолжится автоматически."
+  },
+  "playerAutoplayBlocked": {
+    "message": "Нажмите play, чтобы продолжить"
+  },
+  "playerMissing": {
+    "message": "Ожидаем плеер в этой вкладке."
+  },
+  "playerLoading": {
+    "message": "Ожидаем загрузку видео."
+  },
+  "playerUnavailable": {
+    "message": "Видео недоступно в этой вкладке."
+  },
+  "playerUnsupported": {
+    "message": "Этот формат видео не поддерживается."
+  },
+  "playerDifferentVideo": {
+    "message": "Не синхронизируется: открыт другой ролик."
+  },
+  "roomLeft": {
+    "message": "Вы вышли из комнаты."
+  },
+  "serverDisconnected": {
+    "message": "Нет связи с сервером."
+  },
+  "noRoomSelected": {
+    "message": "Подключено. Комната ещё не выбрана."
+  },
+  "localViewing": {
+    "message": "Локальный просмотр · не синхронизируется"
+  },
+  "watchingTogether": {
+    "message": "Смотрим вместе"
+  },
+  "localViewingSuffix": {
+    "message": " Синхронизация прервана. Просмотр остаётся локальным."
+  },
+  "attemptsStopped": {
+    "message": "Попытки подключения остановлены."
+  },
+  "roomCreated": {
+    "message": "Комната создана. Приглашение готово."
+  },
+  "presenceFailed": {
+    "message": "Не удалось обновить присутствие. Повторите подключение."
+  },
+  "createWhileOffline": {
+    "message": "Нет связи с сервером. Дождитесь подключения и повторите попытку."
+  },
+  "creationUnknown": {
+    "message": "Результат создания пока неизвестен. Повторите проверку: новая комната не будет создана."
+  },
+  "createRoomFailurePrefix": {
+    "message": "Не удалось создать комнату. "
+  },
+  "reloadVideo": {
+    "message": "Перезагрузить видео"
+  },
+  "returnToRoom": {
+    "message": "Вернуться в комнату"
+  },
+  "attentionAnnouncement": {
+    "message": "Требуется внимание."
+  },
+  "attentionRequired": {
+    "message": "Требуется внимание"
+  },
+  "message": {
+    "message": "Сообщение"
+  },
+  "copyFailedManual": {
+    "message": "Не удалось скопировать. Выделите ссылку и скопируйте вручную."
+  },
+  "updateViewFailed": {
+    "message": "Не удалось обновить просмотр. Повторите действие."
+  },
+  "restoreRoomFailed": {
+    "message": "Не удалось восстановить комнату. Откройте приглашение ещё раз."
+  },
+  "connectFailed": {
+    "message": "Не удалось подключиться. Повторите попытку."
+  },
+  "retrySavingMessage": {
+    "message": "Повторите сохранение."
+  },
+  "reloadVideoFailed": {
+    "message": "Не удалось перезагрузить видео. Повторите действие."
+  },
+  "returnToRoomFailed": {
+    "message": "Не удалось вернуться в комнату. Повторите действие."
+  },
+  "switchingVideo": {
+    "message": "Меняем видео…"
+  },
+  "switchWhileOffline": {
+    "message": "Нет связи с сервером. Повторите после подключения."
+  },
+  "videoChanged": {
+    "message": "Видео изменилось. Повторите действие на текущем ролике."
+  },
+  "readPlayerStateFailed": {
+    "message": "Не удалось прочитать состояние плеера."
+  },
+  "prepareVideoSwitchFailed": {
+    "message": "Не удалось подготовить смену видео."
+  },
+  "connectionInterrupted": {
+    "message": "Связь прервалась. Получим актуальное состояние после подключения."
+  },
+  "waitForPreviousAction": {
+    "message": "Дождитесь завершения предыдущего действия и повторите."
+  },
+  "videoSwitchRejected": {
+    "message": "Смена не принята. В комнате уже другое состояние; повторите действие или вернитесь в комнату."
+  },
+  "roomVideoChanged": {
+    "message": "Видео комнаты изменено."
+  },
+  "videoSwitchFailed": {
+    "message": "Не удалось сменить видео. Повторите действие."
+  },
+  "sessionTitle": {
+    "message": "Сессия совместного просмотра"
+  },
+  "watchRoomLabel": {
+    "message": "Комната совместного просмотра"
+  },
+  "showMessage": {
+    "message": "Показать сообщение"
+  },
+  "watchThisInRoom": {
+    "message": "Смотреть это в комнате"
+  },
+  "closeMessage": {
+    "message": "Закрыть сообщение"
+  },
+  "reconnect": {
+    "message": "Повторить подключение"
+  },
+  "retrySaving": {
+    "message": "Повторить сохранение"
+  },
+  "checkingInvitation": {
+    "message": "Проверяем приглашение…"
+  },
+  "extensionDescription": {
+    "message": "Совместный просмотр видео на YouTube."
+  },
+  "retryCountdown": {
+    "message": "Следующая попытка через $1 с."
+  },
+  "participantCount": {
+    "message": "Участников: $1"
+  },
+  "participant": {
+    "message": "Участник $number$$suffix$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      },
+      "suffix": {
+        "content": "$2"
+      }
+    }
+  },
+  "roomNotSaved": {
+    "message": "Комната открыта, но не сохранена. $1"
+  }
+}

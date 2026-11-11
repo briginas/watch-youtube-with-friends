@@ -5,5 +5,6 @@ export default defineConfig({
   test: {
     include: ['src/**/*.test.ts', 'tests/cloud/**/*.test.ts', 'tests/release/**/*.test.mjs'],
     environment: 'node',
+    setupFiles: ['tests/i18n-setup.ts'],
   },
 });

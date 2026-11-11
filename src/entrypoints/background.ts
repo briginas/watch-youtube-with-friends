@@ -1,3 +1,4 @@
+import { t } from '../lib/i18n';
 import { defineBackground } from 'wxt/utils/define-background';
 import { browser } from 'wxt/browser';
 import { backendGeneration, firebaseConfig } from '../lib/firebase/config';
@@ -34,7 +35,7 @@ export default defineBackground(() => {
     });
     await storageReady;
     const config = firebaseConfig();
-    if (!config) throw new Error('Подключение к серверу ещё не настроено.');
+    if (!config) throw new Error(t('serverNotConfigured'));
     return createCatalogRepository(browser.storage.local, catalogStorageKey(config));
   }
   async function bindings() {
@@ -136,7 +137,7 @@ export default defineBackground(() => {
         }
         const key = action.action === 'open' ? action.room.key : action.key;
         const entry = (await repository.read()).entries.find(item => item.key === key);
-        if (!entry) throw new Error('Комнаты нет в списке. Откройте popup ещё раз.');
+        if (!entry) throw new Error(t('catalogEntryMissing'));
         if (action.action === 'activate') {
           const id = await focus(rooms, key, () => entryLive(sourceKey(sender), action.operation));
           if (id === undefined) return { opened: false };
@@ -144,7 +145,7 @@ export default defineBackground(() => {
         }
         return open(rooms, action.room, () => entryLive(sourceKey(sender), action.operation));
       }).then(sendResponse, error => sendResponse({ error: error instanceof Error
-        && /^(Формат списка|Комнаты нет|Подключение к серверу)/u.test(error.message) ? error.message : catalogError }));
+        && [t('unsupportedCatalog'), t('catalogEntryMissing'), t('serverNotConfigured')].includes(error.message) ? error.message : catalogError }));
       return true;
     }
     const parsed = tabRequestSchema.safeParse(message);
@@ -254,7 +255,7 @@ export default defineBackground(() => {
       rooms[tabId] = { target: action.target, backendGeneration };
       await persist(rooms);
       return { accepted: true };
-    }).then(sendResponse, () => sendResponse({ error: 'Не удалось открыть вкладку комнаты. Повторите попытку.' }));
+    }).then(sendResponse, () => sendResponse({ error: t('openRoomTabFailed') }));
     return true;
   });
 

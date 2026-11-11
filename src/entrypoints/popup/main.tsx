@@ -4,6 +4,10 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { applyPopupTheme, loadPopupTheme } from './theme';
 
+import { localizeDocument } from '../../lib/i18n';
+
+localizeDocument();
+
 async function mount() {
   applyPopupTheme(await loadPopupTheme());
   createRoot(document.getElementById('root')!).render(

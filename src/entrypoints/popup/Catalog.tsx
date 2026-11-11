@@ -1,3 +1,4 @@
+import { t } from '../../lib/i18n';
 import { backendGeneration } from '../../lib/firebase/config';
 import { useEffect, useRef, useState } from 'react';
 import { browser } from 'wxt/browser';
@@ -11,7 +12,7 @@ import styles from './App.module.css';
 
 async function request(action: string, extra = {}) {
   const result = await browser.runtime.sendMessage({ type: 'room-catalog', backendGeneration, action, ...extra });
-  if (!result || result.error) throw new Error(result?.error ?? 'Не удалось прочитать список комнат. Повторите действие.');
+  if (!result || result.error) throw new Error(result?.error ?? t('readCatalogFailed'));
   return result;
 }
 
@@ -47,7 +48,7 @@ export function Catalog() {
       const id = ++loadId;
       void request('list').then(value => {
         if (!controller.signal.aborted && id === loadId) { setSnapshot(value); setError(null); }
-      }, () => { if (!controller.signal.aborted && id === loadId) setError('Не удалось прочитать список комнат. Повторите действие.'); });
+      }, () => { if (!controller.signal.aborted && id === loadId) setError(t('readCatalogFailed')); });
     };
     const changed = (_changes: unknown, area: string) => { if (area === 'local' || area === 'session') load(); };
     const close = () => { controller.abort(); entryOwner.current?.stop(); if (entryOperation.current) void requestEntryCancel(entryOperation.current); void closeFirebaseClient(); };
@@ -109,44 +110,44 @@ export function Catalog() {
       return;
     } catch (failure) {
       if (!lifetime.current?.signal.aborted) setErrors(value => ({
-        ...value, [entry.key]: failure instanceof Error ? failure.message : 'Не удалось выполнить действие.',
+        ...value, [entry.key]: failure instanceof Error ? failure.message : t('actionFailed'),
       }));
     } finally { if (remove) setBusy(null); }
   }
 
-  return <section className={styles.catalog} aria-label="Мои комнаты">
-    <h2>Мои комнаты</h2>
-    {!firebaseConfig() ? <p>Подключение к серверу ещё не настроено.</p>
+  return <section className={styles.catalog} aria-label={t('myRooms')}>
+    <h2>{t('myRooms')}</h2>
+    {!firebaseConfig() ? <p>{t('serverNotConfigured')}</p>
       : <>
-        {error && <p role="alert">{error} <button onClick={() => setAttempt(value => value + 1)}>Повторить загрузку списка</button></p>}
-        {!snapshot && !error && <p>Загружаем список…</p>}
+        {error && <p role="alert">{error} <button onClick={() => setAttempt(value => value + 1)}>{t('reloadCatalog')}</button></p>}
+        {!snapshot && !error && <p>{t('loadingCatalog')}</p>}
         {snapshot?.warning && <p role="alert">{snapshot.warning}</p>}
-        {snapshot?.entries.length === 0 && <p>Здесь появятся созданные и принятые комнаты.</p>}
+        {snapshot?.entries.length === 0 && <p>{t('emptyCatalog')}</p>}
         {!!snapshot?.entries.length && <ul>{snapshot.entries.map(entry => <li key={entry.key}>
           <div className={styles.catalogRow}>
             <span className={styles.roomName}>{entry.name}
-              {snapshot.tabStates[entry.key] === 'current' && <span className={styles.currentRoom}>В этой вкладке</span>}
+              {snapshot.tabStates[entry.key] === 'current' && <span className={styles.currentRoom}>{t('inThisTab')}</span>}
             </span>
             {busy?.key === entry.key && busy.action === 'open'
               ? <div className={styles.pendingEntry}>
                 <span role="status">
                   <span className={styles.spinner} aria-hidden="true" />
-                  <span className={styles.srOnly}>Открываем комнату…</span>
+                  <span className={styles.srOnly}>{t('openingRoom')}</span>
                 </span>
-                <button type="button" onClick={cancelEntry}>Отмена</button>
+                <button type="button" onClick={cancelEntry}>{t('cancel')}</button>
               </div>
               : snapshot.tabStates[entry.key] === 'current'
               ? null
-              : <button disabled={!!busy} onClick={() => { void operate(entry); }}>{snapshot.tabStates[entry.key] === 'other' ? 'Перейти' : 'Открыть'}</button>}
-            <button type="button" className={styles.iconButton} aria-label="Убрать из списка" title="Убрать из списка"
+              : <button disabled={!!busy} onClick={() => { void operate(entry); }}>{snapshot.tabStates[entry.key] === 'other' ? t('goToRoom') : t('openRoom')}</button>}
+            <button type="button" className={styles.iconButton} aria-label={t('removeFromList')} title={t('removeFromList')}
               disabled={!!busy} onClick={() => { void operate(entry, true); }}>
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
             </button>
           </div>
           {errors[entry.key] && <p role="alert">{errors[entry.key]}</p>}
           {busy?.key === entry.key && busy.action === 'open' && <>
-            {recovery?.retryAt && <p>Следующая попытка через {Math.max(0, Math.ceil((recovery.retryAt - Date.now()) / 1000))} с.</p>}
-            {recovery?.phase === 'waiting' && <button onClick={() => { void entryOwner.current?.restart(); }}>Повторить</button>}
+            {recovery?.retryAt && <p>{t('retryCountdown', String(Math.max(0, Math.ceil((recovery.retryAt - Date.now()) / 1000))))}</p>}
+            {recovery?.phase === 'waiting' && <button onClick={() => { void entryOwner.current?.restart(); }}>{t('retry')}</button>}
           </>}
         </li>)}</ul>}
       </>}

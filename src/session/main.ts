@@ -1,3 +1,4 @@
+import { localizeDocument, t } from '../lib/i18n';
 import { backendGeneration } from '../lib/firebase/config';
 import { browser } from 'wxt/browser';
 import { createRoomTransport } from '../lib/room/transport';
@@ -21,6 +22,7 @@ import { bindPanelDrag } from './panel-drag';
 import { generationBlocksEntry } from '../lib/connection-error';
 import { panelLayoutSchema } from '../lib/room/panel-position';
 
+localizeDocument();
 const appearance = observeAppearanceTheme();
 
 // Только публичный адрес получателя. Auth и секрет комнаты в URL не попадают.
@@ -38,7 +40,7 @@ const switchVideo = document.querySelector<HTMLButtonElement>('#switch-video')!;
 const switchStatus = document.querySelector<HTMLParagraphElement>('#switch-status')!;
 const catalogRetry = document.querySelector<HTMLButtonElement>('#catalog-retry')!;
 function showCatalogError(error: string | null) {
-  catalogStatus.textContent = error ? `Комната открыта, но не сохранена. ${error}` : '';
+  catalogStatus.textContent = error ? t('roomNotSaved', error) : '';
   catalogStatus.hidden = !error;
   catalogRetry.hidden = !error;
   catalogError = error;
@@ -53,7 +55,7 @@ function showPlayerStatus(localStatus?: PlayerStatus) {
   playerStatus.textContent = localStatus && localStatus !== 'buffering' ? playerMessages[localStatus] ?? '' : '';
   playerStatus.hidden = !playerStatus.textContent;
   returnVideo.hidden = localStatus !== 'different-video' && localStatus !== 'unavailable';
-  returnVideo.textContent = localStatus === 'unavailable' ? 'Перезагрузить видео' : 'Вернуться в комнату';
+  returnVideo.textContent = localStatus === 'unavailable' ? t('reloadVideo') : t('returnToRoom');
   if (localStatus === 'unavailable' || localStatus === 'unsupported') {
     document.querySelector('#notice-content')!.append(playerStatus, returnVideo);
   } else {
@@ -193,12 +195,12 @@ function render() {
     panel.toggleAttribute('data-buffering', state.buffering);
     panel.toggleAttribute('data-problem', state.problem);
     problem.hidden = !state.problem;
-    const announcement = [state.text, state.problem ? 'Требуется внимание.' : '',
+    const announcement = [state.text, state.problem ? t('attentionAnnouncement') : '',
       actionError, viewError, syncError, switchError, catalogError, copyStatus.textContent].filter(Boolean).join(' ');
     const live = document.querySelector('#announcement')!;
     if (live.textContent !== announcement) live.textContent = announcement;
   }
-  roomLabel.textContent = roomName ?? 'Комната';
+  roomLabel.textContent = roomName ?? t('room');
   roomLabel.title = roomName ?? '';
   document.querySelector('#full-room-name')!.textContent = roomName;
   document.querySelector('#action-status')!.textContent = actionError ?? viewError ?? syncError ?? '';
@@ -212,7 +214,7 @@ function render() {
   notice.toggleAttribute('data-error', hasError);
   noticeOpen.hidden = !hasError;
   panel.toggleAttribute('data-notice', hasError);
-  document.querySelector('#notice-title')!.textContent = hasError ? 'Требуется внимание' : 'Сообщение';
+  document.querySelector('#notice-title')!.textContent = hasError ? t('attentionRequired') : t('message');
   toggle.setAttribute('aria-expanded', String(expanded));
   details.hidden = !expanded;
   leave.hidden = !bindingReady || left;
@@ -241,7 +243,7 @@ copy.addEventListener('click', async () => {
     await navigator.clipboard.writeText(invitation);
     if (closed || left || roomInvitation !== invitation) return;
     clearTimeout(copyFeedbackTimer);
-    copyStatus.textContent = 'Приглашение скопировано.';
+    copyStatus.textContent = t('invitationCopied');
     manual.hidden = true;
     invitationLink.value = '';
     copyFeedbackTimer = window.setTimeout(() => {
@@ -252,7 +254,7 @@ copy.addEventListener('click', async () => {
   } catch {
     if (closed || left || roomInvitation !== invitation) return;
     clearTimeout(copyFeedbackTimer);
-    copyStatus.textContent = 'Не удалось скопировать. Выделите ссылку и скопируйте вручную.';
+    copyStatus.textContent = t('copyFailedManual');
     invitationLink.value = invitation;
     manual.hidden = false;
     render();
@@ -349,7 +351,7 @@ async function reconcile() {
     if (!closed && !left) {
       following = false;
       engine.update({ playback: undefined, connected: false, serverTimeOffset: 0 });
-      viewError = 'Не удалось обновить просмотр. Повторите действие.';
+      viewError = t('updateViewFailed');
       render();
     }
   } finally { reconciling = false; }
@@ -357,7 +359,7 @@ async function reconcile() {
 const reconcileTimer = setInterval(() => { void reconcile(); }, 250);
 
 // Ошибка worker не должна оставлять необработанный Promise.
-void ready.catch(() => { actionError = 'Не удалось восстановить комнату. Откройте приглашение ещё раз.'; render(); });
+void ready.catch(() => { actionError = t('restoreRoomFailed'); render(); });
 
 async function release() {
   // Сначала удаляем сохранённую привязку, чтобы reload не вернул вышедшего.
@@ -429,7 +431,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     return popupState();
   };
-  run().then(sendResponse, () => sendResponse({ error: 'Не удалось выполнить действие.' }));
+  run().then(sendResponse, () => sendResponse({ error: t('actionFailed') }));
   return true;
 });
 
@@ -437,16 +439,16 @@ stopRecovery.addEventListener('click', () => transport.stop());
 const recoveryTicker = setInterval(() => { if (lastState?.recovery?.retryAt) render(); }, 1000);
 retry.addEventListener('click', () => {
   actionError = null;
-  void transport.retry().catch(() => { actionError = 'Не удалось подключиться. Повторите попытку.'; }).finally(render);
+  void transport.retry().catch(() => { actionError = t('connectFailed'); }).finally(render);
 });
-catalogRetry.addEventListener('click', () => { void updateCatalogStatus(true).catch(() => showCatalogError('Повторите сохранение.')); });
+catalogRetry.addEventListener('click', () => { void updateCatalogStatus(true).catch(() => showCatalogError(t('retrySavingMessage'))); });
 browser.storage.onChanged.addListener((_changes, area) => {
   if (area === 'session') void updateCatalogStatus().catch(() => {});
 });
 leave.addEventListener('click', () => {
   if (leaving) return;
   leaving = true; actionError = null; render();
-  void release().catch(() => { actionError = 'Не удалось выйти из комнаты. Повторите попытку.'; })
+  void release().catch(() => { actionError = t('leaveRoomFailed'); })
     .finally(() => { leaving = false; render(); });
 });
 addEventListener('pagehide', () => { closed = true; appearance.dispose(); clearInterval(recoveryTicker); disposeDrag(); clearTimeout(renderFrame); clearTimeout(copyFeedbackTimer); resizeObserver.disconnect(); removeEventListener('resize', measure); removeEventListener('message', panelLayout); clearInterval(reconcileTimer); engine.dispose(); void transport.close(); }, { once: true });
@@ -456,7 +458,7 @@ returnVideo.addEventListener('click', event => {
   if (closed || left) return;
   // Ошибку самого видео по-прежнему можно устранить перезагрузкой.
   if (localPlayerStatus === 'unavailable' && following) {
-    void browser.tabs.update(tabId!, { url: returnVideo.href }).catch(() => { actionError = 'Не удалось перезагрузить видео. Повторите действие.'; render(); });
+    void browser.tabs.update(tabId!, { url: returnVideo.href }).catch(() => { actionError = t('reloadVideoFailed'); render(); });
     return;
   }
   actionError = null; render();
@@ -467,14 +469,14 @@ returnVideo.addEventListener('click', event => {
     forceReturn = true;
     lastReconciled = '';
     await reconcile();
-  })().catch(() => { actionError = 'Не удалось вернуться в комнату. Повторите действие.'; render(); });
+  })().catch(() => { actionError = t('returnToRoomFailed'); render(); });
 });
 switchVideo.addEventListener('click', () => {
   if (changing || closed || left || tabId === undefined) return;
   changing = true;
   switchVideo.disabled = true;
   switchError = null;
-  switchStatus.textContent = 'Меняем видео…';
+  switchStatus.textContent = t('switchingVideo');
   render();
   const actionAt = Date.now();
   let pendingStored = false;
@@ -483,26 +485,26 @@ switchVideo.addEventListener('click', () => {
   void (async () => {
     const state = transport.status();
     const room = invitationRoomSchema.safeParse(state.room);
-    if (!state.connected || !state.roomReady || !room.success) throw new Error('Нет связи с сервером. Повторите после подключения.');
+    if (!state.connected || !state.roomReady || !room.success) throw new Error(t('switchWhileOffline'));
     const snapshot = await browser.tabs.sendMessage(tabId!, { type: 'room-player-snapshot', target }, { frameId: 0 });
     if (snapshot?.error) throw new Error(snapshot.error);
     const sample = initialPlaybackSchema.parse(snapshot?.playback);
     const capturedRoute = routeSchema.parse(snapshot?.route);
     const currentRoute = routeSchema.parse(await browser.tabs.sendMessage(tabId!, { type: 'room-player-context', target }, { frameId: 0 }));
     if (capturedRoute.videoId !== currentRoute.videoId || capturedRoute.sequence !== currentRoute.sequence || closed || left) {
-      throw new Error('Видео изменилось. Повторите действие на текущем ролике.');
+      throw new Error(t('videoChanged'));
     }
     const sampledAt = snapshot.sampledAt;
-    if (typeof sampledAt !== 'number' || !Number.isFinite(sampledAt) || sampledAt < actionAt) throw new Error('Не удалось прочитать состояние плеера.');
+    if (typeof sampledAt !== 'number' || !Number.isFinite(sampledAt) || sampledAt < actionAt) throw new Error(t('readPlayerStateFailed'));
     const command = createVideoSwitchCommand(sample, room.data.playback.revision,
       { actionAt: actionAt + state.serverTimeOffset, sampledAt: sampledAt + state.serverTimeOffset });
     const pending = await browser.runtime.sendMessage({ type: 'room-tab-switch-pending', backendGeneration, target,
       pending: { commandId: command.commandId, videoId: sample.videoId } });
-    if (!pending?.accepted || closed || left) throw new Error('Не удалось подготовить смену видео.');
+    if (!pending?.accepted || closed || left) throw new Error(t('prepareVideoSwitchFailed'));
     pendingStored = true;
     const finalRoute = routeSchema.parse(await browser.tabs.sendMessage(tabId!, { type: 'room-player-context', target }, { frameId: 0 }));
     if (closed || left || finalRoute.videoId !== capturedRoute.videoId || finalRoute.sequence !== capturedRoute.sequence) {
-      throw new Error('Видео изменилось. Повторите действие на текущем ролике.');
+      throw new Error(t('videoChanged'));
     }
     submitted = true;
     const result = await transport.sendCommand(command);
@@ -510,10 +512,10 @@ switchVideo.addEventListener('click', () => {
     if (result.status === 'rejected') {
       uncertain = result.reason === 'offline';
       if (result.reason !== 'offline') await browser.runtime.sendMessage({ type: 'room-tab-switch-pending', backendGeneration, target, pending: null });
-      throw new Error(result.reason === 'offline' ? 'Связь прервалась. Получим актуальное состояние после подключения.'
-        : result.reason === 'busy' ? 'Дождитесь завершения предыдущего действия и повторите.' : 'Смена не принята. В комнате уже другое состояние; повторите действие или вернитесь в комнату.');
+      throw new Error(result.reason === 'offline' ? t('connectionInterrupted')
+        : result.reason === 'busy' ? t('waitForPreviousAction') : t('videoSwitchRejected'));
     }
-    switchStatus.textContent = 'Видео комнаты изменено.';
+    switchStatus.textContent = t('roomVideoChanged');
     lastReconciled = '';
     await reconcile();
   })().catch(async error => {
@@ -521,7 +523,7 @@ switchVideo.addEventListener('click', () => {
       await browser.runtime.sendMessage({ type: 'room-tab-switch-pending', backendGeneration, target, pending: null }).catch(() => {});
     }
     if (!closed && !left) {
-      switchError = error instanceof Error ? error.message : 'Не удалось сменить видео. Повторите действие.';
+      switchError = error instanceof Error ? error.message : t('videoSwitchFailed');
       switchStatus.textContent = switchError; render();
     }
   }).finally(() => {

@@ -1,0 +1,394 @@
+{
+  "serverNotConfigured": {
+    "message": "The server connection has not been configured yet."
+  },
+  "catalogEntryMissing": {
+    "message": "This room is no longer in the list. Reopen the extension."
+  },
+  "openRoomTabFailed": {
+    "message": "Could not open the room tab. Please try again."
+  },
+  "joinRoomTitle": {
+    "message": "Join a room"
+  },
+  "connecting": {
+    "message": "Connecting…"
+  },
+  "readPlayerFailed": {
+    "message": "Could not read the player state. Please try again."
+  },
+  "createRoomReopen": {
+    "message": "Could not create the room. Reopen the extension."
+  },
+  "createRoomFailed": {
+    "message": "Could not create the room. Please try again."
+  },
+  "leaveRoomFailed": {
+    "message": "Could not leave the room. Please try again."
+  },
+  "checkingTab": {
+    "message": "Checking the active tab…"
+  },
+  "youtubeVideoOpen": {
+    "message": "A YouTube video is open."
+  },
+  "openYoutubeVideo": {
+    "message": "Open a regular YouTube video."
+  },
+  "checkTabReopen": {
+    "message": "Could not check the tab. Reopen the extension."
+  },
+  "roomConnected": {
+    "message": "Connected to the room."
+  },
+  "loadingRoomState": {
+    "message": "Getting the latest room state…"
+  },
+  "watchTogether": {
+    "message": "Watch together"
+  },
+  "thisTab": {
+    "message": "This tab"
+  },
+  "room": {
+    "message": "Room"
+  },
+  "participantsPrefix": {
+    "message": "Participants: "
+  },
+  "copyInvitation": {
+    "message": "Copy invitation"
+  },
+  "invitationCopied": {
+    "message": "Invitation copied."
+  },
+  "copyInvitationFailed": {
+    "message": "Could not copy the invitation. Copy the link manually."
+  },
+  "invitationLink": {
+    "message": "Invitation link"
+  },
+  "roomDetails": {
+    "message": "Room details"
+  },
+  "participants": {
+    "message": "Participants"
+  },
+  "participantSelf": {
+    "message": " (you)"
+  },
+  "leaveRoom": {
+    "message": "Leave room"
+  },
+  "retry": {
+    "message": "Retry"
+  },
+  "stopAttempts": {
+    "message": "Stop trying"
+  },
+  "creatingRoom": {
+    "message": "Creating a room…"
+  },
+  "readCatalogFailed": {
+    "message": "Could not read the room list. Please try again."
+  },
+  "actionFailed": {
+    "message": "Could not complete the action."
+  },
+  "myRooms": {
+    "message": "My rooms"
+  },
+  "reloadCatalog": {
+    "message": "Reload room list"
+  },
+  "loadingCatalog": {
+    "message": "Loading rooms…"
+  },
+  "emptyCatalog": {
+    "message": "Rooms you create or join will appear here."
+  },
+  "inThisTab": {
+    "message": "In this tab"
+  },
+  "openingRoom": {
+    "message": "Opening room…"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "goToRoom": {
+    "message": "Go to tab"
+  },
+  "openRoom": {
+    "message": "Open"
+  },
+  "removeFromList": {
+    "message": "Remove from list"
+  },
+  "darkTheme": {
+    "message": "Dark theme"
+  },
+  "useLightTheme": {
+    "message": "Switch to light theme"
+  },
+  "useDarkTheme": {
+    "message": "Switch to dark theme"
+  },
+  "saveThemeFailed": {
+    "message": "Could not save the theme. Your choice may reset next time."
+  },
+  "watchSessionTitle": {
+    "message": "Watch together status"
+  },
+  "checkTabFailed": {
+    "message": "Could not check the tab."
+  },
+  "waitForAd": {
+    "message": "Wait for the ad to finish and try again."
+  },
+  "waitForVideo": {
+    "message": "Wait for a regular recorded video to be ready and try again."
+  },
+  "roomOpened": {
+    "message": "The room is open in a YouTube tab."
+  },
+  "entryCancelled": {
+    "message": "Joining cancelled. The invitation is still available."
+  },
+  "openRoomTab": {
+    "message": "Open room tab"
+  },
+  "join": {
+    "message": "Join"
+  },
+  "invitationReady": {
+    "message": "Your invitation is ready. Click “Join”."
+  },
+  "invalidInvitation": {
+    "message": "This invitation is invalid. Ask for a new link."
+  },
+  "networkFailure": {
+    "message": "Could not get the latest room state. Check your internet connection or try again later."
+  },
+  "authRateLimited": {
+    "message": "Too many sign-in attempts. Please try again later."
+  },
+  "authFailed": {
+    "message": "Could not sign in anonymously. Please try again later."
+  },
+  "accessDenied": {
+    "message": "You do not have access to this room. Check your invitation."
+  },
+  "roomNotFound": {
+    "message": "Room not found."
+  },
+  "unsupportedRoom": {
+    "message": "This room format is not supported. Create a new room."
+  },
+  "generationRetired": {
+    "message": "This room is no longer supported. Update the extension, open the video you want and create a new room."
+  },
+  "generationUpdateRequired": {
+    "message": "This room requires a newer version of the extension. Update the extension and reopen the invitation."
+  },
+  "unsupportedGeneration": {
+    "message": "This version of the extension does not support this room generation. Open the video you want and create a new room."
+  },
+  "serviceBusy": {
+    "message": "The service is busy. Wait for the next attempt or try again later."
+  },
+  "serviceQuota": {
+    "message": "The service has temporarily reached its capacity. Please try again later."
+  },
+  "serviceMaintenance": {
+    "message": "The service is temporarily unavailable for maintenance. Please try again later."
+  },
+  "applyPlayerFailed": {
+    "message": "Could not apply the state to the player."
+  },
+  "sendActionFailed": {
+    "message": "Could not send the action. Please try again."
+  },
+  "updateCatalogFailed": {
+    "message": "Could not update the room list. Please try again."
+  },
+  "unsupportedCatalog": {
+    "message": "This room list format is not supported."
+  },
+  "damagedCatalog": {
+    "message": "Some rooms in the list could not be read."
+  },
+  "playerAd": {
+    "message": "An ad is playing in this tab. Sync will resume afterwards."
+  },
+  "playerBuffering": {
+    "message": "The video is buffering. Sync will resume automatically."
+  },
+  "playerAutoplayBlocked": {
+    "message": "Press play to continue"
+  },
+  "playerMissing": {
+    "message": "Waiting for the player in this tab."
+  },
+  "playerLoading": {
+    "message": "Waiting for the video to load."
+  },
+  "playerUnavailable": {
+    "message": "The video is unavailable in this tab."
+  },
+  "playerUnsupported": {
+    "message": "This video format is not supported."
+  },
+  "playerDifferentVideo": {
+    "message": "Not syncing: a different video is open."
+  },
+  "roomLeft": {
+    "message": "You have left the room."
+  },
+  "serverDisconnected": {
+    "message": "No connection to the server."
+  },
+  "noRoomSelected": {
+    "message": "Connected. No room selected yet."
+  },
+  "localViewing": {
+    "message": "Local viewing · not syncing"
+  },
+  "watchingTogether": {
+    "message": "Watching together"
+  },
+  "localViewingSuffix": {
+    "message": " Sync interrupted. Playback continues locally."
+  },
+  "attemptsStopped": {
+    "message": "Connection attempts stopped."
+  },
+  "roomCreated": {
+    "message": "Room created. Your invitation is ready."
+  },
+  "presenceFailed": {
+    "message": "Could not update participants. Reconnect to try again."
+  },
+  "createWhileOffline": {
+    "message": "No connection to the server. Wait until connected and try again."
+  },
+  "creationUnknown": {
+    "message": "The room creation result is still unknown. Check again; this will not create another room."
+  },
+  "createRoomFailurePrefix": {
+    "message": "Could not create the room. "
+  },
+  "reloadVideo": {
+    "message": "Reload video"
+  },
+  "returnToRoom": {
+    "message": "Return to room"
+  },
+  "attentionAnnouncement": {
+    "message": "Attention required."
+  },
+  "attentionRequired": {
+    "message": "Attention required"
+  },
+  "message": {
+    "message": "Message"
+  },
+  "copyFailedManual": {
+    "message": "Could not copy the link. Select it and copy it manually."
+  },
+  "updateViewFailed": {
+    "message": "Could not update playback. Please try again."
+  },
+  "restoreRoomFailed": {
+    "message": "Could not restore the room. Reopen the invitation."
+  },
+  "connectFailed": {
+    "message": "Could not connect. Please try again."
+  },
+  "retrySavingMessage": {
+    "message": "Try saving again."
+  },
+  "reloadVideoFailed": {
+    "message": "Could not reload the video. Please try again."
+  },
+  "returnToRoomFailed": {
+    "message": "Could not return to the room. Please try again."
+  },
+  "switchingVideo": {
+    "message": "Changing video…"
+  },
+  "switchWhileOffline": {
+    "message": "No connection to the server. Try again once connected."
+  },
+  "videoChanged": {
+    "message": "The video has changed. Try again with the current video."
+  },
+  "readPlayerStateFailed": {
+    "message": "Could not read the player state."
+  },
+  "prepareVideoSwitchFailed": {
+    "message": "Could not prepare the video change."
+  },
+  "connectionInterrupted": {
+    "message": "Connection interrupted. The latest state will be fetched after reconnecting."
+  },
+  "waitForPreviousAction": {
+    "message": "Wait for the previous action to finish and try again."
+  },
+  "videoSwitchRejected": {
+    "message": "The change was not accepted because the room state has changed. Try again or return to the room."
+  },
+  "roomVideoChanged": {
+    "message": "Room video changed."
+  },
+  "videoSwitchFailed": {
+    "message": "Could not change the video. Please try again."
+  },
+  "sessionTitle": {
+    "message": "Watch together session"
+  },
+  "watchRoomLabel": {
+    "message": "Watch together room"
+  },
+  "showMessage": {
+    "message": "Show message"
+  },
+  "watchThisInRoom": {
+    "message": "Watch this in the room"
+  },
+  "closeMessage": {
+    "message": "Close message"
+  },
+  "reconnect": {
+    "message": "Reconnect"
+  },
+  "retrySaving": {
+    "message": "Retry saving"
+  },
+  "checkingInvitation": {
+    "message": "Checking invitation…"
+  },
+  "extensionDescription": {
+    "message": "Watch YouTube videos together with friends."
+  },
+  "retryCountdown": {
+    "message": "Next attempt in $1 s."
+  },
+  "participantCount": {
+    "message": "Participants: $1"
+  },
+  "participant": {
+    "message": "Participant $number$$suffix$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      },
+      "suffix": {
+        "content": "$2"
+      }
+    }
+  },
+  "roomNotSaved": {
+    "message": "The room is open but could not be saved. $1"
+  }
+}
