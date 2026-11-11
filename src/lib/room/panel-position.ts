@@ -15,3 +15,8 @@ export type PanelDrag = z.infer<typeof panelDragSchema>;
 export const panelCancelSchema = z.object({
   type: z.literal('room-panel-cancel'), target: z.string().uuid(),
 }).strict();
+
+export const panelLayoutSchema = z.object({
+  type: z.literal('room-panel-layout'), target: z.string().uuid(),
+  availableHeight: z.number().int().min(1).max(100_000),
+}).strict();

@@ -241,16 +241,18 @@ test('док сохраняет положение при раскрытии и 
       expect(actual.height).toBe(expected.height);
     }
 
+    const expandedHeight = (await bounds(frame)).height;
     await toggle.press('Escape');
     await settlePanel(frame);
     const initial = await bounds(frame);
-    // Оставляем место для более просторных подробностей с двумя участниками.
+    // Оставляем 20 px запаса над реальной высотой подробностей.
     // Нехватку места сверху проверяем отдельным движением ниже.
-    await moveDock(1, 1000, -60);
+    const dy = -Math.min(60, Math.max(0, initial.y + initial.height - expandedHeight - 12 - 20));
+    await moveDock(1, 1000, dy);
     await expect.poll(async () => {
       const box = await bounds(frame);
       return [box.x + box.width, box.y];
-    }).toEqual([628, initial.y - 60]);
+    }).toEqual([628, initial.y + dy]);
     const right = (await dock.boundingBox())!;
     await setExpanded(true);
     await expectDockAt(right);

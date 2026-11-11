@@ -7,7 +7,7 @@ html, body { height: 100%; margin: 0; overflow: hidden; background: transparent;
 body { display: flex; flex-direction: column; justify-content: end; }
 :root:not([data-theme]) #room-panel { visibility: hidden; }
 #room-panel { display: flex; flex: none; flex-direction: column; gap: 12px; max-height: 100%; }
-#room-dock, #room-details, #copy-status { background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+#room-dock, #room-details, #room-notice { background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
 #room-dock { display: flex; align-items: center; flex: none; order: 1; gap: 8px; padding: 8px; border-radius: 20px; }
 p { margin: 12px 0; overflow-wrap: anywhere; }
 p:empty { display: none; }
@@ -22,7 +22,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
   gap: 10px;
   flex: 1;
   min-width: 0;
-  min-height: 48px;
+  min-height: 50px;
   border: 0;
   border-radius: 12px;
   padding: 4px;
@@ -51,7 +51,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 svg { flex: none; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 #chevron { color: var(--muted); }
 [aria-expanded="true"] #chevron { transform: rotate(180deg); }
-.summary { display: block; margin: 2px 0 0 15px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.summary { display: block; margin: 2px 0 0 15px; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 :is([data-synced], [data-buffering]):not([data-problem]) .summary,
 :is([data-synced], [data-buffering]) #status,
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -61,7 +61,7 @@ svg { flex: none; width: 16px; height: 16px; fill: none; stroke: currentColor; s
 #room-toggle:not(:disabled):hover { background: var(--surface-hover); }
 #copy-invitation:not(:disabled):hover { background: var(--accent-hover); }
 #copy-invitation svg { width: 20px; height: 20px; }
-#copy-status { flex: none; order: 0; border-radius: 14px; margin: 0; padding: 10px 16px; color: var(--muted); font-size: 12px; }
+#copy-status { color: var(--muted); }
 #copy-status:empty { display: none; }
 #room-details { order: -1; min-height: 0; overflow: auto; scrollbar-width: thin; border-radius: 20px; padding: 16px; }
 .details-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
@@ -73,6 +73,8 @@ h1 { font-size: 17px; line-height: 1.35; margin: 0; overflow-wrap: anywhere; }
 #room-details button, #return-video { display: block; margin: 12px 0 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 #return-video { min-height: 44px; padding: 10px 0; }
 #participants { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 4px; }
+#participants-slot { display: flow-root; }
+#participants-slot ul { margin-bottom: 0; }
 #participants p { font-weight: 650; }
 ul { list-style: none; padding: 0; margin: 12px 0 16px; display: flex; flex-direction: column; gap: 8px; }
 li { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 8px 12px; border-radius: 12px; background: var(--surface-hover); overflow-wrap: anywhere; }
@@ -81,6 +83,23 @@ a { color: var(--accent); }
 label { display: block; margin-top: 12px; }
 input { display: block; width: 100%; min-height: 44px; padding: 10px 12px; margin-top: 8px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: var(--page); }
 #leave { width: 100%; color: var(--error); }
+#room-dock { position: relative; }
+#notice-open { position: absolute; left: 12px; top: 10px; width: 44px; height: 44px; padding: 10px; border: 0; background: var(--surface); color: var(--error); }
+#notice-open svg { width: 24px; height: 24px; }
+/* Полный текст состояния остаётся в подсказке и live-region, без переноса в доке. */
+[data-notice] .summary { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#synced-status[hidden] { display: block !important; visibility: hidden; }
+#room-notice { position: absolute; left: 0; right: 0; bottom: 80px; z-index: 1; display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; }
+#room-notice[data-error] { border-left: 3px solid var(--error); }
+.notice-heading { display: flex; align-items: center; gap: 10px; padding: 8px 8px 0 12px; flex: none; }
+#notice-icon { color: var(--muted); width: 20px; height: 20px; }
+[data-error] #notice-icon { color: var(--error); }
+#notice-title { flex: 1; min-width: 0; font-size: 14px; line-height: 1.5; margin: 0; overflow-wrap: anywhere; }
+#notice-close { display: grid; place-items: center; flex: none; padding: 10px; border: 0; background: transparent; }
+#notice-content { padding: 0 16px 12px; overflow: auto; scrollbar-width: thin; min-height: 0; }
+#notice-content p { margin: 8px 0 0; }
+#notice-content button { margin-top: 8px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+#notice-content label { margin-top: 8px; }
 [data-buffering] #synced-status { visibility: hidden; }
 @media (max-width: 300px) {
   .details-icon { width: 48px; height: 48px; }

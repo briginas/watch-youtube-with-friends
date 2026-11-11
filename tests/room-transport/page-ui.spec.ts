@@ -172,6 +172,161 @@ test('компактный UI: исходное состояние, клавиа
   } finally { await driver.context.close(); }
 });
 
+test('карточка ошибки: стабильная геометрия, обе темы и состояния, закрытие, повтор и границы окна', async ({}, info) => {
+  const driver = await setup(false, playerFixture());
+  try {
+    const { page, frame, invitation } = await create(driver, 'Вечер вместе');
+    const before = await sessionPlayback(frame);
+    await frame.evaluate(() => {
+      Object.defineProperty(navigator.clipboard, 'writeText', { configurable: true,
+        value: () => Promise.reject(new Error('Denied')) });
+    });
+    for (const theme of ['light', 'dark']) {
+      await frame.evaluate(theme => chrome.storage.local.set({ 'watch-together:popup-theme:v1': theme }), theme);
+      await expect(frame.locator('html')).toHaveAttribute('data-theme', theme);
+      for (const expanded of [false, true]) {
+        if (await frame.locator('#room-toggle').getAttribute('aria-expanded') !== String(expanded)) await frame.locator('#room-toggle').press('Enter');
+        await settlePanel(frame);
+        const geometry = await frame.locator('#room-panel').boundingBox();
+        const dock = await frame.locator('#room-dock').boundingBox();
+        const host = await hostBounds(page);
+        await frame.locator('#copy-invitation').press('Enter');
+        await expect(frame.locator('#room-notice')).toBeVisible();
+        await expect(frame.locator('#manual-invitation')).toBeVisible();
+        await expect(frame.locator('#invitation-link')).toBeFocused();
+        await expect(frame.locator('#invitation-link')).toHaveValue(invitation);
+        await settlePanel(frame);
+        expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
+        expect(await frame.locator('#room-dock').boundingBox()).toEqual(dock);
+        expect(await hostBounds(page)).toEqual(host);
+        await expect(frame.locator('#room-toggle')).toHaveAttribute('aria-expanded', String(expanded));
+        await expect.poll(async () => {
+          const box = (await frame.locator('#room-notice').boundingBox())!;
+          return box.y + box.height <= geometry!.y - 10;
+        }).toBe(true);
+        await frame.locator('#notice-close').press('Enter');
+        await expect(frame.locator('#room-notice')).toBeHidden();
+        await expect(frame.locator('#notice-open')).toBeFocused();
+        await frame.locator('#notice-open').press('Enter');
+        await expect(frame.locator('#room-notice')).toBeVisible();
+        await expect(frame.locator('#notice-close')).toBeFocused();
+        await frame.locator('#notice-close').press('Enter');
+      }
+    }
+    await frame.locator('#room-toggle').press('Escape');
+    await page.setViewportSize({ width: 336, height: 480 });
+    // Доверенный геометрический протокол: перенести док к верхней границе без мыши headless.
+    await frame.evaluate(target => {
+      for (const [sequence, phase, dy] of [[0, 'start', 0], [1, 'move', -300], [2, 'end', 0]] as const) {
+        parent.postMessage({ type: 'room-panel-drag', target, gesture: 999, sequence, phase, dx: 0, dy }, '*');
+      }
+    }, new URL(frame.url()).hash.slice(1));
+    await settlePanel(frame);
+    const moved = await frame.locator('#room-dock').boundingBox();
+    await frame.locator('#copy-invitation').press('Enter');
+    await expect(frame.locator('#room-notice')).toBeVisible();
+    await expect.poll(async () => (await frame.locator('#room-notice').boundingBox())!.y).toBeGreaterThanOrEqual(11);
+    expect(await frame.locator('#room-dock').boundingBox()).toEqual(moved);
+    await expect(frame.locator('#notice-close')).toBeInViewport();
+    expect(await frame.locator('#notice-content').evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
+    await page.screenshot({ path: info.outputPath('error-near-top.png') });
+    await frame.locator('#notice-close').press('Enter');
+    // Clip-path должен освобождать область над доком и для hit-testing, а не только визуально.
+    await page.evaluate(({ x, y }) => {
+      const button = document.createElement('button'); button.id = 'above-notice';
+      button.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:100px;height:30px`;
+      button.textContent = 'YouTube'; button.onclick = () => button.dataset.clicked = 'yes';
+      document.body.append(button);
+    }, { x: moved!.x + 16, y: moved!.y - 40 });
+    await page.locator('#above-notice').click();
+    await expect(page.locator('#above-notice')).toHaveAttribute('data-clicked', 'yes');
+    await frame.evaluate(target => {
+      for (const [sequence, phase, dy] of [[0, 'start', 0], [1, 'move', -1000], [2, 'end', 0]] as const) {
+        parent.postMessage({ type: 'room-panel-drag', target, gesture: 1000, sequence, phase, dx: 0, dy }, '*');
+      }
+    }, new URL(frame.url()).hash.slice(1));
+    await expect.poll(async () => (await frame.locator('#room-dock').boundingBox())!.y).toBeCloseTo(12, 0);
+    const atTop = await frame.locator('#room-dock').boundingBox();
+    await frame.locator('#notice-open').press('Enter');
+    await expect(frame.locator('#notice-close')).toBeInViewport();
+    expect(await frame.locator('#room-dock').boundingBox()).toEqual(atTop);
+    await frame.locator('#notice-close').press('Enter');
+    expect(await sessionPlayback(frame)).toEqual(before);
+  } finally { await driver.context.close(); }
+});
+
+test('ошибка плеера и перезагрузка видео доступны в карточке без изменения панели', async () => {
+  const driver = await setup(false, playerFixture());
+  try {
+    const { page, frame } = await create(driver);
+    await expect(frame.locator('#status')).toHaveText('Смотрим вместе');
+    await openDetails(frame);
+    const geometry = await frame.locator('#room-panel').boundingBox();
+    await page.locator('#movie_player').evaluate(el => {
+      const error = document.createElement('div'); error.className = 'ytp-error-content-wrap';
+      error.textContent = 'Video unavailable'; el.append(error);
+    });
+    await expect(frame.locator('#room-notice #player-status')).toContainText('Видео недоступно');
+    await expect(frame.locator('#room-notice #return-video')).toHaveText('Перезагрузить видео');
+    await settlePanel(frame);
+    expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
+    await frame.locator('#room-toggle').press('Enter');
+    await expect(frame.locator('#room-notice #return-video')).toBeVisible();
+    await page.locator('.ytp-error-content-wrap').evaluate(el => el.remove());
+    await expect(frame.locator('#status')).toHaveText('Смотрим вместе');
+    await expect(frame.locator('#room-notice')).toBeHidden();
+  } finally { await driver.context.close(); }
+});
+
+test('ошибка смены видео появляется над подробностями и остаётся доступной после сворачивания', async () => {
+  const driver = await setup(false, playerFixture());
+  try {
+    const { page, frame } = await create(driver);
+    const before = await sessionPlayback(frame);
+    await page.evaluate(() => history.pushState({}, '', '/watch?v=dQw4w9WgXcQ'));
+    await openDetails(frame);
+    await expect(frame.locator('#switch-video')).toBeVisible();
+    await settlePanel(frame);
+    const geometry = await frame.locator('#room-panel').boundingBox();
+    await page.locator('#movie_player').evaluate(el => el.classList.add('ad-showing'));
+    await frame.locator('#switch-video').press('Enter');
+    await expect(frame.locator('#switch-status')).toContainText('Дождитесь окончания рекламы');
+    await expect(frame.locator('#room-notice')).toBeVisible();
+    await settlePanel(frame);
+    expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
+    await frame.locator('#room-toggle').press('Enter');
+    await expect(frame.locator('#room-details')).toBeHidden();
+    await expect(frame.locator('#room-notice')).toBeVisible();
+    expect(await sessionPlayback(frame)).toEqual(before);
+  } finally { await driver.context.close(); }
+});
+
+test('карточка связи сохраняет размер панели и закрытие при обновлениях восстановления', async () => {
+  const driver = await setup(false, playerFixture());
+  try {
+    const { page, frame } = await create(driver);
+    await expect(frame.locator('#status')).toHaveText('Смотрим вместе');
+    await openDetails(frame);
+    const geometry = await frame.locator('#room-panel').boundingBox();
+    await driver.context.setOffline(true);
+    await expect(frame.locator('#connection-status')).toContainText('Просмотр остаётся локальным');
+    await expect(frame.locator('#room-notice')).toBeVisible();
+    await settlePanel(frame);
+    expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
+    await expect(frame.locator('#participant-number')).toHaveText('—');
+    await expect(frame.locator('#retry')).toBeVisible({ timeout: 20_000 });
+    await frame.locator('#notice-close').press('Enter');
+    await expect(frame.locator('#room-notice')).toBeHidden();
+    await page.waitForTimeout(1500);
+    await expect(frame.locator('#room-notice')).toBeHidden();
+    await driver.context.setOffline(false);
+    await expect(frame.locator('#status')).toHaveText('Смотрим вместе');
+    await expect(frame.locator('#notice-open')).toBeHidden();
+    await settlePanel(frame);
+    expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
+  } finally { await driver.context.close(); }
+});
+
 test('геометрия: длинное имя, маленькое окно, доступность выхода и клики за пределами индикатора', async () => {
   const driver = await setup(false, playerFixture());
   try {

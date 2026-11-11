@@ -13,6 +13,8 @@ for (const remoteChange of [false, true]) {
     const sockets = new Set<() => Promise<void>>();
     await pair(async ({ a, b, room }) => {
       const session = await frameOf(b);
+      // Карточка ошибки над раскрытой панелью может перекрыть controls стенда.
+      await session.locator('#room-toggle').press('Escape');
       const before = (await room()).playback;
       disconnected = true;
       await b.context().setOffline(true);
@@ -77,6 +79,7 @@ for (const cut of ['before-server', 'before-ack'] as const) for (const remoteCha
     let writes = 0;
     await pair(async ({ a, b, room }) => {
       const session = await frameOf(b);
+      await session.locator('#room-toggle').press('Escape');
       armed = true;
       await b.locator('.ytp-variable-speed-panel-button').click();
       await expect.poll(() => intercepted).toBe(true);

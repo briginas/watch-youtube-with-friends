@@ -31,6 +31,18 @@ export default defineContentScript({
     let presentation: Presentation | undefined;
     let acceptPresentation = presentationGate();
     let fullscreen = false;
+    let lastAvailableHeight = 0;
+    function layoutFrame() {
+      if (!host || !sessionFrame) return;
+      const height = Math.min((presentation?.height ?? 80) + (presentation?.overlayHeight ?? 0), innerHeight - 24);
+      // Clip-path ограничивает также hit-testing выступающего cross-origin iframe.
+      sessionFrame.style.clipPath = `inset(max(0px, calc(100% - ${Math.max(1, height)}px)) 0 0)`;
+      const availableHeight = Math.max(1, Math.floor(host.getBoundingClientRect().bottom - 12));
+      if (availableHeight !== lastAvailableHeight) {
+        lastAvailableHeight = availableHeight;
+        sessionFrame.contentWindow?.postMessage({ type: 'room-panel-layout', target, availableHeight }, extensionOrigin);
+      }
+    }
     function isFullscreen() {
       return !!document.fullscreenElement || !!document.querySelector('#movie_player.ytp-fullscreen, ytd-watch-flexy[fullscreen]');
     }
@@ -46,6 +58,7 @@ export default defineContentScript({
       host.style.width = `${Math.max(1, Math.min(presentation?.width ?? 380, innerWidth - 24))}px`;
       host.style.height = `${Math.max(1, Math.min(presentation?.height ?? 80, innerHeight - 24))}px`;
       if (position) place(position.x, position.bottom);
+      layoutFrame();
       if (!visible || fullscreen) cancelDrag();
       pageTitle.set(visible ? presentation?.name ?? null : null);
     }
@@ -59,6 +72,7 @@ export default defineContentScript({
       };
       host.style.left = `${position.x}px`;
       host.style.bottom = `${innerHeight - position.bottom}px`;
+      layoutFrame();
     }
     function cancelDrag() {
       drag = undefined;
@@ -106,8 +120,9 @@ export default defineContentScript({
       presentation = undefined;
       acceptPresentation = presentationGate();
       drag = undefined; lastGesture = 0;
+      lastAvailableHeight = 0;
       host = document.createElement('div');
-      host.style.cssText = 'position:fixed;bottom:12px;left:12px;width:380px;height:80px;overflow:clip;visibility:hidden;z-index:2147483647';
+      host.style.cssText = 'position:fixed;bottom:12px;left:12px;width:380px;height:80px;overflow:visible;visibility:hidden;z-index:2147483647';
       const shadow = host.attachShadow({ mode: 'closed' });
       const frame = document.createElement('iframe');
       sessionFrame = frame;
@@ -115,7 +130,7 @@ export default defineContentScript({
       frame.title = 'Состояние совместного просмотра';
       frame.allow = 'clipboard-write';
       // Меняется область обрезки, а iframe и док остаются у её нижнего края.
-      frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:light';
+      frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:light;clip-path:inset(max(0px, calc(100% - 80px)) 0 0)';
       shadow.append(frame);
       const container = host;
       void browser.runtime.sendMessage({ type: 'room-tab-attach', backendGeneration, target }).then(response => {

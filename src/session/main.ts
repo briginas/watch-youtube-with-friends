@@ -19,6 +19,7 @@ import { routeSchema, viewSchema } from '../lib/room/view';
 import type { PlayerStatus } from '../lib/player/youtube-player';
 import { bindPanelDrag } from './panel-drag';
 import { generationBlocksEntry } from '../lib/connection-error';
+import { panelLayoutSchema } from '../lib/room/panel-position';
 
 const appearance = observeAppearanceTheme();
 
@@ -53,6 +54,12 @@ function showPlayerStatus(localStatus?: PlayerStatus) {
   playerStatus.hidden = !playerStatus.textContent;
   returnVideo.hidden = localStatus !== 'different-video' && localStatus !== 'unavailable';
   returnVideo.textContent = localStatus === 'unavailable' ? 'Перезагрузить видео' : 'Вернуться в комнату';
+  if (localStatus === 'unavailable' || localStatus === 'unsupported') {
+    document.querySelector('#notice-content')!.append(playerStatus, returnVideo);
+  } else {
+    details.insertBefore(returnVideo, switchVideo);
+    details.insertBefore(playerStatus, returnVideo);
+  }
   render();
 }
 let left = false;
@@ -95,6 +102,39 @@ const copy = document.querySelector<HTMLButtonElement>('#copy-invitation')!;
 const manual = document.querySelector<HTMLElement>('#manual-invitation')!;
 const invitationLink = document.querySelector<HTMLInputElement>('#invitation-link')!;
 const copyStatus = document.querySelector<HTMLElement>('#copy-status')!;
+const notice = document.querySelector<HTMLElement>('#room-notice')!;
+const noticeOpen = document.querySelector<HTMLButtonElement>('#notice-open')!;
+const noticeClose = document.querySelector<HTMLButtonElement>('#notice-close')!;
+const connectionStatus = document.querySelector<HTMLElement>('#connection-status')!;
+let noticeKey = '';
+let dismissedNotice = '';
+let availableHeight = innerHeight;
+function layoutNotice() {
+  const height = panel.getBoundingClientRect().height;
+  const dockHeight = document.querySelector('#room-dock')!.getBoundingClientRect().height;
+  const aboveDock = availableHeight - dockHeight - 12;
+  notice.style.maxHeight = `${Math.max(60, aboveDock >= 60 ? aboveDock : availableHeight)}px`;
+  notice.style.bottom = `${Math.max(0, Math.min(height + 12, availableHeight - notice.getBoundingClientRect().height))}px`;
+}
+function panelLayout(event: MessageEvent) {
+  if (!event.isTrusted || event.source !== window.parent
+    || !['https://www.youtube.com', 'https://youtube.com'].includes(event.origin)) return;
+  const parsed = panelLayoutSchema.safeParse(event.data);
+  if (!parsed.success || parsed.data.target !== target) return;
+  availableHeight = parsed.data.availableHeight;
+  measure();
+}
+addEventListener('message', panelLayout);
+noticeClose.addEventListener('click', () => {
+  dismissedNotice = noticeKey;
+  render();
+  (noticeOpen.hidden ? toggle : noticeOpen).focus();
+});
+noticeOpen.addEventListener('click', () => {
+  dismissedNotice = '';
+  render();
+  noticeClose.focus();
+});
 function configureRoom(key: string, name: string) {
   roomName = name;
   const config = firebaseConfig();
@@ -110,9 +150,12 @@ function configureRoom(key: string, name: string) {
 }
 function present() {
   if (closed || tabId === undefined) return;
+  layoutNotice();
+  const panelBounds = panel.getBoundingClientRect();
   const content = {
     visible: bindingReady && !left, name: roomName, width: 380,
     height: Math.max(1, Math.min(4096, Math.ceil(panel.getBoundingClientRect().height))),
+    overlayHeight: notice.hidden ? 0 : Math.max(0, Math.min(4096, Math.ceil(panelBounds.top - notice.getBoundingClientRect().top))),
   };
   const signature = JSON.stringify(content);
   if (signature === lastPresentation) return;
@@ -129,9 +172,19 @@ function measure() {
 }
 function render() {
   if (closed) return;
+  const playerError = localPlayerStatus === 'unavailable' || localPlayerStatus === 'unsupported';
+  let connectionKey = '';
+  let connectionText = '';
   if (lastState) {
+    const connectionProblem = !!(lastState.error || lastState.roomError || lastState.presenceError
+      || (bindingReady && (!lastState.connected || !lastState.roomReady)));
     const state = pageState(lastState, { following, player: localPlayerStatus, left,
-      problem: !!(syncError || catalogError || actionError || switchError || viewError) });
+      problem: !!(syncError || catalogError || actionError || switchError || viewError || !manual.hidden || connectionProblem || playerError) });
+    if (connectionProblem) {
+      connectionText = state.text;
+      connectionKey = [lastState.error, lastState.roomError, lastState.presenceError,
+        lastState.connected, lastState.roomReady, lastState.recovery?.phase === 'stopped'].join('|');
+    }
     status.textContent = state.text;
     syncedStatus.hidden = !(state.synced || state.buffering) || state.problem;
     toggle.title = state.text;
@@ -141,7 +194,7 @@ function render() {
     panel.toggleAttribute('data-problem', state.problem);
     problem.hidden = !state.problem;
     const announcement = [state.text, state.problem ? 'Требуется внимание.' : '',
-      actionError, viewError, switchError, catalogError, copyStatus.textContent].filter(Boolean).join(' ');
+      actionError, viewError, syncError, switchError, catalogError, copyStatus.textContent].filter(Boolean).join(' ');
     const live = document.querySelector('#announcement')!;
     if (live.textContent !== announcement) live.textContent = announcement;
   }
@@ -149,6 +202,17 @@ function render() {
   roomLabel.title = roomName ?? '';
   document.querySelector('#full-room-name')!.textContent = roomName;
   document.querySelector('#action-status')!.textContent = actionError ?? viewError ?? syncError ?? '';
+  connectionStatus.textContent = connectionText;
+  const hasError = !!(connectionKey || actionError || viewError || syncError || switchError || catalogError || !manual.hidden || playerError);
+  const nextNoticeKey = [connectionKey, actionError, viewError, syncError, switchStatus.textContent,
+    catalogError, copyStatus.textContent, playerError ? localPlayerStatus : ''].filter(Boolean).join('|');
+  if (nextNoticeKey !== noticeKey) dismissedNotice = '';
+  noticeKey = nextNoticeKey;
+  notice.hidden = !noticeKey || dismissedNotice === noticeKey;
+  notice.toggleAttribute('data-error', hasError);
+  noticeOpen.hidden = !hasError;
+  panel.toggleAttribute('data-notice', hasError);
+  document.querySelector('#notice-title')!.textContent = hasError ? 'Требуется внимание' : 'Сообщение';
   toggle.setAttribute('aria-expanded', String(expanded));
   details.hidden = !expanded;
   leave.hidden = !bindingReady || left;
@@ -166,10 +230,12 @@ addEventListener('keydown', event => {
 });
 const resizeObserver = new ResizeObserver(measure);
 resizeObserver.observe(panel);
+resizeObserver.observe(notice);
 addEventListener('resize', measure);
 copy.addEventListener('click', async () => {
   const invitation = roomInvitation;
   if (!invitation || left || copying) return;
+  dismissedNotice = '';
   copying = true;
   try {
     await navigator.clipboard.writeText(invitation);
@@ -189,7 +255,7 @@ copy.addEventListener('click', async () => {
     copyStatus.textContent = 'Не удалось скопировать. Выделите ссылку и скопируйте вручную.';
     invitationLink.value = invitation;
     manual.hidden = false;
-    setExpanded(true);
+    render();
     invitationLink.focus();
   } finally {
     copying = false;
@@ -221,7 +287,10 @@ const transport = createRoomTransport((state) => {
   retry.hidden = generationBlocksEntry(state.recovery?.failure) ||
     (state.phase !== 'error' && !state.presenceError && !state.roomError && state.recovery?.phase !== 'waiting');
   stopRecovery.hidden = state.recovery?.phase !== 'running' && state.recovery?.phase !== 'waiting';
+  const slot = document.querySelector<HTMLElement>('#participants-slot')!;
+  const previousHeight = slot.getBoundingClientRect().height;
   renderParticipants(participants, state);
+  slot.style.minHeight = participants.hidden ? `${previousHeight}px` : '';
   const room = invitationRoomSchema.safeParse(state.room);
   if (!room.success) showPlayerStatus();
   else returnVideo.href = `https://www.youtube.com/watch?v=${room.data.playback.videoId}`;
@@ -299,6 +368,7 @@ async function release() {
   following = false;
   roomName = null; roomInvitation = null;
   actionError = null; syncError = null; switchError = null; viewError = null;
+  switchStatus.textContent = '';
   catalogError = null;
   copyStatus.textContent = ''; manual.hidden = true; invitationLink.value = '';
   expanded = false;
@@ -379,7 +449,7 @@ leave.addEventListener('click', () => {
   void release().catch(() => { actionError = 'Не удалось выйти из комнаты. Повторите попытку.'; })
     .finally(() => { leaving = false; render(); });
 });
-addEventListener('pagehide', () => { closed = true; appearance.dispose(); clearInterval(recoveryTicker); disposeDrag(); clearTimeout(renderFrame); clearTimeout(copyFeedbackTimer); resizeObserver.disconnect(); removeEventListener('resize', measure); clearInterval(reconcileTimer); engine.dispose(); void transport.close(); }, { once: true });
+addEventListener('pagehide', () => { closed = true; appearance.dispose(); clearInterval(recoveryTicker); disposeDrag(); clearTimeout(renderFrame); clearTimeout(copyFeedbackTimer); resizeObserver.disconnect(); removeEventListener('resize', measure); removeEventListener('message', panelLayout); clearInterval(reconcileTimer); engine.dispose(); void transport.close(); }, { once: true });
 
 returnVideo.addEventListener('click', event => {
   event.preventDefault();
