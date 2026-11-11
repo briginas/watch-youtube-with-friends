@@ -7,7 +7,7 @@ import { publicKeys } from './config.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const same = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
-const allowedPath = /^(?:manifest\.json|(?:popup|session|invitation)\.html|background\.js|(?:chunks|content-scripts)\/[\w.-]+\.js|assets\/[\w.-]+\.css|icon\/(?:16|32|48|128)\.png)$/;
+const allowedPath = /^(?:manifest\.json|(?:popup|session|invitation)\.html|background\.js|(?:chunks|content-scripts)\/[\w.-]+\.js|assets\/[\w.-]+\.css|assets\/popup-plush\.webp|icon\/(?:16|32|48|128)\.png)$/;
 const patterns = {
   'private-key': /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
   'service-account': /["']type["']\s*:\s*["']service_account["']/,

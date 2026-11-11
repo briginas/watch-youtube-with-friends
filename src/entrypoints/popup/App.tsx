@@ -12,6 +12,7 @@ import { roomMetadataSchema } from '../../lib/room/metadata';
 import { Catalog } from './Catalog';
 import { abortable } from '../../lib/service-status';
 import { generationBlocksEntry } from '../../lib/connection-error';
+import { ThemeToggle } from './ThemeToggle';
 
 type PageState = 'loading' | 'watch' | 'unsupported' | 'error';
 
@@ -164,9 +165,14 @@ export function App() {
   return (
     <main className={styles.panel}>
       <header className={styles.header}>
-        <h1>Смотреть вместе</h1>
-        <span className={styles.version}>v{browser.runtime.getManifest().version}</span>
+        <img className={styles.brandIcon} src="/icon/128.png" alt="" width="44" height="44" />
+        <div className={styles.brandTitle}>
+          <h1>Смотреть вместе</h1>
+          <span className={styles.version}>v{browser.runtime.getManifest().version}</span>
+        </div>
+        <ThemeToggle />
       </header>
+      <img className={styles.hero} src="/assets/popup-plush.webp" alt="" width="800" height="236" />
       <section className={styles.context} aria-label="Эта вкладка">
         {hasRoom ? <>
           <div className={styles.roomBar}>
@@ -176,12 +182,13 @@ export function App() {
               <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/><circle cx="9" cy="7" r="4"/></svg>
               <span><span className={styles.srOnly}>Участников: </span>{participants.length}</span>
             </span>}
-            <button type="button" className={styles.iconButton} aria-label="Копировать приглашение" title="Копировать приглашение"
-              disabled={!invitation || busy} onClick={() => { void copyInvitation(); }}>
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13.5a4 4 0 0 0 5.7 0l4.2-4.2a4 4 0 0 0-5.7-5.7l-2.4 2.4m2.2 4.5a4 4 0 0 0-5.7 0l-4.2 4.2a4 4 0 0 0 5.7 5.7l2.4-2.4"/></svg>
-            </button>
           </div>
           <p role="status" className={styles.note}>{roomStatus}</p>
+          <button type="button" className={styles.primary} aria-label="Копировать приглашение"
+            disabled={!invitation || busy} onClick={() => { void copyInvitation(); }}>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13.5a4 4 0 0 0 5.7 0l4.2-4.2a4 4 0 0 0-5.7-5.7l-2.4 2.4m2.2 4.5a4 4 0 0 0-5.7 0l-4.2 4.2a4 4 0 0 0 5.7 5.7l2.4-2.4"/></svg>
+            Копировать приглашение
+          </button>
           {copyFeedback && <p role="status" className={styles.note}>{copyFeedback.copied
             ? 'Приглашение скопировано.'
             : 'Не удалось скопировать приглашение. Скопируйте ссылку вручную.'}</p>}

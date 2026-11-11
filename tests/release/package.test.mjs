@@ -42,6 +42,15 @@ function fixture() {
 }
 
 describe('проверка поставляемого ZIP', () => {
+  it('включает подготовленный баннер popup, но отклоняет другие изображения', () => {
+    const f = fixture();
+    mkdirSync(join(f.directory, 'assets'));
+    copyFileSync('public/assets/popup-plush.webp', join(f.directory, 'assets/popup-plush.webp'));
+    createPackage(f.directory, f.destination, config, '0.1.0');
+    expect(execFileSync('unzip', ['-Z1', f.destination], { encoding: 'utf8' }).split('\n')).toContain('assets/popup-plush.webp');
+    copyFileSync('public/assets/popup-plush.webp', join(f.directory, 'assets/unapproved.webp'));
+    expect(() => auditDirectory(f.directory, config, '0.1.0')).toThrow('запрещённый путь');
+  });
   it('проверяет распакованный ZIP, manifest в корне и SHA самого архива', () => {
     const f = fixture();
     const result = createPackage(f.directory, f.destination, config, '0.1.0');

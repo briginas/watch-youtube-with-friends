@@ -13,9 +13,10 @@ test('unpacked MV3 загружается и открывает React popup', as
   await expect(version).toBeVisible();
   const titleBox = (await heading.boundingBox())!;
   const versionBox = (await version.boundingBox())!;
-  expect(versionBox.x).toBeGreaterThan(titleBox.x + titleBox.width);
-  expect(versionBox.y).toBeLessThan(titleBox.y + titleBox.height);
+  expect(versionBox.x).toBeGreaterThanOrEqual(titleBox.x);
+  expect(versionBox.y).toBeGreaterThanOrEqual(titleBox.y + titleBox.height);
   expect(versionBox.x + versionBox.width).toBeLessThanOrEqual(336);
+  await expect(page.getByRole('switch', { name: 'Тёмная тема' })).toHaveAttribute('aria-checked', 'false');
   await expect(page.getByRole('heading', { name: 'Мои комнаты' })).toBeVisible();
   await expect(page.getByText('Технический прототип')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Смотреть вместе', exact: true })).toHaveCount(0);

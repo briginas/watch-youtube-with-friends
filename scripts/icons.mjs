@@ -25,4 +25,10 @@ await sharp('docs/store-assets/promo-plush-source.png')
   .png()
   .toFile('docs/store-assets/promo-plush-440x280.png');
 
-console.log('PNG-иконки 16/32/48/128 и small promo tile 440×280 готовы.');
+await mkdir('public/assets', { recursive: true });
+await sharp('docs/store-assets/promo-plush-source.png')
+  .resize(800, 236, { fit: 'cover', position: 'centre' })
+  .webp({ quality: 85 })
+  .toFile('public/assets/popup-plush.webp');
+
+console.log('PNG-иконки 16/32/48/128, small promo tile 440×280 и баннер popup готовы.');

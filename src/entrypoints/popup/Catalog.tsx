@@ -124,7 +124,9 @@ export function Catalog() {
         {snapshot?.entries.length === 0 && <p>Здесь появятся созданные и принятые комнаты.</p>}
         {!!snapshot?.entries.length && <ul>{snapshot.entries.map(entry => <li key={entry.key}>
           <div className={styles.catalogRow}>
-            <span className={styles.roomName}>{entry.name}</span>
+            <span className={styles.roomName}>{entry.name}
+              {snapshot.tabStates[entry.key] === 'current' && <span className={styles.currentRoom}>В этой вкладке</span>}
+            </span>
             {busy?.key === entry.key && busy.action === 'open'
               ? <div className={styles.pendingEntry}>
                 <span role="status">
@@ -134,7 +136,7 @@ export function Catalog() {
                 <button type="button" onClick={cancelEntry}>Отмена</button>
               </div>
               : snapshot.tabStates[entry.key] === 'current'
-              ? <span className={styles.currentRoom}>В этой вкладке</span>
+              ? null
               : <button disabled={!!busy} onClick={() => { void operate(entry); }}>{snapshot.tabStates[entry.key] === 'other' ? 'Перейти' : 'Открыть'}</button>}
             <button type="button" className={styles.iconButton} aria-label="Убрать из списка" title="Убрать из списка"
               disabled={!!busy} onClick={() => { void operate(entry, true); }}>
