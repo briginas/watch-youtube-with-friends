@@ -115,7 +115,7 @@ export default defineContentScript({
       frame.title = 'Состояние совместного просмотра';
       frame.allow = 'clipboard-write';
       // Меняется область обрезки, а iframe и док остаются у её нижнего края.
-      frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:normal';
+      frame.style.cssText = 'position:absolute;bottom:0;left:0;width:100%;height:max(1px, calc(100vh - 24px));border:0;color-scheme:light';
       shadow.append(frame);
       const container = host;
       void browser.runtime.sendMessage({ type: 'room-tab-attach', backendGeneration, target }).then(response => {

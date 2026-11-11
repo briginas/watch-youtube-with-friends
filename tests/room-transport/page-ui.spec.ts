@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import sharp from 'sharp';
 import { frameOf, openDetails, panelBounds, settlePanel, sessionPlayback, popup, setup, stopWorker, watch, workerOf } from './fixtures';
 import { playerFixture, readyPlayer, withPlaybackPair } from './playback-fixture';
 import type { browser as browserApi } from 'wxt/browser';
@@ -33,6 +34,35 @@ async function panelVisibility(frame: import('@playwright/test').Frame) {
   return (await frame.frameElement()).evaluate(el => getComputedStyle(el as Element).visibility);
 }
 
+async function expectTransparentPanel(page: Page, frame: import('@playwright/test').Frame) {
+  // Проверяем композицию iframe, а не computed background: при ошибке он тоже transparent.
+  for (const colorScheme of ['light', 'dark']) {
+    await page.evaluate(colorScheme => {
+      document.documentElement.style.colorScheme = colorScheme;
+      const backdrop = document.getElementById('panel-backdrop') ?? document.createElement('div');
+      backdrop.id = 'panel-backdrop';
+      backdrop.style.cssText = 'position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:rgb(64,160,224)';
+      document.body.append(backdrop);
+    }, colorScheme);
+    for (const expanded of [false, true]) {
+      const toggle = frame.locator('#room-toggle');
+      if (await toggle.getAttribute('aria-expanded') !== String(expanded)) await toggle.press('Enter');
+      await settlePanel(frame);
+      const dock = (await frame.locator('#room-dock').boundingBox())!;
+      const points = [{ x: dock.x + 1, y: dock.y + dock.height - 2 }];
+      if (expanded) points.push({ x: dock.x + dock.width / 2, y: dock.y - 6 });
+      const { data, info } = await sharp(await page.screenshot({ scale: 'css' })).raw().toBuffer({ resolveWithObject: true });
+      for (const point of points) {
+        const offset = (Math.floor(point.y) * info.width + Math.floor(point.x)) * info.channels;
+        // Допускаем слабую тень поверхности, но не непрозрачный canvas.
+        for (const [channel, expected] of [64, 160, 224].entries()) {
+          expect(Math.abs(data[offset + channel]! - expected), `${colorScheme}, expanded=${expanded}, channel=${channel}`).toBeLessThan(16);
+        }
+      }
+    }
+  }
+}
+
 test('общие темы popup и панели: live-переключение, контраст, геометрия и сохранение комнаты', async ({}, info) => {
   const driver = await setup(false, playerFixture());
   const key = 'watch-together:popup-theme:v1';
@@ -53,8 +83,8 @@ test('общие темы popup и панели: live-переключение, 
       .map(channel => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4)
       .reduce((total, channel, i) => total + channel * [.2126, .7152, .0722][i]!, 0);
     const contrast = (a: string, b: string) => (Math.max(luminance(a), luminance(b)) + .05) / (Math.min(luminance(a), luminance(b)) + .05);
-    for (const theme of ['light', 'dark'] as const) {
-      if (theme === 'dark') await toggleTheme.press('Space');
+    for (const [index, theme] of (['light', 'dark', 'light', 'dark'] as const).entries()) {
+      if (index > 0) await toggleTheme.press('Space');
       await expect(frame.locator('html')).toHaveAttribute('data-theme', theme);
       await expect(frame.locator('#room-toggle')).toHaveAttribute('aria-expanded', 'true');
       expect(await frame.locator('#room-panel').boundingBox()).toEqual(geometry);
@@ -73,6 +103,7 @@ test('общие темы popup и панели: live-переключение, 
       expect(await frame.locator('li').evaluate(el => getComputedStyle(el).color)).toBe(await frame.locator('h1').evaluate(el => getComputedStyle(el).color));
       await page.bringToFront();
       await frame.locator('#room-toggle').evaluate(el => el.blur());
+      await expectTransparentPanel(page, frame);
       await frame.locator('#room-panel').screenshot({ path: info.outputPath(`${theme}.png`) });
       await control.bringToFront();
     }
@@ -83,6 +114,8 @@ test('общие темы popup и панели: live-переключение, 
     const reopened = await frameOf(page, false);
     await expect(reopened.locator('html')).toHaveAttribute('data-theme', 'dark');
     await expect(reopened.locator('#room-name')).toHaveText('Вечер вместе');
+    await page.bringToFront();
+    await expectTransparentPanel(page, reopened);
     await expect.poll(async () => {
       const transport = await control.evaluate(target => chrome.runtime.sendMessage({ type: 'room-session', backendGeneration: 'emulator-v1', target, action: 'status' }), new URL(reopened.url()).hash.slice(1));
       return transport.roomInvitation === invitation;
